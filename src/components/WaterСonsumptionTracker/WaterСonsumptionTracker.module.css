@@ -1,0 +1,37 @@
+.divWaterConsumptionTracker {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+.divTitle {
+  display: flex;
+  gap: 16px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.divTrackerBenefits {
+  display: flex;
+  justify-content: center;
+}
+
+.headOfSubsections {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.subsection {
+  font-size: 16px;
+  font-weight: 400;
+}
