@@ -1,0 +1,139 @@
+.wrap_form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+
+.title {
+    color: rgb(47, 47, 47);
+    font-family: Roboto;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: 0%;
+    text-align: left;
+}
+
+.label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    color: rgb(47, 47, 47);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: left;
+}
+
+.errorText {
+    color: rgb(239, 80, 80);
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0%;
+    text-align: left;
+}
+
+.errorField {
+    color: rgb(239, 80, 80) !important;
+    border: 1px solid rgb(239, 80, 80) !important;
+}
+
+.field {
+    width: 100%;
+    height: 40px;
+    padding: 12px 10px 12px 10px;
+
+    border: 1px solid rgb(215, 227, 255);
+    border-radius: 6px;
+
+    background: transparent;
+    outline: transparent;
+
+    &::placeholder {
+        color: rgb(158, 187, 255);
+        opacity: 1;
+    }
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.iconWrapper {
+    position: absolute;
+    top: 43px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.icon {
+    color: rgb(64, 123, 255);
+}
+
+.btn {
+    padding: 8px 30px;
+    width: 280px;
+    height: 36px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+    background-color: #407bff;
+    border: none;
+
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    line-height: 1.25;
+}
+
+.btn:hover {
+    box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+}
+
+.btn:active {
+    box-shadow: none;
+}
+
+.link {
+    color: var(--blue);
+}
+
+.link:hover,
+.link.focus {
+    color: #ff9d43;
+}
+
+@media (min-width: 768px) {
+    .wrap_form {
+        width: 384px;
+    }
+
+    .btn {
+        padding: 10px 30px;
+        width: 100%;
+        height: 44px;
+        font-size: 18px;
+        line-height: 1.3333;
+    }
+}
+
+@media (min-width: 1440px) {
+    .wrap_form {
+        margin-top: 162px;
+        margin-left: 728px;
+    }
+}
