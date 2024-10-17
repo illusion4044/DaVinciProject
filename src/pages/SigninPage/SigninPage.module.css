@@ -1,0 +1,6 @@
+@media (min-width: 1440px) {
+    .signInPageContainer {
+        display: flex;
+        flex-direction: column;
+    }
+}
