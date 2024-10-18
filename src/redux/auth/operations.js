@@ -28,15 +28,3 @@ export const login = createAsyncThunk('/auth/login', async (user, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 });
-
-export const fetchLiters = createAsyncThunk(
-  'auth/register',
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get('/auth/register');
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.massage);
-    }
-  }
-);
