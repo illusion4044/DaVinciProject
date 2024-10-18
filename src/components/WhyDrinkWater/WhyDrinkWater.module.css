@@ -1,0 +1,31 @@
+ul {
+  list-style-type: disc;
+}
+
+ul li::marker {
+  width: 8px;
+  height: 8px;
+  color: #407bff;
+}
+
+.divWhyDrinkWater {
+  padding: 40px 0;
+  border-radius: 10px;
+  width: 280px;
+  background-color: #ecf2ff;
+}
+
+.heading {
+  font-size: 18px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listItems {
+  font-size: 16px;
+  font-weight: 400;
+}
