@@ -8,17 +8,26 @@ const WaterСonsumptionTracker = () => {
           <h1 className={css.title}>Water consumption tracker</h1>
           <h2 className={css.subtitle}>Record daily water intake and track</h2>
         </div>
-        <div className={css.divTrackerBenefits}>
+        <div>
           <h3 className={css.headOfSubsections}>Tracker Benefits</h3>
           <div className={css.divSubsections}>
-            <div>
-              <h4 className={css.subsection}>Habit drive</h4>
+            <div className="icon-text">
+              <svg className="icon">
+                <use href="/path/to/src/img/icons.svg#icon-calendar-days" />
+              </svg>
+              <p>Habit drive</p>
             </div>
-            <div>
-              <h4 className={css.subsection}>View statistics</h4>
+            <div className="icon-text">
+              <svg className="icon">
+                <use href="/path/to/src/img/icons.svg#icon-presentation-chart-bar" />
+              </svg>
+              <p>View statistics</p>
             </div>
-            <div>
-              <h4 className={css.subsection}>Personal rate setting</h4>
+            <div className="icon-text">
+              <svg className="icon">
+                <use href="/path/to/src/img/icons.svg#icon-wrench-screwdriver" />
+              </svg>
+              <p>Personal rate setting</p>
             </div>
           </div>
         </div>

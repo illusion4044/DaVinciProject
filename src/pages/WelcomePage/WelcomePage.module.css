@@ -1,0 +1,13 @@
+.welcomePage {
+  background-image: url('../../img/main-page_img/Background Main Page-mob-1x.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+@media (min-resolution: 2dppx) {
+  .welcomePage {
+    background-image: url('../../img/main-page_img/Background Main Page-mob-2x.jpg');
+  }
+}

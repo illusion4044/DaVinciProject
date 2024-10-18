@@ -1,4 +1,4 @@
-import css from './WhyDrinkWater.modules.css';
+import css from './WhyDrinkWater.module.css';
 
 const WhyDrinkWater = () => {
   return (
