@@ -1,0 +1,56 @@
+.modalBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: white;
+    box-shadow: 24px;
+    padding: 16px;
+    border-radius: 10px;
+  }
+  
+  .modalTitle {
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: 100 !important;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .deleteBtn {
+    padding: 3px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: rgb(255, 92, 92);
+    text-transform: uppercase;
+    font-weight: 200;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .deleteBtn:hover,   
+  .deleteBtn:focus {
+    background-color: rgb(253, 235, 236);
+  }
+
+  .backBtn {
+    padding: 3px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: rgb(43, 174, 217);
+    text-transform: uppercase;
+    font-weight: 200;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .backBtn:hover,   
+  .backBtn:focus {
+    background-color: rgb(225, 234, 255);
+  }
