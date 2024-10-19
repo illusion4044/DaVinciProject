@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react';
 import {Route, Routes} from 'react-router-dom';
-import SharedLayout from '../SharedLayout/SharedLayout';
+import {SharedLayout} from '../SharedLayout/SharedLayout';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from '../../redux/auth/selectors';
 import { refreshUser } from '../../redux/auth/operations';
