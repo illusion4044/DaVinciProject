@@ -1,2 +1,2 @@
-export const getUserGender = state => state.auth.user.gender;
+export const getUserGender = state => state.water.gender;
 export const getUserDailyNorma = state => state.water.dailyNorma;

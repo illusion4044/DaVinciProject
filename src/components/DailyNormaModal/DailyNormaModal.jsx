@@ -3,19 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
-import 'react-toastify/dist/ReactToastify.css';
-import css from './DailyNormaModal.module.css';
-import { getUserDailyNorma, getUserGender } from 'redux/water/selectors.js';
-import { changeDailyNorma } from 'redux/water/slice.js';
+/* import css from './DailyNormaModal.module.css'; */
+
+import { changeDailyNorma } from '../../redux/water/slice.js';
 import {
   fetchMonthlyPortionsThunk,
   updatePortionThunk,
-} from 'redux/water/operations.js';
+} from '../../redux/water/operations.js';
+import {
+  getUserDailyNorma,
+  getUserGender,
+} from '../../redux/water/selectors.js';
 
 export default function DailyNormaModal({ onClose }) {
+  const dispatch = useDispatch();
   const womanFormula = 'V=(M*0.03) + (T*0.4)';
   const manFormula = 'V=(M*0.04) + (T*0.6)';
-  const dispatch = useDispatch();
+
   const [calculatedNorma, setCalculatedNorma] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const gender = useSelector(getUserGender);
@@ -41,7 +45,6 @@ export default function DailyNormaModal({ onClose }) {
       .required('Water amount is required'),
   });
 
-
   const getCurrentDate = () => {
     const currentDate = new Date();
     const currentDay = String(currentDate.getDate()).padStart(2, '0');
@@ -50,13 +53,11 @@ export default function DailyNormaModal({ onClose }) {
     return `${currentDay}-${currentMonth}-${currentYear}`;
   };
 
-
   const handleBackdropClick = e => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
-
 
   useEffect(() => {
     const handleEsc = e => {
@@ -69,7 +70,6 @@ export default function DailyNormaModal({ onClose }) {
       window.removeEventListener('keydown', handleEsc);
     };
   }, [onClose]);
-
 
   const formik = useFormik({
     initialValues: {
@@ -91,16 +91,13 @@ export default function DailyNormaModal({ onClose }) {
         const newDailyNorma = { dailyNorma: dailyNormaMl, weight, time };
         const currentDate = getCurrentDate();
 
-
         dispatch(changeDailyNorma(newDailyNorma));
         await dispatch(updatePortionThunk(newDailyNorma));
         await dispatch(fetchMonthlyPortionsThunk(currentDate));
 
-
         toast.success('Data saved successfully!');
         onClose();
       } catch (error) {
-
         toast.error('An error occurred while saving data!');
       } finally {
         setIsLoading(false);
@@ -108,13 +105,11 @@ export default function DailyNormaModal({ onClose }) {
     },
   });
 
-
   const handleGenderChange = e => {
     setSelectedGender(e.target.value);
     formik.setFieldValue('gender', e.target.value);
   };
 
- 
   useEffect(() => {
     const weight = Math.floor(formik.values.weight);
     const time = Math.floor(formik.values.time);
