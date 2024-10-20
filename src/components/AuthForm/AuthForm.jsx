@@ -9,7 +9,7 @@ import { PiEyeLight } from 'react-icons/pi';
 import { PiEyeSlash } from 'react-icons/pi';
 
 import css from './AuthForm.module.css';
-// import { login, register } from '../../redux/auth/operations.js';
+import { login, register } from '../../redux/auth/operations.js';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { selectUser } from '../../redux/auth/selectors';
 
@@ -87,7 +87,7 @@ const AuthForm = () => {
   return (
     <>
       <div className={css.wrap_form}>
-        {/* <Formik
+        <Formik
           initialValues={initialValues}
           validationSchema={signUpValidationSchema}
           onSubmit={handleSubmit}
@@ -102,7 +102,7 @@ const AuthForm = () => {
                 </label>
                 <Field
                   className={`${css.field} ${
-                    errors.email && touched.email ? css.errorField : ""
+                    errors.email && touched.email ? css.errorField : ''
                   }`}
                   type="email"
                   name="email"
@@ -122,9 +122,9 @@ const AuthForm = () => {
                 </label>
                 <Field
                   className={`${css.field} ${
-                    touched.password && errors.password ? css.errorField : ""
+                    touched.password && errors.password ? css.errorField : ''
                   }`}
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   name="password"
                   id={passwordFieldId}
                   placeholder="Password"
@@ -146,16 +146,16 @@ const AuthForm = () => {
                 />
               </div>
 
-              {action === "Sign Up" && (
+              {action === 'Sign Up' && (
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={repeatPasswordFieldId}>
                     Repeat password
                   </label>
                   <Field
                     className={`${css.field} ${
-                      touched.password && errors.password ? css.errorField : ""
+                      touched.password && errors.password ? css.errorField : ''
                     }`}
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     name="repeatPassword"
                     id={repeatPasswordFieldId}
                     placeholder="Repeat password"
@@ -188,15 +188,15 @@ const AuthForm = () => {
         </Formik>
         <nav>
           <Link
-            to={action === "Sign In" ? "/signup" : "/signin"}
+            to={action === 'Sign In' ? '/signup' : '/signin'}
             className={css.link}
             onClick={() =>
-              setAction(action === "Sign In" ? "Sign Up" : "Sign In")
+              setAction(action === 'Sign In' ? 'Sign Up' : 'Sign In')
             }
           >
-            {action === "Sign In" ? "Sign Up" : "Sign In"}
+            {action === 'Sign In' ? 'Sign Up' : 'Sign In'}
           </Link>
-        </nav> */}
+        </nav>
       </div>
     </>
   );
