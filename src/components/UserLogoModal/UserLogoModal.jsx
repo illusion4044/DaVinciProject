@@ -1,6 +1,6 @@
 import css from './UserLogoModal.module.css';
 
-export function UserLogoModal({ toggleModal }) {
+export function UserLogoModal() {
   return (
     <div className={css.modal}>
       <ul className={css.modal_list}>
