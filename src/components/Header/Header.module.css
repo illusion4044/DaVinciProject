@@ -1,0 +1,88 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Desktop (1440px) */
+@media (min-width: 1440px) {
+  header {
+    max-width: 1208px;
+  }
+}
+
+/* Tablet (768px) */
+@media (min-width: 768px) and (max-width: 1207px) {
+  header {
+    max-width: 708px;
+  }
+}
+
+/* Mobile (280px) */
+@media (max-width: 768px) {
+  header {
+    max-width: 280px;
+  }
+}
+
+.user_avatar_placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #407bff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.user_avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user_name {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: right;
+}
+
+.user_block {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.user_button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  gap: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.sign_in_block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #407bff;
+  gap: 8px;
+}
+
+.sign_in_block_link {
+  color: inherit;
+  text-decoration: none;
+}
