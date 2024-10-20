@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
-/* import css from './DailyNormaModal.module.css'; */
+import css from './DailyNormaModal.module.css';
 
 import { changeDailyNorma } from '../../redux/water/slice.js';
 import {
@@ -16,28 +16,28 @@ import {
 } from '../../redux/water/selectors.js';
 
 export default function DailyNormaModal({ onClose }) {
-  const dispatch = useDispatch();
   const womanFormula = 'V=(M*0.03) + (T*0.4)';
   const manFormula = 'V=(M*0.04) + (T*0.6)';
-
+  const dispatch = useDispatch();
   const [calculatedNorma, setCalculatedNorma] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const gender = useSelector(getUserGender);
   const dailyNorma = useSelector(getUserDailyNorma);
   const [selectedGender, setSelectedGender] = useState(gender);
 
-  // Валідація полів
   const calculateSchema = Yup.object({
     weight: Yup.number()
       .typeError('Weight must be a number')
       .positive()
       .min(20, 'Minimum value is 20kg')
-      .max(300, 'Maximum value is 300kg'),
+      .max(300, 'Maximum value is 300kg')
+      .required('Weight is required'),
     time: Yup.number()
       .typeError('Time must be a number')
       .positive()
       .min(0.1, 'Minimum value is 0.1h')
-      .max(24, 'Maximum value is 24h'),
+      .max(24, 'Maximum value is 24h')
+      .required('Time is required'),
     amountOfWater: Yup.number()
       .typeError('Water amount must be a number')
       .min(0.1, 'Minimum value is 0.1L')
@@ -133,25 +133,39 @@ export default function DailyNormaModal({ onClose }) {
 
   return (
     <div onClick={handleBackdropClick}>
-      <div>
-        <div className="modal-header">
-          <h1>My daily norma</h1>
-          <button onClick={onClose} className="close-btn">
-            &times;
+      <div className={css.modal}>
+        <div className={css.modalHeaderContainer}>
+          <h1 className={css.header}>My daily norma</h1>
+          <button onClick={onClose} className={css.closeButton}>
+            <span>&times;</span>
           </button>
         </div>
-
-        <p>
-          For woman: <span>{womanFormula}</span>
-        </p>
-        <p>
-          For man: <span>{manFormula}</span>
-        </p>
-
+        <div className={css.formulaContainer}>
+          <div className={css.womanFormula}>
+            <p className={css.formulaText}>
+              For woman: <span className={css.formula}>{womanFormula}</span>
+            </p>
+          </div>
+          <div className={css.manFormula}>
+            <p className={css.formulaText}>
+              For man: <span className={css.formula}>{manFormula}</span>
+            </p>
+          </div>
+        </div>
+        <div className={css.placeholderContainer}>
+          <p className={css.placeholder}>
+            <span>
+              * V is the volume of the water norm in liters per day, M is your
+              body weight, T is the time of active sports, or another type of
+              activity commensurate in terms of loads (in the absence of these,
+              you must set 0)
+            </span>
+          </p>
+        </div>
         <form onSubmit={formik.handleSubmit}>
           <div>
-            <h2>Calculate your rate:</h2>
-            <div>
+            <h2 className={css.rate}>Calculate your rate:</h2>
+            <div className={css.radio}>
               <label>
                 <input
                   type="radio"
@@ -159,6 +173,7 @@ export default function DailyNormaModal({ onClose }) {
                   value="woman"
                   checked={selectedGender === 'woman'}
                   onChange={handleGenderChange}
+                  className={css.gender}
                 />
                 For woman
               </label>
@@ -169,13 +184,14 @@ export default function DailyNormaModal({ onClose }) {
                   value="man"
                   checked={selectedGender === 'man'}
                   onChange={handleGenderChange}
+                  className={css.gender}
                 />
                 For man
               </label>
             </div>
 
             <label>
-              <p>Your weight in kilograms:</p>
+              <p className={css.weight}>Your weight in kilograms:</p>
               <input
                 id="weight"
                 type="number"
@@ -184,11 +200,15 @@ export default function DailyNormaModal({ onClose }) {
                 onBlur={formik.handleBlur}
                 value={formik.values.weight}
                 placeholder="0"
+                className={css.value}
               />
+              {formik.touched.weight && formik.errors.weight ? (
+                <div className={css.error}>{formik.errors.weight}</div>
+              ) : null}
             </label>
 
             <label>
-              <p>
+              <p className={css.text}>
                 The time of active participation in sports or other activities
                 with a high physical load in hours:
               </p>
@@ -200,16 +220,25 @@ export default function DailyNormaModal({ onClose }) {
                 onBlur={formik.handleBlur}
                 value={formik.values.time}
                 placeholder="0"
+                className={css.value}
               />
+              {formik.touched.time && formik.errors.time ? (
+                <div className={css.error}>{formik.errors.time}</div>
+              ) : null}
             </label>
-            <p>
-              The required amount of water in liters per day: {calculatedNorma}
-            </p>
+            <div className={css.amountContainer}>
+              <p className={css.amount}>
+                The required amount of water in liters per day:
+              </p>
+              <p className={css.calculatedNorma}>{calculatedNorma}</p>
+            </div>
           </div>
 
           <div>
             <label>
-              <h2>Write down how much water you will drink:</h2>
+              <h2 className={css.amountOfWater}>
+                Write down how much water you will drink:
+              </h2>
               <input
                 type="number"
                 name="amountOfWater"
@@ -218,11 +247,15 @@ export default function DailyNormaModal({ onClose }) {
                 onBlur={formik.handleBlur}
                 value={formik.values.amountOfWater}
                 placeholder="0"
+                className={css.value}
               />
+              {formik.touched.amountOfWater && formik.errors.amountOfWater ? (
+                <div className={css.error}>{formik.errors.amountOfWater}</div>
+              ) : null}
             </label>
           </div>
 
-          <button type="submit" disabled={isLoading}>
+          <button type="submit" disabled={isLoading} className={css.saveButton}>
             {isLoading ? 'Saving...' : 'Save'}
           </button>
         </form>
