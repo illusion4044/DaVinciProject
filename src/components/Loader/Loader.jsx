@@ -1,3 +1,4 @@
+
 import { InfinitySpin } from 'react-loader-spinner';
 
 const Loader = () => {
@@ -9,6 +10,10 @@ const Loader = () => {
             ariaLabel="infinity-spin-loading"
         />
     );
+
+const Loader = () => {
+    return <div>Loading...</div>;
+
 };
 
 export default Loader;
