@@ -1,0 +1,288 @@
+
+.modalContainer {
+   position: fixed;
+height: 100%;
+width: 100%;
+top: 0;
+left: 0;
+background-color: rgba(0, 0, 0, 0.8);
+ overflow: hidden;
+}
+
+
+.modal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 280px;
+  height: 100%;
+  background: #fcfcfc;
+
+  border-radius: 4px;
+   overflow: auto;
+  padding: 24px 12px 24px 12px;
+}
+
+
+.error{
+  color: red;
+}
+
+
+@media (min-width: 768px) {
+  .modal {
+    width: 704px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .modal {
+    width: 592px;
+  }
+}
+
+.modalHeaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+margin-bottom: 24px;
+}
+
+.header {
+   font-size: 26px;
+  line-height: 1.2;
+  margin-bottom: 0;
+  font-weight: 500;
+   margin-top: 0;
+   line-height: 1.23
+}
+
+.closeButton {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton span {
+  font-size: 24px;
+  line-height: 1;
+  color: #407bff;
+}
+
+@media (min-width: 768px) {
+  .formulaContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 24px;
+  }
+}
+
+
+
+
+.formulaText {
+     align-items: baseline;
+
+    font-size: 16px;
+    margin: 0;
+
+    line-height: 1.25;
+}
+
+.formula{
+   font-size: 18px;
+      margin: 0;
+    line-height: 1.33;
+    color: #407bff;
+}
+
+.womanFormula {
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .womanFormula {
+ margin-bottom: 0;
+  }
+}
+
+.manFormula{
+  margin-bottom: 14px;
+}
+
+@media (min-width: 768px) {
+  .manFormula {
+ margin-bottom: 0;
+  }
+}
+
+.placeholderContainer{
+  border-radius: 10px;
+padding: 10px;
+width: 100%;
+margin-bottom: 24px;
+border: 1px solid #407bff;
+box-sizing: border-box;
+}
+
+
+
+.placeholder{
+   font-size: 12px;
+    line-height: 1.33;
+    margin: 0;
+    color: gray
+}
+
+.rate {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 18px;
+line-height: 1.11;
+}
+
+.radio {
+  margin-bottom: 16px;
+}
+
+input[type="radio"] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #407BFF;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+}
+
+input[type="radio"]::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #407BFF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+input[type="radio"]:checked::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.gender {
+  font-size: 16px;
+line-height: 1.25;
+}
+
+.weight{
+  margin-top: 0;
+  font-size: 16px;
+line-height: 1.25;
+margin-bottom: 8px;
+}
+
+.value {
+  border-radius: 6px;
+padding: 12px 10px;
+ width: 100%;
+height: 44px;
+border: 1px solid #407bff;
+  box-sizing: border-box;
+   color: #407BFF;
+}
+
+
+
+.value:hover,
+.value:focus {
+  border-color: #407BFF;
+  outline: none;
+}
+
+.value::placeholder {
+  color: #407BFF;
+  opacity: 1;
+}
+
+.text {
+   font-size: 16px;
+line-height: 1.25;
+margin-top: 16px;
+margin-bottom: 8px;
+}
+
+.amount {
+
+
+  line-height: 1.25;
+margin: 0;
+
+}
+
+.amountContainer {
+display: flex;
+flex-direction: row;
+gap: 6px;
+align-items: center;
+margin-top: 16px;
+margin-bottom: 24px;
+}
+
+
+@media (min-width: 768px) {
+  .amountContainer {
+ margin-bottom: 26px;
+  }
+}
+
+.calculatedNorma {
+  font-weight: 700;
+font-size: 18px;
+line-height: 1.33;
+ color: #407bff;
+ margin: 0;
+}
+
+
+.amountOfWater {
+  margin-top: 24px;
+  margin-bottom: 16px;
+font-size: 18px;
+line-height: 1.11;
+}
+
+.saveButton {
+border-radius: 10px;
+padding: 8px 30px;
+width: 256px;
+height: 36px;
+font-weight: 500;
+font-size: 16px;
+line-height: 125%;
+text-align: center;
+color: white;
+margin-top: 24px;
+margin-bottom: 24px;
+background-color: #407bff;
+border: none;
+}
+
+@media (min-width: 768px) {
+  .saveButton {
+  float: right;
+
+  }
+}
