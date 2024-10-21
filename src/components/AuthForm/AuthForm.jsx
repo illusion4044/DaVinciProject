@@ -1,28 +1,27 @@
-import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
-import { useId } from "react";
-import * as yup from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useId } from 'react';
+import * as yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { toast } from 'react-hot-toast';
 
-import { PiEyeLight } from "react-icons/pi";
-import { PiEyeSlash } from "react-icons/pi";
+import { PiEyeLight } from 'react-icons/pi';
+import { PiEyeSlash } from 'react-icons/pi';
 
-import css from "./AuthForm.module.css";
-import { login, register } from "../../redux/auth/operations.js";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { selectUser } from "../../redux/auth/selectors";
-
+import css from './AuthForm.module.css';
+import { logIn, register } from '../../redux/auth/operations.js';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { selectUser } from '../../redux/auth/selectors';
 
 const signUpValidationSchema = yup.object().shape({
-  email: yup.string().email("Must be a valid email!").required("Required"),
+  email: yup.string().email('Must be a valid email!').required('Required'),
   password: yup
     .string()
-    .min(6, "Must be at least 6 characters!")
-    .required("Required"),
+    .min(6, 'Must be at least 6 characters!')
+    .required('Required'),
   repeatPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match"),
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
 const AuthForm = () => {
@@ -30,7 +29,7 @@ const AuthForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [action, setAction] = useState("Sign Up");
+  const [action, setAction] = useState('Sign Up');
   const emailFieldId = useId();
   const passwordFieldId = useId();
   const repeatPasswordFieldId = useId();
@@ -38,43 +37,43 @@ const AuthForm = () => {
   const user = useSelector(selectUser);
 
   const initialValues = {
-    email: user.email ?? "",
-    password: "",
-    repeatPassword: "",
+    email: user.email ?? '',
+    password: '',
+    repeatPassword: '',
   };
 
   useEffect(() => {
-    if (location.pathname === "/signin") {
-      setAction("Sign In");
-    } else if (location.pathname === "/signup") {
-      setAction("Sign Up");
+    if (location.pathname === '/signin') {
+      setAction('Sign In');
+    } else if (location.pathname === '/signup') {
+      setAction('Sign Up');
     }
   }, [location.pathname]);
 
   const handleSubmit = ({ repeatPassword, ...loginValues }, actions) => {
     switch (action) {
-      case "Sign Up":
+      case 'Sign Up':
         dispatch(register(loginValues))
           .unwrap()
           .then(() => {
-            toast.success("Registration success!");
-            navigate("/signin");
+            toast.success('Registration success!');
+            navigate('/signin');
           })
-          .catch((e) => {
-            console.error("Registration error: ", e);
+          .catch(e => {
+            console.error('Registration error: ', e);
             toast.error(
               `Registration failed. Please check your information and try again.`
             );
           });
         break;
-      case "Sign In":
-        dispatch(login(loginValues))
+      case 'Sign In':
+        dispatch(logIn(loginValues))
           .unwrap()
           .then(() => {
-            toast.success("Login success!");
+            toast.success('Login success!');
           })
-          .catch((e) => {
-            console.error("Login error: ", e);
+          .catch(e => {
+            console.error('Login error: ', e);
             toast.error(`Incorrect login or password. Please try again`);
           });
         break;
@@ -103,7 +102,7 @@ const AuthForm = () => {
                 </label>
                 <Field
                   className={`${css.field} ${
-                    errors.email && touched.email ? css.errorField : ""
+                    errors.email && touched.email ? css.errorField : ''
                   }`}
                   type="email"
                   name="email"
@@ -123,9 +122,9 @@ const AuthForm = () => {
                 </label>
                 <Field
                   className={`${css.field} ${
-                    touched.password && errors.password ? css.errorField : ""
+                    touched.password && errors.password ? css.errorField : ''
                   }`}
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   name="password"
                   id={passwordFieldId}
                   placeholder="Password"
@@ -147,16 +146,16 @@ const AuthForm = () => {
                 />
               </div>
 
-              {action === "Sign Up" && (
+              {action === 'Sign Up' && (
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={repeatPasswordFieldId}>
                     Repeat password
                   </label>
                   <Field
                     className={`${css.field} ${
-                      touched.password && errors.password ? css.errorField : ""
+                      touched.password && errors.password ? css.errorField : ''
                     }`}
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     name="repeatPassword"
                     id={repeatPasswordFieldId}
                     placeholder="Repeat password"
@@ -189,13 +188,13 @@ const AuthForm = () => {
         </Formik>
         <nav>
           <Link
-            to={action === "Sign In" ? "/signup" : "/signin"}
+            to={action === 'Sign In' ? '/signup' : '/signin'}
             className={css.link}
             onClick={() =>
-              setAction(action === "Sign In" ? "Sign Up" : "Sign In")
+              setAction(action === 'Sign In' ? 'Sign Up' : 'Sign In')
             }
           >
-            {action === "Sign In" ? "Sign Up" : "Sign In"}
+            {action === 'Sign In' ? 'Sign Up' : 'Sign In'}
           </Link>
         </nav>
       </div>
