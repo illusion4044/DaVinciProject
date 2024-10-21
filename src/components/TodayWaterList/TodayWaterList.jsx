@@ -1,21 +1,66 @@
-import TodayListModal from '../TodayListModal/TodayListModal.jsx';
+import WaterRatioPanel from 'components/WaterRatioPanel/WaterRatioPanel.jsx';
+import { useSelector } from 'react-redux';
 
 export default function TodayWaterList() {
+  const portionWater = useSelector(state => state.water.dailyNorma);
+
   return (
     <>
       <h3>Today</h3>
       <ul>
         <li>
           <svg>
-            <use href="./img/"></use>
+            <use href="./img/img_for_todayWaterList/glasswater-1x.png,./img/img_for_todayWaterList/glasswater-2x.png"></use>
           </svg>
-          TodayWaterList:{} <button></button>
-          <button></button>
+          TodayWaterList:{portionWater}
+          TodayWaterList: {}
+          <button>
+            <svg>
+              <use href="../img/icons.svg#icon-pencil-square"></use>
+            </svg>
+          </button>
+          <button>
+            <svg>
+              <use href="../img/icons.svg#icon-trash"></use>
+            </svg>
+          </button>
         </li>
-        <li></li>
-        <li></li>
+        <li>
+          <svg>
+            <use href="./img/img_for_todayWaterList/glasswater-1x.png,./img/img_for_todayWaterList/glasswater-2x.png"></use>
+          </svg>
+          TodayWaterList:{portionWater}
+          TodayWaterList: {}
+          <button>
+            <svg>
+              <use href="../img/icons.svg#icon-pencil-square"></use>
+            </svg>
+          </button>
+          <button>
+            <svg>
+              <use href="../img/icons.svg#icon-trash"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <svg>
+            <use href="./img/img_for_todayWaterList/glasswater-1x.png,./img/img_for_todayWaterList/glasswater-2x.png"></use>
+          </svg>
+          TodayWaterList:{portionWater}
+          TodayWaterList: {}
+          <button>
+            <svg>
+              <use href="../img/icons.svg#icon-pencil-square"></use>
+            </svg>
+          </button>
+          <button>
+            <svg>
+              <use href="../img/icons.svg#icon-trash"></use>
+            </svg>
+          </button>
+        </li>
       </ul>
-      <button onClick={TodayListModal}>+ Add Water</button>
+      <button onClick={WaterRatioPanel}>+ Add Water</button>
     </>
   );
 }
