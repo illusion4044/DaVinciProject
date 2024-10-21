@@ -1,12 +1,9 @@
-
-import WaterRatioPanel from 'components/WaterRatioPanel/WaterRatioPanel.jsx'
-import TodayListModal from '../TodayListModal/TodayListModal.jsx';
+import WaterRatioPanel from '../WaterRatioPanel/WaterRatioPanel.jsx';
+// import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import { useSelector } from 'react-redux';
 
 export default function TodayWaterList() {
   const portionWater = useSelector(state => state.water.dailyNorma);
-
-
 
   //   const time = useSelector(state => state.water.gender);
 
@@ -64,7 +61,6 @@ export default function TodayWaterList() {
               <use href="../img/icons.svg#icon-trash"></use>
             </svg>
           </button>
-
         </li>
         <li>
           <svg>
@@ -99,7 +95,6 @@ export default function TodayWaterList() {
               <use href="../img/icons.svg#icon-trash"></use>
             </svg>
           </button>
-
         </li>
       </ul>
       <button onClick={WaterRatioPanel}>+ Add Water</button>
