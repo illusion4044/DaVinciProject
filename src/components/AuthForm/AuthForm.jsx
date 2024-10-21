@@ -9,7 +9,7 @@ import { PiEyeLight } from 'react-icons/pi';
 import { PiEyeSlash } from 'react-icons/pi';
 
 import css from './AuthForm.module.css';
-import { login, register } from '../../redux/auth/operations.js';
+import { logIn, register } from '../../redux/auth/operations.js';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { selectUser } from '../../redux/auth/selectors';
 
@@ -67,7 +67,7 @@ const AuthForm = () => {
           });
         break;
       case 'Sign In':
-        dispatch(login(loginValues))
+        dispatch(logIn(loginValues))
           .unwrap()
           .then(() => {
             toast.success('Login success!');
