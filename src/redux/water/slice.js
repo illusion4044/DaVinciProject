@@ -1,26 +1,53 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updatePortionThunk, fetchMonthlyPortionsThunk } from './operations';
+import { updatePortionThunk, fetchMonthlyPortionsThunk, updateWaterRateThunk } from './operations';
 
 const initialState = {
   dailyNorma: null,
   monthlyPortions: [],
+  activeContent: "pictureBottleBg",
   isLoading: false,
-  error: null,
+  isError: null,
 };
 
 const waterSlice = createSlice({
-  name: 'water',
+  name: "water",
   initialState,
   reducers: {
+
     changeDailyNorma(state, action) {
       state.dailyNorma = action.payload;
     },
+
+    changeActiveContent(state, action) {
+      state.activeContent = action.payload;
+    },
+
+    clearNormaCounterData(state) {
+      state.dailyNorma = 0;
+      state.isLoading = false;
+      state.isError = null;
+    },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(updatePortionThunk.pending, state => {
+
+      .addCase(updateWaterRateThunk.pending, (state) => {
         state.isLoading = true;
-        state.error = null;
+        state.isError = null;
+      })
+      .addCase(updateWaterRateThunk.fulfilled, (state, { payload }) => {
+        state.dailyNorma = payload.result.dailyWaterNorma;
+        state.isLoading = false;
+      })
+      .addCase(updateWaterRateThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = payload;
+      })
+
+
+      .addCase(updatePortionThunk.pending, (state) => {
+        state.isLoading = true;
+        state.isError = null;
       })
       .addCase(updatePortionThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -28,12 +55,13 @@ const waterSlice = createSlice({
       })
       .addCase(updatePortionThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.isError = action.payload;
       })
 
-      .addCase(fetchMonthlyPortionsThunk.pending, state => {
+
+      .addCase(fetchMonthlyPortionsThunk.pending, (state) => {
         state.isLoading = true;
-        state.error = null;
+        state.isError = null;
       })
       .addCase(fetchMonthlyPortionsThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -41,10 +69,13 @@ const waterSlice = createSlice({
       })
       .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.isError = action.payload;
       });
   },
 });
 
-export const { changeDailyNorma } = waterSlice.actions;
+
+export const { changeDailyNorma, clearNormaCounterData, changeActiveContent } =
+  waterSlice.actions;
+
 export default waterSlice.reducer;

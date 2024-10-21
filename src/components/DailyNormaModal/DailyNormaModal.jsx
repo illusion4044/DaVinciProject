@@ -9,6 +9,7 @@ import { changeDailyNorma } from '../../redux/water/slice.js';
 import {
   fetchMonthlyPortionsThunk,
   updatePortionThunk,
+  updateWaterRateThunk,
 } from '../../redux/water/operations.js';
 import {
   getUserDailyNorma,
@@ -92,6 +93,7 @@ export default function DailyNormaModal({ onClose }) {
         const currentDate = getCurrentDate();
 
         dispatch(changeDailyNorma(newDailyNorma));
+        await dispatch(updateWaterRateThunk(newDailyNorma));
         await dispatch(updatePortionThunk(newDailyNorma));
         await dispatch(fetchMonthlyPortionsThunk(currentDate));
 
@@ -132,7 +134,7 @@ export default function DailyNormaModal({ onClose }) {
   ]);
 
   return (
-    <div onClick={handleBackdropClick}>
+    <div className={css.modalContainer} onClick={handleBackdropClick}>
       <div className={css.modal}>
         <div className={css.modalHeaderContainer}>
           <h1 className={css.header}>My daily norma</h1>
