@@ -1,0 +1,45 @@
+.user_avatar_placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #407bff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.user_avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user_name {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: right;
+}
+
+.user_block {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.user_button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  gap: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
