@@ -43,9 +43,9 @@ const AuthForm = () => {
   };
 
   useEffect(() => {
-    if (location.pathname === '/signin') {
+    if (location.pathname === '/login') {
       setAction('Sign In');
-    } else if (location.pathname === '/signup') {
+    } else if (location.pathname === '/register') {
       setAction('Sign Up');
     }
   }, [location.pathname]);
@@ -57,7 +57,7 @@ const AuthForm = () => {
           .unwrap()
           .then(() => {
             toast.success('Registration success!');
-            navigate('/signin');
+            navigate('/login');
           })
           .catch(e => {
             console.error('Registration error: ', e);

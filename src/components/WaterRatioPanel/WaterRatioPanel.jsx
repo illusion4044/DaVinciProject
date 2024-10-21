@@ -1,5 +1,5 @@
 import { ReactSlider } from 'react-slider';
-import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
+import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 
 export default function WaterRatioPanel() {
   return (
@@ -10,7 +10,7 @@ export default function WaterRatioPanel() {
         trackClassName="example-track"
         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
       />
-      <button onclick={TodayListModal}> +Add Water</button>
+      <button onClick={() => console.log('Water added')}> +Add Water</button>
     </>
   );
 }

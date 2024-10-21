@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import DailyNormaModal from 'components/DailyNormaModal/DailyNormaModal.jsx';
+import DailyNormaModal from '../DailyNormaModal/DailyNormaModal.jsx';
 
 export default function DailyNorma() {
   const liters = useSelector(state => state.auth.items);
