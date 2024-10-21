@@ -1,4 +1,4 @@
-import { ReactSlider } from 'react-slider';
+import ReactSlider from 'react-slider';
 import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 
 export default function WaterRatioPanel() {
