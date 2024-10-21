@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
-import userImage from '../../img/john-1x.jpg';
+import userImage from '../../img/john_1x.jpg';
 import { updateUser } from '../../redux/users/operations.js';
 
 const UserSchema = Yup.object().shape({
