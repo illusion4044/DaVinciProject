@@ -188,7 +188,7 @@ const AuthForm = () => {
         </Formik>
         <nav>
           <Link
-            to={action === 'Sign In' ? '/signup' : '/signin'}
+            to={action === 'Sign In' ? '/register' : '/login'}
             className={css.link}
             onClick={() =>
               setAction(action === 'Sign In' ? 'Sign Up' : 'Sign In')
