@@ -32,7 +32,13 @@ export default function App() {
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route path='/' element={<SharedLayout />}>
-          <Route index element={<WelcomePage />} />
+          {/* <Route path='/welcome' element={<WelcomePage />} /> */}
+          <Route
+            path='/welcome'
+            element={
+              <RestrictedRoute component={WelcomePage} redirectTo='/welcome' />
+            }
+          />
           <Route
             path='/register'
             element={
