@@ -12,3 +12,15 @@ export const fetchLiters = createAsyncThunk(
     }
   }
 );
+
+export const updateUser = createAsyncThunk(
+  'users/updateUser',
+  async (userData, thunkAPI) => {
+    try {
+      const response = await axios.patch('/api/user', userData);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

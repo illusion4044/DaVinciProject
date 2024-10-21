@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchLiters } from './operations.js';
+import { updateUser } from './operations.js';
 
 const usersSlice = createSlice({
   name: 'users',
@@ -20,6 +21,19 @@ const usersSlice = createSlice({
       })
       .addCase(fetchLiters.rejected, state => {
         state.error = true;
+        state.loading = false;
+      })
+      .addCase(updateUser.pending, state => {
+        state.loading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.items = state.items.map(user =>
+          user.id === action.payload.id ? action.payload : user
+        );
+        state.loading = false;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.error = action.payload;
         state.loading = false;
       }),
 });
