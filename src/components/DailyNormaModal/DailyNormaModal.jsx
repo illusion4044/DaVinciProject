@@ -9,11 +9,10 @@ import { changeDailyNorma } from '../../redux/water/slice.js';
 import {
   fetchMonthlyPortionsThunk,
   updatePortionThunk,
-  updateWaterRateThunk,
 } from '../../redux/water/operations.js';
 import {
-  getUserDailyNorma,
-  getUserGender,
+  selectDailyNorma,
+  selectGender,
 } from '../../redux/water/selectors.js';
 
 export default function DailyNormaModal({ onClose }) {
@@ -22,8 +21,8 @@ export default function DailyNormaModal({ onClose }) {
   const dispatch = useDispatch();
   const [calculatedNorma, setCalculatedNorma] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const gender = useSelector(getUserGender);
-  const dailyNorma = useSelector(getUserDailyNorma);
+  const gender = useSelector(selectGender);
+  const dailyNorma = useSelector(selectDailyNorma);
   const [selectedGender, setSelectedGender] = useState(gender);
 
   const calculateSchema = Yup.object({
@@ -93,7 +92,6 @@ export default function DailyNormaModal({ onClose }) {
         const currentDate = getCurrentDate();
 
         dispatch(changeDailyNorma(newDailyNorma));
-        await dispatch(updateWaterRateThunk(newDailyNorma));
         await dispatch(updatePortionThunk(newDailyNorma));
         await dispatch(fetchMonthlyPortionsThunk(currentDate));
 
