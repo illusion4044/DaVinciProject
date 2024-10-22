@@ -1,20 +1,31 @@
+import { useState } from 'react';
 import css from './UserLogoModal.module.css';
+
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/auth/slice'; 
 
 export function UserLogoModal() {
 const dispatch = useDispatch();
   
+
+import SettingModal from '../SettingModal/SettingModal.jsx';
+
+export function UserLogoModal() {
+  const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
+
+  const openSettingModal = () => {
+    setIsSettingModalOpen(true);
+  };
+
+  const closeSettingModal = () => {
+    setIsSettingModalOpen(false);
+  };
+
   return (
     <div className={css.modal}>
       <ul className={css.modal_list}>
         <li className={css.modal_item}>
-          <button
-            onClick={() => {
-              /* Open SettingModal */
-            }}
-            className={css.modal_button}
-          >
+          <button onClick={openSettingModal} className={css.modal_button}>
             <svg
               width="16"
               height="16"
@@ -63,6 +74,7 @@ const dispatch = useDispatch();
           </button>
         </li>
       </ul>
+      {isSettingModalOpen && <SettingModal closeModal={closeSettingModal} />}
     </div>
   );
 }
