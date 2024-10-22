@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Logo from '../../img/logo_img/logo';
 import css from './Header.module.css';
 import { UserLogoModal } from '../../components/UserLogoModal/UserLogoModal';
+import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -85,6 +86,7 @@ export default function Header() {
           </div>
         </a>
       )}
+      <UserLogoutModal/>
     </header>
   );
 }

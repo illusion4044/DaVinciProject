@@ -13,6 +13,15 @@ const authSlice = createSlice({
         isRefreshing: false,
         isLoading: false,
         error: null,
+        isModalOpen: false,
+    },
+    reducers: {
+        openModal: (state) => {
+            state.isModalOpen = true;
+        },
+        closeModal: (state) => {
+            state.isModalOpen = false;
+        },
     },
     extraReducers: builder =>
         builder
@@ -73,5 +82,8 @@ const authSlice = createSlice({
                 state.isRefreshing = false;
             }),
 });
+
+
+export const { openModal, closeModal } = authSlice.actions;
 
 export default authSlice.reducer;

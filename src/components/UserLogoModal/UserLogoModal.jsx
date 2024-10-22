@@ -1,6 +1,10 @@
 import css from './UserLogoModal.module.css';
+import { useDispatch } from 'react-redux';
+import { openModal } from '../../redux/auth/slice'; 
 
 export function UserLogoModal() {
+const dispatch = useDispatch();
+  
   return (
     <div className={css.modal}>
       <ul className={css.modal_list}>
@@ -37,7 +41,7 @@ export function UserLogoModal() {
         <li className={css.modal_item}>
           <button
             onClick={() => {
-              /* Open UserLogoutModal */
+               dispatch(openModal());
             }}
             className={css.modal_button}
           >
