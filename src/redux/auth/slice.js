@@ -2,11 +2,34 @@ import { createSlice } from '@reduxjs/toolkit';
 import { logIn, logOut, refreshUser, register } from './operations';
 
 const authSlice = createSlice({
+
+    name: 'auth',
+    initialState: {
+        user: {
+            name: null,
+            email: null,
+        },
+        token: null,
+        isLoggedIn: false,
+        isRefreshing: false,
+        isLoading: false,
+        error: null,
+        isModalOpen: false,
+    },
+    reducers: {
+        openModal: (state) => {
+            state.isModalOpen = true;
+        },
+        closeModal: (state) => {
+            state.isModalOpen = false;
+        },
+
   name: 'auth',
   initialState: {
     user: {
       name: null,
       email: null,
+
     },
     token: null,
     isLoggedIn: false,
@@ -76,5 +99,8 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       }),
 });
+
+
+export const { openModal, closeModal } = authSlice.actions;
 
 export default authSlice.reducer;
