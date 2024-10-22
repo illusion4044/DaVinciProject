@@ -37,5 +37,17 @@ const usersSlice = createSlice({
         state.loading = false;
       }),
 });
-
 export default usersSlice.reducer;
+// name: 'auth',
+// initialState: {
+//   user: {
+//     name: 'Test User',
+//     email: 'testuser@example.com',
+//     photo: 'path-to-photo.jpg',
+//   },
+//   token: 'fake-token',
+//   isLoggedIn: true,
+//   isRefreshing: false,
+//   isLoading: false,
+//   error: null,
+// },

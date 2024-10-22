@@ -37,6 +37,7 @@ const authSlice = createSlice({
     isLoading: false,
     error: null,
   },
+
   extraReducers: builder =>
     builder
       // Register
