@@ -17,7 +17,7 @@ const signUpValidationSchema = yup.object().shape({
   email: yup.string().email('Must be a valid email!').required('Required'),
   password: yup
     .string()
-    .min(6, 'Must be at least 6 characters!')
+    .min(8, 'Must be at least 8 characters!')
     .required('Required'),
   repeatPassword: yup
     .string()
