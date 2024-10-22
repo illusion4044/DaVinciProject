@@ -10,7 +10,14 @@ export default function DailyNorma() {
     <div>
       <h4>My daily Norma</h4>
       <p>DailyNorma: {liters} L</p>
+
       <button onClick={handleClick}>Edit</button>
+
+
+      <button onClick={() => {}}>Edit</button>
+
+      <button onClick={handleClick}>Edit</button>
+
     </div>
   );
 }
