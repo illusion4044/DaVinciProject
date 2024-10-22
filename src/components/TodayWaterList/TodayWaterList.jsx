@@ -1,4 +1,4 @@
-import WaterRatioPanel from '../WaterRatioPanel/WaterRatioPanel.jsx';
+// import WaterRatioPanel from '../WaterRatioPanel/WaterRatioPanel.jsx';
 // import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import { useSelector } from 'react-redux';
 
@@ -97,7 +97,7 @@ export default function TodayWaterList() {
           </button>
         </li>
       </ul>
-      <button onClick={WaterRatioPanel}>+ Add Water</button>
+      <button onClick={() => {}}>+ Add Water</button>
     </>
   );
 }
