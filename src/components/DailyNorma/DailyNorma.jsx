@@ -8,7 +8,7 @@ export default function DailyNorma() {
     <div>
       <h4>My daily Norma</h4>
       <p>DailyNorma: {liters} L</p>
-      <button onClick={DailyNormaModal}>Edit</button>
+      <button onClick={() => {}}>Edit</button>
     </div>
   );
 }
