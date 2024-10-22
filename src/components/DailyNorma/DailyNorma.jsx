@@ -10,11 +10,7 @@ export default function DailyNorma() {
     <div>
       <h4>My daily Norma</h4>
       <p>DailyNorma: {liters} L</p>
-<<<<<<< Updated upstream
-      <button onClick={() => {}}>Edit</button>
-=======
       <button onClick={handleClick}>Edit</button>
->>>>>>> Stashed changes
     </div>
   );
 }
