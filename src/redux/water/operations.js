@@ -65,22 +65,3 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
 );
 
 
-export const updateWaterRateThunk = createAsyncThunk(
-  'water/updateWaterRate',
-  async (newDailyNorma, { rejectWithValue }) => {
-    try {
-      const response = await axios.put(
-        `${API_URL}/water/daily-rate`,
-        newDailyNorma
-      );
-
-      return response.data;
-    } catch (error) {
-      if (error.response && error.response.data) {
-        return rejectWithValue(error.response.data);
-      } else {
-        return rejectWithValue('An unknown error occurred'); 
-      }
-    }
-  }
-);
