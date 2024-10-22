@@ -134,9 +134,9 @@ const AuthForm = () => {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <PiEyeSlash className={css.icon} />
-                  ) : (
                     <PiEyeLight className={css.icon} />
+                  ) : (
+                    <PiEyeSlash className={css.icon} />
                   )}
                 </div>
                 <ErrorMessage
@@ -166,9 +166,9 @@ const AuthForm = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <PiEyeSlash className={css.icon} />
-                    ) : (
                       <PiEyeLight className={css.icon} />
+                    ) : (
+                      <PiEyeSlash className={css.icon} />
                     )}
                   </div>
 
