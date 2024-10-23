@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDailyNorma, selectSelectedItem } from '../../redux/water/selectors.js';
 import { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 import {
   fetchDailyPortionsThunk,
   fetchMonthlyPortionsThunk,
   updatePortionThunk,
 } from '../../redux/water/operations.js';
+import css from './TodayListModal.module.css'
 
 export default function TodayListModal({ onClose }) {
   const dispatch = useDispatch();
@@ -18,7 +17,12 @@ export default function TodayListModal({ onClose }) {
   const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
   const [inputValue, setInputValue] = useState(count);
   const [selectedTime, setSelectedTime] = useState(
-    selectedItem ? selectedItem.time : dayjs().format('HH:mm')
+    selectedItem
+      ? selectedItem.time
+      : new Date().toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        })
   );
   const [isSaveDisabled, setIsSaveDisabled] = useState(
     count <= 0 || count > 1500
@@ -64,6 +68,12 @@ export default function TodayListModal({ onClose }) {
     return currentDay + '-' + currentMonth + '-' + currentYear;
   };
 
+  const handleBackdropClick = e => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   const onSaveClick = () => {
     const consumeRatio = dailyNorma / count;
     const payload = {
@@ -73,7 +83,6 @@ export default function TodayListModal({ onClose }) {
       dailyNorma,
       consumeRatio,
     };
-
 
     dispatch(updatePortionThunk(payload)).then(() => {
       const currentDate = getCurrentData();
@@ -87,58 +96,87 @@ export default function TodayListModal({ onClose }) {
   }, [selectedItem]);
 
   return (
-    <div>
-      <h1>Edit the entered amount of water</h1>
-
-      {isFirstRecord ? <p>No notes yet</p> : null}
-
-      <div>
-        <svg>
-          <use href=""></use>
-        </svg>
-        <p>{selectedItem ? selectedItem.amount : 0} ml</p>
-        <p>{selectedItem ? selectedItem.time : '00:00'}</p>
-      </div>
-
-      <div>
-        <h2>Correct entered data:</h2>
-        <p>Amount of water:</p>
-        <div>
-          <button onClick={handleDecrement}>-</button>
-          <span>{count} ml</span>
-          <button onClick={handleIncrement}>+</button>
+    <div className={css.modalContainer} onClick={handleBackdropClick}>
+      <div className={css.modal}>
+        <div className={css.headerContainer}>
+          <h1 className={css.modalHeader}>Edit the entered amount of water</h1>
+          <button onClick={onClose} className={css.closeButton}>
+            <span>&times;</span>
+          </button>
         </div>
-      </div>
+        {isFirstRecord ? <p>No notes yet</p> : null}
 
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div className={css.waterContainer}>
+          <svg className={css.svg}>
+            <use href="src/img/icons.svg#icon-Group-4"></use>
+          </svg>
+
+          <p className={css.amount}>
+            {selectedItem ? selectedItem.amount : 0} ml
+          </p>
+          <p className={css.time}>
+            {selectedItem ? selectedItem.time : '00:00'}
+          </p>
+        </div>
+
         <div>
-          <label>Recording time:</label>
+          <h2 className={css.enteredData}>Correct entered data:</h2>
+          <p className={css.amountText}>Amount of water:</p>
+          <div className={css.buttonContainer}>
+            <button className={css.minus} onClick={handleDecrement}>
+              <svg className={css.svgMinus}>
+                <use href="src/img/icons.svg#icon-minus-small"></use>
+              </svg>
+            </button>
+            <span className={css.span}>{count} ml</span>
+            <button className={css.plus} onClick={handleIncrement}>
+              <svg className={css.svgPlus}>
+                <use href="src/img/icons.svg#icon-minus-small"></use>
+              </svg>
+              <svg className={css.svgPlusSecond}>
+                <use href="src/img/icons.svg#icon-minus-small"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+         <div>
+          <div className={css.recording}>
+            <label className={css.timeText}>Recording time:</label>
+            <input
+              className={css.timeInput}
+              type="time"
+              value={selectedTime}
+              onChange={event => setSelectedTime(event.target.value)}
+            />
+          </div>
+        </div>
+
+
+        <div>
+          <h2 className={css.waterValue}>Enter the value of the water used:</h2>
           <input
-            type="time"
-            value={selectedTime}
-            onChange={event => setSelectedTime(event.target.value)}
+            className={css.timeInput}
+            type="number"
+            value={inputValue}
+            min={0}
+            max={1500}
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
           />
         </div>
-      </LocalizationProvider>
 
-      <div>
-        <h2>Enter the value of the water used:</h2>
-        <input
-          type="number"
-          value={inputValue}
-          min={0}
-          max={1500}
-          onChange={handleInputChange}
-          onBlur={handleInputBlur}
-        />
-      </div>
-
-      <div>
-        <p>{count} ml</p>
-        <button onClick={onSaveClick} disabled={isSaveDisabled}>
-          Save
-        </button>
+        <div>
+          <p className={css.ml}>{count} ml</p>
+          <button
+            className={css.save}
+            onClick={onSaveClick}
+            disabled={isSaveDisabled}
+          >
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};

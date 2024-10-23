@@ -88,6 +88,7 @@ export default function DailyNormaModal({ onClose }) {
 
         const newDailyNorma = { dailyNorma: dailyNormaMl };
         const currentDate = getCurrentDate();
+console.log(newDailyNorma);
 
         dispatch(changeDailyNorma(newDailyNorma));
 
