@@ -2,15 +2,12 @@ import { useState } from 'react';
 import css from './UserLogoModal.module.css';
 
 import { useDispatch } from 'react-redux';
-import { openModal } from '../../redux/auth/slice'; 
-
-export function UserLogoModal() {
-const dispatch = useDispatch();
-  
-
+import { openModal } from '../../redux/auth/slice';
 import SettingModal from '../SettingModal/SettingModal.jsx';
 
 export function UserLogoModal() {
+  const dispatch = useDispatch();
+
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
 
   const openSettingModal = () => {

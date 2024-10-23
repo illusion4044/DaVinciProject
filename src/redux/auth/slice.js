@@ -16,26 +16,13 @@ const authSlice = createSlice({
         error: null,
         isModalOpen: false,
     },
-    reducers: {
-        openModal: (state) => {
-            state.isModalOpen = true;
-        },
-        closeModal: (state) => {
-            state.isModalOpen = false;
-        },
-
-  name: 'auth',
-  initialState: {
-    user: {
-      name: null,
-      email: null,
-
+  reducers: {
+    openModal: (state) => {
+      state.isModalOpen = true;
     },
-    token: null,
-    isLoggedIn: false,
-    isRefreshing: false,
-    isLoading: false,
-    error: null,
+    closeModal: (state) => {
+      state.isModalOpen = false;
+    },
   },
 
   extraReducers: builder =>
