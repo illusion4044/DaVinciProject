@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updatePortionThunk, fetchMonthlyPortionsThunk, updateWaterRateThunk } from './operations';
+import { updatePortionThunk, fetchMonthlyPortionsThunk, fetchDailyPortionsThunk } from './operations';
 
 const initialState = {
   dailyNorma: null,
@@ -31,15 +31,15 @@ const waterSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      .addCase(updateWaterRateThunk.pending, (state) => {
+      .addCase(fetchDailyPortionsThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = null;
       })
-      .addCase(updateWaterRateThunk.fulfilled, (state, { payload }) => {
+      .addCase(fetchDailyPortionsThunk.fulfilled, (state, { payload }) => {
         state.dailyNorma = payload.result.dailyWaterNorma;
         state.isLoading = false;
       })
-      .addCase(updateWaterRateThunk.rejected, (state, { payload }) => {
+      .addCase(fetchDailyPortionsThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = payload;
       })

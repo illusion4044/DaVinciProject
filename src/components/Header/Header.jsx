@@ -1,25 +1,30 @@
+import { useState } from 'react';  // Import useState for modal handling
 import Logo from '../../img/logo_img/logo';
 import css from './Header.module.css';
 
 import { UserLogoModal } from '../../components/UserLogoModal/UserLogoModal';
 import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
 
-
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors';
 import UserLogo from '../../components/UserLogo/UserLogo';
 import UserAuth from '../../components/UserAuth/UserAuth';
 
-
 export default function Header() {
-  // const user = {
-  //   name: 'Davyd',
-  //   email: 'fdavyd@example.com',
-  // };
+  const [isModalOpen, setIsModalOpen] = useState(false);  // Define modal state
+
+  // Define the toggleModal function to handle modal state
+  const toggleModal = () => {
+    setIsModalOpen(prevState => !prevState);
+  };
+
+  // Define getAvatarContent function (returns placeholder for now)
+  const getAvatarContent = () => {
+    return <span className={css.avatar}>Avatar</span>;  // You can customize this as needed
+  };
+
   const user = useSelector(selectUser);
   console.log('user:', user);
-
-  // const user = null;
 
   return (
     <header className={css.header}>
@@ -81,7 +86,6 @@ export default function Header() {
       <UserLogoutModal/>
 
       {user.email ? <UserLogo user={user} /> : <UserAuth />}
-
     </header>
   );
 }
