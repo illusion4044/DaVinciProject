@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 export const updatePortionThunk = createAsyncThunk(
   'water/updatePortion',
   async ({ id, ...restCredentials }, { rejectWithValue }) => {
@@ -23,13 +22,12 @@ export const updatePortionThunk = createAsyncThunk(
 
 export const updateWaterRateThunk = createAsyncThunk(
   'water/updateWaterRate',
-  async (newDailyNorma, { rejectWithValue }) => {
+  async ({ id, newDailyNorma }, { rejectWithValue }) => {
+    if (!id) {
+      return rejectWithValue('ID is missing or undefined.');
+    }
     try {
-      const response = await axios.patch(
-        `/water/${id}`,
-        newDailyNorma
-      );
-
+      const response = await axios.patch(`/water/${id}`, newDailyNorma);
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -48,7 +46,6 @@ export const fetchMonthlyPortionsThunk = createAsyncThunk(
       const response = await axios.get('/water/month', {
         params: { date },
       });
-
       return response.data.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -61,14 +58,13 @@ export const fetchMonthlyPortionsThunk = createAsyncThunk(
 );
 
 export const fetchDailyPortionsThunk = createAsyncThunk(
-  'water/fetchWaterByDay',
+  'water/fetchDailyPortions',
   async (date, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/water/day', {
+      const response = await axios.get('/water/daily', {
         params: { date },
       });
-
-      return response.data.data;
+      return response.data.data; 
     } catch (error) {
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data);

@@ -1,13 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { updatePortionThunk, fetchMonthlyPortionsThunk, fetchDailyPortionsThunk } from './operations';
-
-import {
-  updatePortionThunk,
-  fetchMonthlyPortionsThunk,
-  fetchDailyPortionsThunk,
-} from './operations';
-
 
 const initialState = {
   dailyNorma: null,
@@ -34,9 +26,8 @@ const waterSlice = createSlice({
       state.isError = null;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-
       .addCase(fetchDailyPortionsThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = null;
@@ -49,8 +40,6 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.isError = payload;
       })
-
-
       .addCase(updatePortionThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = null;
@@ -63,9 +52,7 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.isError = action.payload;
       })
-
-
-      .addCase(fetchMonthlyPortionsThunk.pending, state => {
+      .addCase(fetchMonthlyPortionsThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = null;
       })
@@ -76,27 +63,10 @@ const waterSlice = createSlice({
       .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
-      })
-
-
-      .addCase(fetchDailyPortionsThunk.pending, state => {
-        state.isLoading = true;
-        state.isError = null;
-      })
-      .addCase(fetchDailyPortionsThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.dailyPortions = action.payload;
-      })
-      .addCase(fetchDailyPortionsThunk.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload;
       });
   },
 });
 
-
-export const { changeDailyNorma, changeActiveContent, clearNormaCounterData } =
-  waterSlice.actions;
-
+export const { changeDailyNorma, changeActiveContent, clearNormaCounterData } = waterSlice.actions;
 
 export default waterSlice.reducer;

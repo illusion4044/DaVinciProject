@@ -1,4 +1,4 @@
-import { useState } from 'react';  // Import useState for modal handling
+import { useState } from 'react';
 import Logo from '../../img/logo_img/logo';
 import css from './Header.module.css';
 
@@ -11,16 +11,14 @@ import UserLogo from '../../components/UserLogo/UserLogo';
 import UserAuth from '../../components/UserAuth/UserAuth';
 
 export default function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);  // Define modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Define the toggleModal function to handle modal state
   const toggleModal = () => {
     setIsModalOpen(prevState => !prevState);
   };
 
-  // Define getAvatarContent function (returns placeholder for now)
   const getAvatarContent = () => {
-    return <span className={css.avatar}>Avatar</span>;  // You can customize this as needed
+    return <span className={css.avatar}>Avatar</span>;
   };
 
   const user = useSelector(selectUser);
@@ -85,7 +83,7 @@ export default function Header() {
       )}
       <UserLogoutModal/>
 
-      {user.email ? <UserLogo user={user} /> : <UserAuth />}
+      {user && user.email ? <UserLogo user={user} /> : <UserAuth />}
     </header>
   );
 }
