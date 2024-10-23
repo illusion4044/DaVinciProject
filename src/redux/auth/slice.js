@@ -22,6 +22,10 @@ const authSlice = createSlice({
     },
     closeModal: (state) => {
       state.isModalOpen = false;
+
+    },
+  },
+
     },
 
     name: 'auth',
@@ -37,6 +41,7 @@ const authSlice = createSlice({
       isLoading: false,
       error: null,
     },
+
 
     extraReducers: builder =>
       builder
