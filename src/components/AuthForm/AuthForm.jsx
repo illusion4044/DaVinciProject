@@ -17,7 +17,7 @@ const signUpValidationSchema = yup.object().shape({
   email: yup.string().email('Must be a valid email!').required('Required'),
   password: yup
     .string()
-    .min(6, 'Must be at least 6 characters!')
+    .min(8, 'Must be at least 8 characters!')
     .required('Required'),
   repeatPassword: yup
     .string()
@@ -134,9 +134,9 @@ const AuthForm = () => {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <PiEyeSlash className={css.icon} />
-                  ) : (
                     <PiEyeLight className={css.icon} />
+                  ) : (
+                    <PiEyeSlash className={css.icon} />
                   )}
                 </div>
                 <ErrorMessage
@@ -166,9 +166,9 @@ const AuthForm = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <PiEyeSlash className={css.icon} />
-                    ) : (
                       <PiEyeLight className={css.icon} />
+                    ) : (
+                      <PiEyeSlash className={css.icon} />
                     )}
                   </div>
 
