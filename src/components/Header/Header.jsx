@@ -1,28 +1,25 @@
-import { useState } from 'react';
 import Logo from '../../img/logo_img/logo';
 import css from './Header.module.css';
 
 import { UserLogoModal } from '../../components/UserLogoModal/UserLogoModal';
 import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
 
+
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors';
 import UserLogo from '../../components/UserLogo/UserLogo';
 import UserAuth from '../../components/UserAuth/UserAuth';
 
+
 export default function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleModal = () => {
-    setIsModalOpen(prevState => !prevState);
-  };
-
-  const getAvatarContent = () => {
-    return <span className={css.avatar}>Avatar</span>;
-  };
-
+  // const user = {
+  //   name: 'Davyd',
+  //   email: 'fdavyd@example.com',
+  // };
   const user = useSelector(selectUser);
   console.log('user:', user);
+
+  // const user = null;
 
   return (
     <header className={css.header}>
@@ -83,7 +80,8 @@ export default function Header() {
       )}
       <UserLogoutModal/>
 
-      {user && user.email ? <UserLogo user={user} /> : <UserAuth />}
+      {user.email ? <UserLogo user={user} /> : <UserAuth />}
+
     </header>
   );
 }
