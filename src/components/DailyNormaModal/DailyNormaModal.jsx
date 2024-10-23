@@ -8,7 +8,7 @@ import css from './DailyNormaModal.module.css';
 import { changeDailyNorma } from '../../redux/water/slice.js';
 import {
   fetchMonthlyPortionsThunk,
-  updatePortionThunk,
+  updateWaterRateThunk,
 } from '../../redux/water/operations.js';
 import {
   selectDailyNorma,
@@ -83,17 +83,16 @@ export default function DailyNormaModal({ onClose }) {
     onSubmit: async values => {
       setIsLoading(true);
       try {
-        const weight = Number(values.weight);
-        const time = Number(values.time);
         const dailyNormaLiters = Number(values.amountOfWater);
         const dailyNormaMl = dailyNormaLiters * 1000;
 
-        const newDailyNorma = { dailyNorma: dailyNormaMl, weight, time };
+        const newDailyNorma = { dailyNorma: dailyNormaMl };
         const currentDate = getCurrentDate();
 
         dispatch(changeDailyNorma(newDailyNorma));
-        await dispatch(updatePortionThunk(newDailyNorma));
-        await dispatch(fetchMonthlyPortionsThunk(currentDate));
+
+         dispatch(updateWaterRateThunk(newDailyNorma));
+         dispatch(fetchMonthlyPortionsThunk(currentDate));
 
         toast.success('Data saved successfully!');
         onClose();
