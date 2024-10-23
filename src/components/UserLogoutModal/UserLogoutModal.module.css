@@ -3,11 +3,19 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 592px;
+    width: 280px;
     background-color: white;
     box-shadow: 24px;
     padding: 32px 24px;
     border-radius: 10px;
+  }
+
+  .buttonContainer {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
   }
 
   .closeBtn {
@@ -37,12 +45,6 @@
     line-height: 20px;
   }
 
-  .buttonContainer {
-    margin-top: 24px;
-    display: flex;
-    justify-content: start;
-    gap: 24px;
-  }
 
   .deleteBtn {
     font-weight: 500;
@@ -51,7 +53,7 @@
     cursor: pointer;
     border-radius: 10px;
     padding: 10px 30px;
-    width: 160px;
+    width: 232px;
     height: 44px;
     color: #fff;
     background-color: #ef5050;
@@ -73,7 +75,7 @@
     cursor: pointer;
     border-radius: 10px;
     padding: 10px 30px;
-    width: 160px;
+    width: 232px;
     height: 44px;
     transition: background-color 0.3s, color 0.3s;
   }
@@ -81,4 +83,38 @@
   .backBtn:hover,   
   .backBtn:focus {
     background-color: rgb(225, 234, 255);
+  }
+
+  @media (min-width: 768px){
+    .modalBox {
+      width: 592px;
+    }
+    .buttonContainer {
+    margin-top: 24px;
+    flex-direction: row;
+    justify-content: end;
+  }
+    .deleteBtn {
+      width: 160px;
+    }
+    .backBtn {
+      width: 160px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .modalBox {
+      width: 592px;
+    }
+    .buttonContainer {
+    margin-top: 24px;
+    flex-direction: row;
+    justify-content: start;
+  }
+  .deleteBtn {
+      width: 160px;
+    }
+    .backBtn {
+      width: 160px;
+    }
   }
