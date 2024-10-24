@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchLiters } from './operations.js';
-import { updateUser } from './operations.js';
+// import { fetchLiters } from './operations.js';
+import { fetchLiters, getUser, updateUser } from './operations.js';
 
 const usersSlice = createSlice({
   name: 'users',
@@ -8,6 +8,7 @@ const usersSlice = createSlice({
     items: [],
     loading: false,
     error: null,
+    user: {},
   },
   extraReducers: builder =>
     builder
@@ -33,6 +34,17 @@ const usersSlice = createSlice({
         state.loading = false;
       })
       .addCase(updateUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+      .addCase(getUser.pending, state => {
+        state.loading = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       }),
