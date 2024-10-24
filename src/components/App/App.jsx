@@ -7,14 +7,12 @@ import { refreshUser } from '../../redux/auth/operations';
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Loader from '../Loader/Loader';
+import WhyDrinkWater from '../WhyDrinkWater/WhyDrinkWater.jsx';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const SigninPage = lazy(() => import('../../pages/SigninPage/SigninPage'));
 const SignupPage = lazy(() => import('../../pages/SignupPage/SignupPage'));
 const WelcomePage = lazy(() => import('../../pages/WelcomePage/WelcomePage'));
-const WhyDrinkWater = lazy(() =>
-  import('../../pages/WhyDrinkWater/WhyDrinkWater')
-);
 
 export default function App() {
   const dispatch = useDispatch();
@@ -33,7 +31,6 @@ export default function App() {
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          {/* <Route path='/welcome' element={<WelcomePage />} /> */}
           <Route
             path="/welcome"
             element={
