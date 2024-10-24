@@ -15,6 +15,10 @@ const authSlice = createSlice({
     error: null,
     isModalOpen: false,
   },
+
+
+  extraReducers: builder =>
+
   reducers: {
     openModal: (state) => {
       state.isModalOpen = true;
@@ -24,6 +28,7 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) =>
+
     builder
       // Register
       .addCase(register.pending, (state) => {
