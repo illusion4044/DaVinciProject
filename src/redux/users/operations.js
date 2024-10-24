@@ -1,17 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchLiters = createAsyncThunk(
-  'auth/register',
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get('/auth/register');
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.massage);
-    }
-  }
-);
+axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
+
+// export const fetchLiters = createAsyncThunk(
+//   'auth/register',
+//   async (_, thunkAPI) => {
+//     try {
+//       const response = await axios.get('/auth/register');
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.massage);
+//     }
+//   }
+// );
 
 export const updateUser = createAsyncThunk(
   'users/updateUser',

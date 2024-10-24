@@ -1,0 +1,120 @@
+.modalBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    background-color: white;
+    box-shadow: 24px;
+    padding: 32px 24px;
+    border-radius: 10px;
+  }
+
+  .buttonContainer {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 36px;
+    right: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #407bff;
+}
+  
+  .modalTitle {
+    margin: 0;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 32px;
+    text-align: left;
+  }
+  
+  .modalDescr {
+    margin-top: 24px;
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+
+  .deleteBtn {
+    font-weight: 500;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 30px;
+    width: 232px;
+    height: 44px;
+    color: #fff;
+    background-color: #ef5050;
+    box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .deleteBtn:hover,   
+  .deleteBtn:focus {
+    background-color: #eb7777;
+  }
+
+  .backBtn {
+    color: #407bff;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: #d7e3ff;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 30px;
+    width: 232px;
+    height: 44px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .backBtn:hover,   
+  .backBtn:focus {
+    background-color: rgb(225, 234, 255);
+  }
+
+  @media (min-width: 768px){
+    .modalBox {
+      width: 592px;
+    }
+    .buttonContainer {
+    margin-top: 24px;
+    flex-direction: row;
+    justify-content: end;
+  }
+    .deleteBtn {
+      width: 160px;
+    }
+    .backBtn {
+      width: 160px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .modalBox {
+      width: 592px;
+    }
+    .buttonContainer {
+    margin-top: 24px;
+    flex-direction: row;
+    justify-content: start;
+  }
+  .deleteBtn {
+      width: 160px;
+    }
+    .backBtn {
+      width: 160px;
+    }
+  }
