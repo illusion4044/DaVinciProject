@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
 
 export const updatePortionThunk = createAsyncThunk(
   'water/updatePortion',
