@@ -1,16 +1,64 @@
-@import-normalize; /* bring in normalize.css styles */
+/* Імпорт шрифту Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'); 
-/* font */
-
+/* Глобальні стилі для всієї сторінки */
 * {
-  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Стиль для body */
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  background-color: #f4f4f4;
+  color: #333;
+}
 
+/* Стилі для заголовків і текстових елементів */
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
+}
+
+/* Стилі для списків */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* Стилі для посилань */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Стилі для зображень */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Стилі для address */
+address {
+  font-style: normal;
+}
+
+/* Глобальні стилі для кнопок */
+button {
+  font-family: inherit;
+  color: currentColor;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Глобальні стилі для полів вводу */
+input {
+  font-family: inherit;
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 16px;
 }
