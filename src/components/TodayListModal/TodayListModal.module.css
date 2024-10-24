@@ -22,6 +22,19 @@ background-color: rgba(0, 0, 0, 0.8);
   padding: 24px 12px 24px 12px;
 }
 
+@media (min-width: 768px) {
+  .modal {
+    width: 704px;
+    height: auto;
+  }
+}
+
+@media (min-width: 1440px) {
+  .modal {
+    width: 592px;
+  }
+}
+
 
 .modalHeader {
 font-size: 26px;
@@ -66,9 +79,14 @@ width: 100%;
 height: 52px;
 background-color: #ecf2ff;
     align-items: center;
+    margin-bottom: 24px;
 }
 
-
+@media (min-width: 768px) {
+  .waterContainer {
+  width: 254px;
+  }
+}
 
 .svg {
   width: 23px;
@@ -90,7 +108,7 @@ line-height: 2;
 }
 
 .enteredData {
-
+margin-bottom: 16px;
 font-size: 18px;
 line-height: 1.11;
 }
@@ -98,6 +116,7 @@ line-height: 1.11;
 .amountText {
   font-size: 16px;
 line-height: 1.25;
+margin-bottom: 12px;
 }
 
 .minus {
@@ -207,6 +226,16 @@ font-size: 18px;
 line-height: 1.11;
 }
 
+@media (min-width: 768px) {
+  .saveContainer {
+  display: flex;
+ gap: 24px;
+ justify-content: flex-end;
+ align-items: center;
+}
+}
+
+
 .ml {
   font-weight: 700;
 font-size: 18px;
@@ -217,6 +246,14 @@ margin: 0;
 
 margin-bottom: 16px;
 }
+
+@media (min-width: 768px) {
+  .ml {
+
+margin-bottom: 0;
+}
+}
+
 
 .save{
   border-radius: 10px;
@@ -231,6 +268,18 @@ background-color: #407bff;
 border: none;
 
 }
+
+@media (min-width: 768px) {
+  .save {
+
+padding: 10px 30px;
+width: 160px;
+height: 44px;
+
+}
+}
+
+
 
 .timeInput {
   border: 1px solid #d7e3ff;
