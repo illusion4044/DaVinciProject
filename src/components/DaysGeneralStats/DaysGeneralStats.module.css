@@ -1,0 +1,36 @@
+.dailyStatsContainer{
+  width: 280px;
+  border-radius: 10px;
+  padding: 24px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 16px;
+  line-height: 1.25;
+  box-shadow: 0px 4px 4px 0px #407BFF4D;
+
+  @media (min-width: 768px){
+      width: 292px;
+      padding: 24px 16px;
+  };
+
+}
+
+.containerTitle{
+  color: #407BFF;
+  font-weight: 400;
+}
+
+.statContainer{
+  display: flex;
+  gap: 6px;
+}
+
+.statsValue{
+  color: #407BFF;
+  font-size: 18px;
+  line-height: 1.33;
+  font-weight: 500;
+}
+
+

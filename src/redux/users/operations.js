@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
 const API_URL = 'https://dark-side-of-the-app01.onrender.com';
 
 export const fetchLiters = createAsyncThunk(
@@ -14,6 +15,21 @@ export const fetchLiters = createAsyncThunk(
     }
   }
 );
+
+axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
+
+// export const fetchLiters = createAsyncThunk(
+//   'auth/register',
+//   async (_, thunkAPI) => {
+//     try {
+//       const response = await axios.get('/auth/register');
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.massage);
+//     }
+//   }
+// );
+
 
 export const updateUser = createAsyncThunk(
   'user/update',
