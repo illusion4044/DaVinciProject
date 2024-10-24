@@ -62,7 +62,7 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
   'water/fetchDailyPortions',
   async (date, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/water/daily', {
+      const response = await axios.get('/water/day', {
         params: { date },
       });
       return response.data.data;

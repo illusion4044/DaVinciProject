@@ -12,6 +12,7 @@ const initialState = {
   activeContent: 'pictureBottleBg',
   isLoading: false,
   isError: null,
+  isOpenDailyNormaModal: false,
 };
 
 const waterSlice = createSlice({
@@ -31,6 +32,9 @@ const waterSlice = createSlice({
     },
     changeDailyPortions(state, action) {
       state.dailyPortions = action.payload;
+    },
+    openDailyModal: state => {
+      state.isDailyModalOpen = true;
     },
   },
   extraReducers: builder => {
@@ -79,6 +83,7 @@ export const {
   changeActiveContent,
   clearNormaCounterData,
   changeDailyPortions,
+  openDailyModal,
 } = waterSlice.actions;
 
 export default waterSlice.reducer;
