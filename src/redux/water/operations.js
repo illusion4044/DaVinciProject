@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
 
 export const updatePortionThunk = createAsyncThunk(
   'water/updatePortion',
@@ -64,7 +65,7 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
       const response = await axios.get('/water/daily', {
         params: { date },
       });
-      return response.data.data; 
+      return response.data.data;
     } catch (error) {
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data);

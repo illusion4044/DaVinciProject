@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchLiters } from './operations.js';
+// import { fetchLiters } from './operations.js';
 import { updateUser } from './operations.js';
 
 const usersSlice = createSlice({
@@ -11,18 +11,18 @@ const usersSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-      .addCase(fetchLiters.pending, state => {
-        state.loading = true;
-        state.error = false;
-      })
-      .addCase(fetchLiters.fulfilled, (state, action) => {
-        state.items = action.payload;
-        state.loading = false;
-      })
-      .addCase(fetchLiters.rejected, state => {
-        state.error = true;
-        state.loading = false;
-      })
+      // .addCase(fetchLiters.pending, state => {
+      //   state.loading = true;
+      //   state.error = false;
+      // })
+      // .addCase(fetchLiters.fulfilled, (state, action) => {
+      //   state.items = action.payload;
+      //   state.loading = false;
+      // })
+      // .addCase(fetchLiters.rejected, state => {
+      //   state.error = true;
+      //   state.loading = false;
+      // })
       .addCase(updateUser.pending, state => {
         state.loading = true;
       })

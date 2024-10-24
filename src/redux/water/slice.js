@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updatePortionThunk, fetchMonthlyPortionsThunk, fetchDailyPortionsThunk } from './operations';
+import {
+  updatePortionThunk,
+  fetchMonthlyPortionsThunk,
+  fetchDailyPortionsThunk,
+} from './operations.js';
 
 const initialState = {
   dailyNorma: null,
@@ -25,10 +29,13 @@ const waterSlice = createSlice({
       state.isLoading = false;
       state.isError = null;
     },
+    changeDailyPortions(state, action) {
+      state.dailyPortions = action.payload;
+    },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(fetchDailyPortionsThunk.pending, (state) => {
+      .addCase(fetchDailyPortionsThunk.pending, state => {
         state.isLoading = true;
         state.isError = null;
       })
@@ -40,7 +47,7 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.isError = payload;
       })
-      .addCase(updatePortionThunk.pending, (state) => {
+      .addCase(updatePortionThunk.pending, state => {
         state.isLoading = true;
         state.isError = null;
       })
@@ -52,7 +59,7 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.isError = action.payload;
       })
-      .addCase(fetchMonthlyPortionsThunk.pending, (state) => {
+      .addCase(fetchMonthlyPortionsThunk.pending, state => {
         state.isLoading = true;
         state.isError = null;
       })
@@ -67,6 +74,11 @@ const waterSlice = createSlice({
   },
 });
 
-export const { changeDailyNorma, changeActiveContent, clearNormaCounterData } = waterSlice.actions;
+export const {
+  changeDailyNorma,
+  changeActiveContent,
+  clearNormaCounterData,
+  changeDailyPortions,
+} = waterSlice.actions;
 
 export default waterSlice.reducer;
