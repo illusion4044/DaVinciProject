@@ -35,7 +35,7 @@ export default function DailyNormaModal({ onClose }) {
     time: Yup.number()
       .typeError('Time must be a number')
       .positive()
-      .min(0.1, 'Minimum value is 0.1h')
+      .min(0, 'Minimum value is 0h')
       .max(24, 'Maximum value is 24h')
       .required('Time is required'),
     amountOfWater: Yup.number()
