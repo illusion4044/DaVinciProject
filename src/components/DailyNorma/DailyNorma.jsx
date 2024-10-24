@@ -1,33 +1,29 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
-import changeDailyPortion from '../../redux/water/slice.js';
+import { openDailyModal } from '../../redux/water/slice.js';
 import DailyNormaModal from '../DailyNormaModal/DailyNormaModal.jsx';
+import { useState } from 'react';
 
 export default function DailyNorma() {
-  const [isDailyNormaModalOpen, setIsDailyNormaModalOpen] = useState(false);
-  const liters = useSelector(state => state.water.dailyPortions);
+  const mlLiters = useSelector(state => state.water.dailyPortions);
+  const liters = mlLiters / 1000;
   const dispatch = useDispatch();
 
-  const openDailyNormaModal = () => {
-    isDailyNormaModalOpen(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openDailyModal = () => {
+    setIsModalOpen(true);
   };
 
-  const closeDailyNormaModal = () => {
-    setIsDailyNormaModalOpen(false);
+  const closeDailyModal = () => {
+    setIsModalOpen(false);
   };
-  const handleTarget = () => dispatch(changeDailyPortion);
 
   return (
     <div>
       <h4>My daily Norma</h4>
       <p>DailyNorma: {liters} L</p>
-
-      <button onClick={openDailyNormaModal} onChange={handleTarget}>
-        Edit
-      </button>
-      {openDailyNormaModal && (
-        <DailyNormaModal closeDailyNormaModal={closeDailyNormaModal} />
-      )}
+      <button onClick={() => dispatch(openDailyModal())}>Edit</button>
+      {isModalOpen && <DailyNormaModal closeModal={closeDailyModal} />}
     </div>
   );
 }

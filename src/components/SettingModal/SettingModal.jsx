@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { selectUser } from '../../redux/auth/selectors';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
 import userImage from '../../img/setting_modal-img/userPhoto1x.jpg';
@@ -14,22 +15,46 @@ const UserSchema = Yup.object().shape({
     .min(2, 'Minimum 2 characters')
     .max(32, 'Maximum 32 characters'),
   email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string()
-    .min(8, 'Password must be at least 8 characters long')
-    .required('Password is required'),
-  newPassword: Yup.string().min(
-    8,
-    'New password must be at least 8 characters long'
+
+  password: Yup.string().test(
+    'passwords-check',
+    'To change password, all password fields must be filled',
+    function (value) {
+      const { newPassword, repeatNewPassword } = this.parent;
+      if (value || newPassword || repeatNewPassword) {
+        return (
+          value &&
+          newPassword.length >= 8 &&
+          repeatNewPassword.length >= 8 &&
+          newPassword === repeatNewPassword
+        );
+      }
+      return true;
+    }
   ),
-  repeatNewPassword: Yup.string()
-    .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-    .required('Repeat new password is required'),
+
+  newPassword: Yup.string().when('password', {
+    is: password => !!password,
+    then: Yup.string()
+      .min(8, 'New password must be at least 8 characters long')
+      .required('New password is required'),
+    otherwise: Yup.string().notRequired(),
+  }),
+
+  repeatNewPassword: Yup.string().when('newPassword', {
+    is: newPassword => !!newPassword,
+    then: Yup.string()
+      .oneOf([Yup.ref('newPassword')], 'Passwords must match')
+      .required('Repeat new password is required'),
+    otherwise: Yup.string().notRequired(),
+  }),
 });
 
 export default function SettingModal({ closeModal }) {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.users);
+  const user = useSelector(selectUser);
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   useEffect(() => {
     const handleKeyDown = e => {
@@ -45,9 +70,22 @@ export default function SettingModal({ closeModal }) {
     };
   }, [closeModal]);
 
+  const handleImageUpload = e => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedPhoto(file);
+    }
+  };
+
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      await dispatch(updateUser(values)).unwrap();
+      const userData = {
+        ...values,
+        photo: selectedPhoto,
+        token: user.token,
+      };
+
+      await dispatch(updateUser(userData)).unwrap();
       toast.success('Settings updated successfully');
       closeModal();
     } catch (error) {
@@ -62,19 +100,12 @@ export default function SettingModal({ closeModal }) {
     setShowPassword(prev => !prev);
   };
 
-  const handleImageUpload = () => {
-    toast.info('Image upload feature is not yet implemented');
-  };
-
-  const handleBackdropClick = e => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
   return (
-    <div className={css.backdrop} onClick={handleBackdropClick} tabIndex="0">
-      <div className={css.modal} onClick={e => e.stopPropagation()}>
+    <div
+      className={css.backdrop}
+      onClick={e => e.target === e.currentTarget && closeModal()}
+    >
+      <div className={css.modal}>
         <div className={css.wrap}>
           <p className={css.modalHeading}>Settings</p>
           <button type="button" className={css.modalBtn} onClick={closeModal}>
@@ -94,14 +125,22 @@ export default function SettingModal({ closeModal }) {
           />
           <button
             type="button"
-            className={css.modalBtn}
-            onClick={handleImageUpload}
+            className={css.uploadBtn}
+            onClick={() => document.getElementById('fileInput').click()}
           >
             <svg className={css.arrowUpTrayIcon} width="16" height="16">
               <use href="/icons.svg#icon-arrow-up-tray"></use>
             </svg>
+            <span className={css.uploadText}>Upload a photo</span>
           </button>
-          <p className={css.uploadText}>Upload a photo</p>
+
+          <input
+            id="fileInput"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+          />
         </div>
 
         <Formik

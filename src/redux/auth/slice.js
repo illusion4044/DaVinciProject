@@ -15,18 +15,19 @@ const authSlice = createSlice({
     error: null,
     isModalOpen: false,
   },
+
   reducers: {
-    openModal: (state) => {
+    openModal: state => {
       state.isModalOpen = true;
     },
-    closeModal: (state) => {
+    closeModal: state => {
       state.isModalOpen = false;
     },
   },
-  extraReducers: (builder) =>
+  extraReducers: builder =>
     builder
       // Register
-      .addCase(register.pending, (state) => {
+      .addCase(register.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
@@ -41,7 +42,7 @@ const authSlice = createSlice({
         state.error = action.payload || action.error.message;
       })
       // Log In
-      .addCase(logIn.pending, (state) => {
+      .addCase(logIn.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
@@ -56,11 +57,11 @@ const authSlice = createSlice({
         state.error = action.payload || action.error.message;
       })
       // Log Out
-      .addCase(logOut.pending, (state) => {
+      .addCase(logOut.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(logOut.fulfilled, (state) => {
+      .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
@@ -71,7 +72,7 @@ const authSlice = createSlice({
         state.error = action.payload || action.error.message;
       })
       // Refresh User
-      .addCase(refreshUser.pending, (state) => {
+      .addCase(refreshUser.pending, state => {
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
@@ -79,7 +80,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, (state) => {
+      .addCase(refreshUser.rejected, state => {
         state.isRefreshing = false;
       }),
 });
