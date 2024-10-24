@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 const API_URL = 'https://dark-side-of-the-app01.onrender.com';
 
 export const fetchLiters = createAsyncThunk(
@@ -29,7 +28,6 @@ axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
 //     }
 //   }
 // );
-
 
 export const updateUser = createAsyncThunk(
   'user/update',
@@ -92,3 +90,16 @@ export const updateUser = createAsyncThunk(
     }
   }
 );
+
+export const getUser = createAsyncThunk('users', async (token, thunkAPI) => {
+  try {
+    const response = await axios.get('/users', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
