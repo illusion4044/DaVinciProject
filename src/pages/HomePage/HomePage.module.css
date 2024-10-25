@@ -40,15 +40,79 @@ img {
 }
 
 .homePage {
-  background-image: url('../../img/home-screen_img/backgroundElementHomeSscreen-mob-1x.jpg');
-  background-size: cover;
-  background-position: center;
+  background-image: url('../../img/home-screen_img/backgroundElementHomeSscreenMob1x.jpg');
+  background-size: contain;
   background-repeat: no-repeat;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  /* align-items: center; */
+}
+.bottle {
+  background-image: url('../../img/home-screen_img/bottleHomeScreenMob1x.jpg');
+  width: 280px;
+  height: 208px;
+  margin: 8px 0 16px 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (min-resolution: 2dppx) {
   .homePage {
-    background-image: url('../../img/home-screen_img/backgroundEelementHomeScreen-mob-2x.jpg');
+    background-image: url('../../img/home-screen_img/backgroundEelementHomeScreenMob2x.jpg');
+  }
+  .bottle {
+      background-image: url('../../img/home-screen_img/bottleHomeScreenMob2x.jpg');
+    }
+}
+
+@media screen and (min-width: 768px) {
+  .homePage {
+    background-image: url('../../img/home-screen_img/backgroundElementHomeScreenTabl1x.jpg');
+    padding-top: 16px;
+  }
+
+  .bottle {
+    background-image: url('../../img/home-screen_img/bottleHomeScreenTabl1x.jpg');
+    width: 518px;
+    height: 386px;
+  }
+
+    @media (min-resolution: 2dppx) {
+      .homePage {
+        background-image: url('../../img/home-screen_img/backgroundElementHomeScreenTabl2x.jpg');
+      }
+
+      .bottle {
+        background-image: url('../../img/home-screen_img/bottleHomeScreenTabl2x.jpg');
+      }
+    }
+}
+
+@media screen and (min-width: 1440px) {
+  .homePage {
+    max-width: 1440px;
+  }
+  .bottle {
+    background-image: url('../../img/home-screen_img/botleHomeScreenDesc1x.jpg');
+    width: 738px;
+    height: 548px;
+  }
+
+    @media (min-resolution: 2dppx) {
+      .bottle {
+        background-image: url('../../img/home-screen_img/botleHomescreenDesc2x.jpg');
+      }
+    }
+  .container {
+    align-items: flex-start;
   }
 }
