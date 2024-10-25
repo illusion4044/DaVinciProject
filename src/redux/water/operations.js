@@ -74,9 +74,12 @@ export const fetchMonthlyPortionsThunk = createAsyncThunk(
 
     setAuthHeader(token);
 
+
+    const formattedDate = format(new Date(date), 'yyyy-MM-dd');
+
     try {
       const response = await axios.get('/water/month', {
-        params: { date },
+        params: { date: formattedDate },
       });
       return response.data.data;
     } catch (error) {
@@ -98,10 +101,10 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
     }
 
     setAuthHeader(token);
-
+const formattedDate = format(new Date(date), 'yyyy-MM-dd');
     try {
       const response = await axios.get('/water/day', {
-        params: { date },
+        params: { date: formattedDate },
       });
       return response.data.data;
     } catch (error) {
