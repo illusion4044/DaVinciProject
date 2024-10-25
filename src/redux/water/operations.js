@@ -1,24 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import { format } from 'date-fns';
 
 axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
-
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-
 export const updatePortionThunk = createAsyncThunk(
   'water/updatePortion',
   async ({ id, ...restCredentials }, { rejectWithValue, getState }) => {
-
     const token = getState().auth.token;
     if (!token) {
       return rejectWithValue('No token found');
     }
-
 
     setAuthHeader(token);
 
@@ -74,7 +70,6 @@ export const fetchMonthlyPortionsThunk = createAsyncThunk(
 
     setAuthHeader(token);
 
-
     const formattedDate = format(new Date(date), 'yyyy-MM-dd');
 
     try {
@@ -101,7 +96,7 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
     }
 
     setAuthHeader(token);
-const formattedDate = format(new Date(date), 'yyyy-MM-dd');
+    const formattedDate = format(new Date(date), 'yyyy-MM-dd');
     try {
       const response = await axios.get('/water/day', {
         params: { date: formattedDate },
