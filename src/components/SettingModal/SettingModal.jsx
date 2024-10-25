@@ -7,54 +7,51 @@ import { selectUser } from '../../redux/auth/selectors';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
 import userImage from '../../img/setting_modal-img/userPhoto1x.jpg';
-import { updateUser } from '../../redux/users/operations.js';
+import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
+import Loader from '../Loader/Loader.jsx';
 
 const UserSchema = Yup.object().shape({
   gender: Yup.string().required('Please select your gender'),
+
   name: Yup.string()
     .min(2, 'Minimum 2 characters')
-    .max(32, 'Maximum 32 characters'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
+    .max(32, 'Maximum 32 characters')
+    .notRequired(),
 
-  password: Yup.string().test(
-    'passwords-check',
-    'To change password, all password fields must be filled',
-    function (value) {
-      const { newPassword, repeatNewPassword } = this.parent;
-      if (value || newPassword || repeatNewPassword) {
-        return (
-          value &&
-          newPassword.length >= 8 &&
-          repeatNewPassword.length >= 8 &&
-          newPassword === repeatNewPassword
-        );
-      }
-      return true;
-    }
-  ),
+  email: Yup.string().email('Invalid email').notRequired(),
 
-  newPassword: Yup.string().when('password', {
-    is: password => !!password,
-    then: Yup.string()
-      .min(8, 'New password must be at least 8 characters long')
-      .required('New password is required'),
-    otherwise: Yup.string().notRequired(),
-  }),
+  password: Yup.string()
+    .min(8, 'Password must be at least 8 characters long')
+    .notRequired(),
 
-  repeatNewPassword: Yup.string().when('newPassword', {
-    is: newPassword => !!newPassword,
-    then: Yup.string()
-      .oneOf([Yup.ref('newPassword')], 'Passwords must match')
-      .required('Repeat new password is required'),
-    otherwise: Yup.string().notRequired(),
-  }),
+  newPassword: Yup.string()
+    .min(8, 'New password must be at least 8 characters long')
+    .when('password', {
+      is: val => Boolean(val),
+      then: Yup.string().required(
+        'New password is required if old password is provided'
+      ),
+    }),
+
+  repeatNewPassword: Yup.string()
+    .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+    .when('password', {
+      is: val => Boolean(val),
+      then: Yup.string().required(
+        'Repeat new password is required if old password is provided'
+      ),
+    }),
 });
 
 export default function SettingModal({ closeModal }) {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const user = useSelector(state => state.auth.user);
+  const isLoading = useSelector(state => state.auth.isLoading);
   const [showPassword, setShowPassword] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [previewPhotoUrl, setPreviewPhotoUrl] = useState(
+    user.photo || userImage
+  );
 
   useEffect(() => {
     const handleKeyDown = e => {
@@ -74,18 +71,70 @@ export default function SettingModal({ closeModal }) {
     const file = e.target.files[0];
     if (file) {
       setSelectedPhoto(file);
+      setPreviewPhotoUrl(URL.createObjectURL(file));
     }
   };
+
+  // const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+  //   try {
+  //     const userData = {
+  //       ...values,
+  //       token: user.token,
+  //     };
+
+  //     if (selectedPhoto) {
+  //       await dispatch(
+  //         uploadUserPhoto({ photo: selectedPhoto, token: user.token })
+  //       ).unwrap();
+  //     }
+
+  //     if (
+  //       values.name !== user.name ||
+  //       values.email !== user.email ||
+  //       values.gender !== user.gender ||
+  //       values.password
+  //     ) {
+  //       await dispatch(updateUserInfo({ ...userData, id: user._id })).unwrap();
+  //     }
+
+  //     toast.success('Settings updated successfully');
+  //     closeModal();
+  //   } catch (error) {
+  //     toast.error('Failed to update settings');
+  //     setErrors({ submit: error.message });
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const userData = {
         ...values,
-        photo: selectedPhoto,
         token: user.token,
       };
 
-      await dispatch(updateUser(userData)).unwrap();
+      // Check if photo was changed and only upload in production
+      if (selectedPhoto) {
+        if (import.meta.env.MODE === 'development') {
+          console.log('Simulating photo upload in development mode.');
+        } else {
+          await dispatch(
+            uploadUserPhoto({ photo: selectedPhoto, token: user.token })
+          ).unwrap();
+        }
+      }
+
+      // Check if other fields were changed
+      if (
+        values.name !== user.name ||
+        values.email !== user.email ||
+        values.gender !== user.gender ||
+        values.password
+      ) {
+        await dispatch(updateUserInfo({ ...userData, id: user._id })).unwrap();
+      }
+
       toast.success('Settings updated successfully');
       closeModal();
     } catch (error) {
@@ -106,9 +155,14 @@ export default function SettingModal({ closeModal }) {
       onClick={e => e.target === e.currentTarget && closeModal()}
     >
       <div className={css.modal}>
+        {isLoading && (
+          <div className={css.loaderContainer}>
+            <Loader />
+          </div>
+        )}
         <div className={css.wrap}>
           <p className={css.modalHeading}>Settings</p>
-          <button type="button" className={css.modalBtn} onClick={closeModal}>
+          <button type="button" className={css.uploadBtn} onClick={closeModal}>
             <svg className={css.closeIcon} width="24" height="24">
               <use href="/icons.svg#icon-x-mark"></use>
             </svg>
@@ -120,7 +174,7 @@ export default function SettingModal({ closeModal }) {
         <div className={css.wrapImageUpload}>
           <img
             className={css.userImg}
-            src={user.photo || userImage}
+            src={previewPhotoUrl}
             alt={user.name || 'User photo'}
           />
           <button
