@@ -23,7 +23,7 @@ export default function App() {
   useEffect(() => {
     dispatch(getUser(userToken));
     dispatch(refreshUser());
-  }, [dispatch]);
+  }, [dispatch, userToken]);
 
   if (isRefreshing) {
     return <Loader />;

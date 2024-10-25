@@ -12,6 +12,19 @@ export default function WaterRatioPanel() {
   const rect2 = 100 - rect1;
 
   return (
+
+    <>
+      <ReactSlider
+        className="horizontal-slider"
+        thumbClassName="example-thumb"
+        trackClassName="example-track"
+        renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+      />
+      {/* <div>
+        <button onClick={() => {}}> + Add Water</button>
+      </div> */}
+    </>
+
     <div className={css.container}>
       <div className={css.todayBarBox}>
         <p className={css.today}>Today</p>
@@ -49,6 +62,7 @@ export default function WaterRatioPanel() {
     </div>
     
           
+
 
   );
 }
