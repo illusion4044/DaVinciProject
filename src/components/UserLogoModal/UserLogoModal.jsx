@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/auth/slice'; 
 import css from './UserLogoModal.module.css';
 import SettingModal from '../SettingModal/SettingModal.jsx';
+import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
 
 export function UserLogoModal() {
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ export function UserLogoModal() {
           </button>
         </li>
       </ul>
+      <UserLogoutModal/>
       {isSettingModalOpen && <SettingModal closeSettingModal={closeSettingModal} />}
     </div>
   );

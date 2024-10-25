@@ -7,10 +7,13 @@ import css from './HomePage.module.css';
 export default function HomePage() {
   return (
     <div className={css.homePage}>
-      <DailyNorma />
-      <WaterRatioPanel />
-      <TodayWaterList />
-      <MonthStatsTable />
+      <DailyNorma className={css.dailyNorma}/>
+      <div className={css.container}>
+        <div className={css.bottle}></div>
+        <WaterRatioPanel />
+        <TodayWaterList />
+        <MonthStatsTable />
+      </div>
     </div>
   );
 }

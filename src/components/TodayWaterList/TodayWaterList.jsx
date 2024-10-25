@@ -1,14 +1,26 @@
 // import WaterRatioPanel from '../WaterRatioPanel/WaterRatioPanel.jsx';
 // import TodayListModal from '../TodayListModal/TodayListModal.jsx';
+
 import { useSelector } from 'react-redux';
+
+import { useSelector, useDispatch } from 'react-redux';
+import css from './TodayWaterList.module.css';
+
+// import { selectWater } from "../../redux/waterPortion/selectors.js";
+
 // import waterPortion from "../UserLogOutModal/UserLogoutModal.jsx";
 import css from './TodayWaterList.module.css';
 
 export default function TodayWaterList() {
   const mlLiters = useSelector(state => state.water.dailyPortions);
 
+
+  const dispatch = useDispatch();
+
+
   return (
     <>
+
       <div className={css.container}>
         <h4 className={css.name}>Today</h4>
         <div className={css.containerList}>
@@ -29,6 +41,21 @@ export default function TodayWaterList() {
           </svg>
         </div>
       </div>
+
+      <h3>Today</h3>
+      <ul className={css.wtList}>
+        {mlLiters.map(portion => (
+          <li className={css.list} key={portion.id}></li>
+        ))}
+      </ul>
+      {/* <button onClick={() => {}}> + Add Water</button> */}
+
     </>
   );
 }
+/* <use href="src/img/icons.svg#icon-Group-4"></use>;
+<use href="src/img/icons.svg#icon-pencil-square"></use>;
+<use href="src/img/icons.svg#icon-trash"></use>; */
+
+/* TodayWaterList:{portionWater}
+          TodayWaterList: {} */

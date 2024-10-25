@@ -1,10 +1,27 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+
+
 axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
+
+
+const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
 
 export const updatePortionThunk = createAsyncThunk(
   'water/updatePortion',
-  async ({ id, ...restCredentials }, { rejectWithValue }) => {
+  async ({ id, ...restCredentials }, { rejectWithValue, getState }) => {
+
+    const token = getState().auth.token;
+    if (!token) {
+      return rejectWithValue('No token found');
+    }
+
+
+    setAuthHeader(token);
+
     if (!id) {
       return rejectWithValue('ID is missing or undefined.');
     }
@@ -23,7 +40,14 @@ export const updatePortionThunk = createAsyncThunk(
 
 export const updateWaterRateThunk = createAsyncThunk(
   'water/updateWaterRate',
-  async ({ id, newDailyNorma }, { rejectWithValue }) => {
+  async ({ id, newDailyNorma }, { rejectWithValue, getState }) => {
+    const token = getState().auth.token;
+    if (!token) {
+      return rejectWithValue('No token found');
+    }
+
+    setAuthHeader(token);
+
     if (!id) {
       return rejectWithValue('ID is missing or undefined.');
     }
@@ -42,10 +66,20 @@ export const updateWaterRateThunk = createAsyncThunk(
 
 export const fetchMonthlyPortionsThunk = createAsyncThunk(
   'water/fetchWaterByMonth',
-  async (date, { rejectWithValue }) => {
+  async (date, { rejectWithValue, getState }) => {
+    const token = getState().auth.token;
+    if (!token) {
+      return rejectWithValue('No token found');
+    }
+
+    setAuthHeader(token);
+
+
+    const formattedDate = format(new Date(date), 'yyyy-MM-dd');
+
     try {
       const response = await axios.get('/water/month', {
-        params: { date },
+        params: { date: formattedDate },
       });
       return response.data.data;
     } catch (error) {
@@ -60,10 +94,17 @@ export const fetchMonthlyPortionsThunk = createAsyncThunk(
 
 export const fetchDailyPortionsThunk = createAsyncThunk(
   'water/fetchDailyPortions',
-  async (date, { rejectWithValue }) => {
+  async (date, { rejectWithValue, getState }) => {
+    const token = getState().auth.token;
+    if (!token) {
+      return rejectWithValue('No token found');
+    }
+
+    setAuthHeader(token);
+const formattedDate = format(new Date(date), 'yyyy-MM-dd');
     try {
       const response = await axios.get('/water/day', {
-        params: { date },
+        params: { date: formattedDate },
       });
       return response.data.data;
     } catch (error) {
