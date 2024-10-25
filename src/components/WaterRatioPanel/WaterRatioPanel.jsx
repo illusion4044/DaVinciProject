@@ -1,7 +1,10 @@
+
+import ReactSlider from 'react-slider';
 import { useSelector } from 'react-redux';
 import { selectPercentPerDay } from '../../redux/water/selectors';
 import css from './WaterRatioPanel.module.css';
 import icon from "../../img/icons.svg";
+
 
 export default function WaterRatioPanel() {
   // const rect1 = Number(useSelector(selectPercentPerDay));

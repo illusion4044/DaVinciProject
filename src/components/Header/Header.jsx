@@ -1,4 +1,4 @@
-import Logo from '../../img/logo_img/logo';
+import Logo from '../../img/logoImg/logo';
 import css from './Header.module.css';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors';
