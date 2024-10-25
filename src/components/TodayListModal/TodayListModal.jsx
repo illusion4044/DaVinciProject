@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDailyNorma, selectSelectedItem } from '../../redux/water/selectors.js';
 import { useEffect, useState } from 'react';
-
+/* import TimePicker from 'react-time-picker'; */
 import {
   fetchDailyPortionsThunk,
   fetchMonthlyPortionsThunk,
@@ -48,13 +48,20 @@ export default function TodayListModal({ onClose }) {
   };
 
   const handleInputChange = event => {
-    const value = Number(event.target.value);
+   const value = event.target.value;
     setInputValue(value);
   };
 
   const handleInputBlur = () => {
-    if (inputValue >= 0 && inputValue <= 1500) {
-      setCount(inputValue);
+    const value = Number(inputValue);
+    if (inputValue === '') {
+      setCount(0);
+      setIsSaveDisabled(true);
+    } else if (value >= 0 && value <= 1500) {
+      setCount(value);
+      setIsSaveDisabled(false);
+    } else {
+      setIsSaveDisabled(true); 
     }
   };
 
@@ -83,6 +90,9 @@ export default function TodayListModal({ onClose }) {
       dailyNorma,
       consumeRatio,
     };
+
+    console.log(payload);
+
 
     dispatch(updatePortionThunk(payload)).then(() => {
       const currentDate = getCurrentData();
@@ -140,9 +150,18 @@ export default function TodayListModal({ onClose }) {
           </div>
         </div>
 
-         <div>
+        <div>
           <div className={css.recording}>
             <label className={css.timeText}>Recording time:</label>
+
+         {/*    <TimePicker
+              onChange={setSelectedTime}
+              value={selectedTime}
+              format="HH:mm"
+              disableClock={true}
+              clearIcon={null}
+              clockIcon={null}
+            /> */}
             <input
               className={css.timeInput}
               type="time"
@@ -152,11 +171,10 @@ export default function TodayListModal({ onClose }) {
           </div>
         </div>
 
-
         <div>
           <h2 className={css.waterValue}>Enter the value of the water used:</h2>
           <input
-            className={css.timeInput}
+            className={css.valueInput}
             type="number"
             value={inputValue}
             min={0}
