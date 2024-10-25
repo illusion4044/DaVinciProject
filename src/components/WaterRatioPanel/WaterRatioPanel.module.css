@@ -1,0 +1,158 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  height: 134px;
+  background: #ffffff;
+  margin: 16px auto 0 auto;
+  font-family: Roboto, Helvetica, sans-serif;
+}
+
+.todayBarBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.today {
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #407BFF;
+}
+
+.rectBox {
+  position: relative;
+  width: 256px;
+  margin: 8px auto 0 auto;
+}
+
+.rectangle {
+  display: inline-block;
+  height: 8px;
+  border-radius: 10px;
+}
+
+.ellipse {
+  display: inline-block;
+  position: absolute;
+  transform: translate(-50%, 50%);
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border: 1px solid rgb(64, 123, 255);
+  border-radius: 7px;
+}
+
+.line {
+  display: inline-block;
+  position: absolute;
+  width: 1px;
+  height: 8px;
+  background: #D7E3FF;
+}
+
+.line50 {
+  transform: translate(-128px, 310%);
+}
+
+.percent {
+  display: inline-block;
+  position: absolute;
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.25;
+  color: #407BFF;
+}
+
+.percentValue {
+  transform: translate(-138px, 230%);
+}
+
+.addWaterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 280px;
+  height: 36px;
+  border: none;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  padding: 6px 76px 6px 76px;
+  text-align: center;
+  color: white;
+  background-color: #407BFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  margin-top: 40px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  fill: transparent;
+  stroke: #ffffff;  
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 704px;
+    height: 90px;
+    flex-direction: row;
+    align-items: center;
+    gap: 34px;
+  }
+
+  .todayBarBox{
+    margin-left: 8px;
+    margin-bottom: 32px;
+  }
+
+  .rectBox {
+    width: 325px;
+  }
+
+  .line50 {
+  transform: translate(-163px, 310%);
+  }
+
+  .percentValue {
+  transform: translate(-172px, 230%);
+  }
+
+  .addWaterBtn {
+    width: 336px;
+    height: 44px;
+    padding: 10px 104px 10px 104px;
+    margin-top: 0;
+  }
+
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 592px;
+    margin: 0;
+    gap: 44px;
+  }
+
+  .rectBox {
+    width: 360px;
+  }
+
+  .line50 {
+    transform: translate(-180px, 310%);
+  }
+
+  .percentValue {
+    transform: translate(-190px, 230%);
+  }
+
+  .addWaterBtn {
+    width: 178px;
+    padding: 10px 30px 10px 30px;
+  }
+}
+
