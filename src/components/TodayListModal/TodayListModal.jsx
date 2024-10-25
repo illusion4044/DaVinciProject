@@ -166,7 +166,7 @@ export default function TodayListModal({ onClose }) {
           />
         </div>
 
-        <div>
+        <div className={css.saveContainer}>
           <p className={css.ml}>{count} ml</p>
           <button
             className={css.save}
