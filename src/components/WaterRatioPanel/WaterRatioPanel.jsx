@@ -10,7 +10,9 @@ export default function WaterRatioPanel() {
         trackClassName="example-track"
         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
       />
-      <button onClick={() => console.log('Water added')}> +Add Water</button>
+      {/* <div>
+        <button onClick={() => {}}> + Add Water</button>
+      </div> */}
     </>
   );
 }
