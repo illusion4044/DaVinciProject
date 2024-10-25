@@ -43,9 +43,9 @@ const AuthForm = () => {
   };
 
   useEffect(() => {
-    if (location.pathname === '/login') {
+    if (location.pathname === '/signin') {
       setAction('Sign In');
-    } else if (location.pathname === '/register') {
+    } else if (location.pathname === '/signup') {
       setAction('Sign Up');
     }
   }, [location.pathname]);
@@ -57,7 +57,7 @@ const AuthForm = () => {
           .unwrap()
           .then(() => {
             toast.success('Registration success!');
-            navigate('/login');
+            navigate('/signin');
           })
           .catch(e => {
             console.error('Registration error: ', e);
@@ -188,7 +188,7 @@ const AuthForm = () => {
         </Formik>
         <nav>
           <Link
-            to={action === 'Sign In' ? '/register' : '/login'}
+            to={action === 'Sign In' ? '/signup' : '/signin'}
             className={css.link}
             onClick={() =>
               setAction(action === 'Sign In' ? 'Sign Up' : 'Sign In')

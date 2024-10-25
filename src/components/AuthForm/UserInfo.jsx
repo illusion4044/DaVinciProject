@@ -1,9 +1,7 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
 export function useGetUserData() {
   const { token } = useSelector((state) => state.auth);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,7 +26,7 @@ export function useGetUserData() {
         .then((data) => {
           if (data.status === 200) {
             const { name, email, gender } = data.data;
-
+            
             setFormData((prevData) => ({
               ...prevData,
               name: name,
@@ -58,6 +56,5 @@ export function useGetUserData() {
         });
     }
   }, [ token]);
-
   return { formData, initialData };
 }
