@@ -1,24 +1,61 @@
 .divWaterConsumptionTracker {
-  padding-top: 24px;
-  padding-bottom: 40px;
+  height: 384px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 .divTitle {
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 140px;
 }
 
 .title {
-  font-size: 28px;
   font-weight: 700;
+  font-size: 28px;
+  line-height: 114%;
 }
 
 .subtitle {
-  font-size: 24px;
   font-weight: 400;
+  font-size: 24px;
+  line-height: 125%;
+}
+
+.trackerBenefits {
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .headOfSubsections {
+  font-weight: 500;
   font-size: 18px;
-  margin-bottom: 12px;
+  line-height: 111%;
+}
+
+.divSubsections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.iconText {
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  padding: 4px;
+}
+.iconSizeWrap {
+  fill: #407bff;
 }
 
 .btn {
