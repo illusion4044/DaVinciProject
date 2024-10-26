@@ -1,5 +1,5 @@
 import AuthForm from "../../components/AuthForm/AuthForm";
-import css from './SigninPage.module.css';
+import css from './SignupPage.module.css';
 
 const SignupPage = () => {
   return  (
