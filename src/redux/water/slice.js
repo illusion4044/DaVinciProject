@@ -8,12 +8,8 @@ import {
 const initialState = {
   dailyNorma: null,
   monthlyPortions: [],
-
-  dailyPortions: [],
+  dailyPortions: [2000], 
   percentPerDay: null,
-
-  dailyPortions: [2000],
-
   activeContent: 'pictureBottleBg',
   isLoading: false,
   isError: null,
@@ -40,7 +36,7 @@ const waterSlice = createSlice({
       state.dailyPortions = action.payload;
     },
     openDailyModal: state => {
-      state.isDailyModalOpen = true;
+      state.isOpenDailyNormaModal = true; 
     },
     openTodayModal: state => {
       state.isTodayModalOpen = true;
