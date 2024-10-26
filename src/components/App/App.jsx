@@ -42,7 +42,7 @@ export default function App() {
           <Route
             path="/register"
             element={
-              <RestrictedRoute component={SignupPage} redirectTo="/home" />
+              <RestrictedRoute component={SignupPage} redirectTo="/login" />
             }
           />
           <Route

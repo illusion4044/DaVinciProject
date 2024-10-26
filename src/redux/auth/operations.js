@@ -1,14 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = "https://dark-side-of-the-app01.onrender.com";
+axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
+  axios.defaults.headers.common.Authorization = '';
 };
 
 export const register = createAsyncThunk(
@@ -26,7 +26,7 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk('/auth/login', async (user, thunkAPI) => {
   try {
     const response = await axios.post('/auth/signin', user);
-    const token = response.data.token;
+    const token = response.data.accessToken;
 
     setAuthHeader(token);
     return response.data;
@@ -56,15 +56,12 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-export const logOut = createAsyncThunk(
-    'auth/logOut',
-    async (_, thunkAPI) => {
-        try {
-            await axios.post('/auth/logout');
-            localStorage.removeItem('token');
-            setAuthHeader("");
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
-    }
-);
+export const logOut = createAsyncThunk('auth/logOut', async (_, thunkAPI) => {
+  try {
+    await axios.post('/auth/logout');
+    localStorage.removeItem('token');
+    setAuthHeader('');
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
