@@ -15,6 +15,8 @@ import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
 import { updateUser } from '../../redux/users/operations.js';
 
 
+// New file
+
 const UserSchema = Yup.object().shape({
   gender: Yup.string().required('Please select your gender'),
 
