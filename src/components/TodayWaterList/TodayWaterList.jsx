@@ -46,9 +46,3 @@ export default function TodayWaterList() {
     </>
   );
 }
-/* <use href="src/img/icons.svg#icon-Group-4"></use>;
-<use href="src/img/icons.svg#icon-pencil-square"></use>;
-<use href="src/img/icons.svg#icon-trash"></use>; */
-
-/* TodayWaterList:{portionWater}
-          TodayWaterList: {} */
