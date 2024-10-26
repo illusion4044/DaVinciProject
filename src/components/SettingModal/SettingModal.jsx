@@ -11,11 +11,8 @@ import css from './SettingModal.module.css';
 import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
 import Loader from '../Loader/Loader.jsx';
 import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
-// import { updateUser } from '../../redux/users/operations.js';
-
-
-
-// New file
+import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
+import Loader from '../Loader/Loader.jsx';
 
 const UserSchema = Yup.object().shape({
   gender: Yup.string().required('Please select your gender'),
@@ -121,18 +118,12 @@ export default function SettingModal({ closeModal }) {
         token: user.token,
       };
 
-      // Check if photo was changed and only upload in production
       if (selectedPhoto) {
-        if (import.meta.env.MODE === 'development') {
-          console.log('Simulating photo upload in development mode.');
-        } else {
-          await dispatch(
-            uploadUserPhoto({ photo: selectedPhoto, token: user.token })
-          ).unwrap();
-        }
+        await dispatch(
+          uploadUserPhoto({ photo: selectedPhoto, token: user.token })
+        ).unwrap();
       }
 
-      // Check if other fields were changed
       if (
         values.name !== user.name ||
         values.email !== user.email ||
