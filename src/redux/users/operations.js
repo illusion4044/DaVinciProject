@@ -29,23 +29,12 @@ axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
 //   }
 // );
 
-export const updateUser = createAsyncThunk(
-  'user/update',
-  async (
-    { photo, gender, name, email, password, newPassword, token },
-    { rejectWithValue }
-  ) => {
+export const uploadUserPhoto = createAsyncThunk(
+  'user/uploadPhoto',
+  async ({ photo, token }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
-      if (photo) {
-        formData.append('photo', photo);
-      }
-
-      formData.append('gender', gender);
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('password', password || '');
-      formData.append('newPassword', newPassword || '');
+      formData.append('photo', photo);
 
       const config = {
         headers: {
@@ -63,30 +52,76 @@ export const updateUser = createAsyncThunk(
       if (response.status === 200) {
         return response.data;
       }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 401) {
+          return rejectWithValue('Unauthorized. Please log in.');
+        }
+        if (error.response.status === 404) {
+          return rejectWithValue('User not found.');
+        }
+        if (error.response.status === 500) {
+          return rejectWithValue('Server error. Please try again later.');
+        }
+      }
+      return rejectWithValue('Failed to upload photo.');
+    }
+  }
+);
 
-      if (response.status === 400) {
-        return rejectWithValue(
-          'New password cannot be the same as the old password'
-        );
+export const updateUserInfo = createAsyncThunk(
+  'user/updateInfo',
+  async (
+    { id, name, email, gender, password, newPassword, token },
+    { rejectWithValue }
+  ) => {
+    try {
+      const data = {};
+      if (name) data.name = name;
+      if (email) data.email = email;
+      if (gender) data.gender = gender;
+
+      if (password && newPassword) {
+        data.password = password;
+        data.newPassword = newPassword;
       }
 
-      if (response.status === 401) {
-        return rejectWithValue('Unauthorized. Please log in again.');
-      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      };
 
-      if (response.status === 404) {
-        return rejectWithValue('User not found.');
-      }
+      const response = await axios.patch(
+        `${API_URL}/users/${id}`,
+        data,
+        config
+      );
 
-      if (response.status === 500) {
-        return rejectWithValue(
-          'Internal server error. Please try again later.'
-        );
+      if (response.status === 200) {
+        return response.data;
       }
     } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message || 'Failed to update user'
-      );
+      if (error.response) {
+        if (error.response.status === 400) {
+          return rejectWithValue(
+            'New password cannot be the same as the old password.'
+          );
+        }
+        if (error.response.status === 401) {
+          return rejectWithValue('Unauthorized access. Please log in again.');
+        }
+        if (error.response.status === 404) {
+          return rejectWithValue('User not found.');
+        }
+        if (error.response.status === 500) {
+          return rejectWithValue(
+            'Internal Server Error. Please try again later.'
+          );
+        }
+      }
+      return rejectWithValue('Failed to update user information.');
     }
   }
 );

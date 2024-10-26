@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import { fetchLiters } from './operations.js';
-import { getUser, updateUser } from './operations.js';
+
+import { updateUserInfo, uploadUserPhoto } from './operations.js';
 
 const usersSlice = createSlice({
   name: 'users',
@@ -24,16 +25,34 @@ const usersSlice = createSlice({
       //   state.error = true;
       //   state.loading = false;
       // })
-      .addCase(updateUser.pending, state => {
+      // Handle updateUserInfo for updating user information
+      // Handle updateUserInfo for updating user information
+      .addCase(updateUserInfo.pending, state => {
         state.loading = true;
       })
-      .addCase(updateUser.fulfilled, (state, action) => {
+      .addCase(updateUserInfo.fulfilled, (state, action) => {
         state.items = state.items.map(user =>
-          user.id === action.payload.id ? action.payload : user
+          user._id === action.payload.data._id ? action.payload.data : user
         );
         state.loading = false;
       })
-      .addCase(updateUser.rejected, (state, action) => {
+      .addCase(updateUserInfo.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+
+      .addCase(uploadUserPhoto.pending, state => {
+        state.loading = true;
+      })
+      .addCase(uploadUserPhoto.fulfilled, (state, action) => {
+        state.items = state.items.map(user =>
+          user._id === action.payload.data.user._id
+            ? action.payload.data.user
+            : user
+        );
+        state.loading = false;
+      })
+      .addCase(uploadUserPhoto.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       })
@@ -50,16 +69,3 @@ const usersSlice = createSlice({
       }),
 });
 export default usersSlice.reducer;
-// name: 'auth',
-// initialState: {
-//   user: {
-//     name: 'Test User',
-//     email: 'testuser@example.com',
-//     photo: 'path-to-photo.jpg',
-//   },
-//   token: 'fake-token',
-//   isLoggedIn: true,
-//   isRefreshing: false,
-//   isLoading: false,
-//   error: null,
-// },
