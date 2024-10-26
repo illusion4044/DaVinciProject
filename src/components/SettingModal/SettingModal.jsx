@@ -6,6 +6,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { selectUser } from '../../redux/auth/selectors';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
+
+// import userImage from '../../img/setting_modal-img/userPhoto1x.jpg';
+import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
+import Loader from '../Loader/Loader.jsx';
 import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
 import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
 import Loader from '../Loader/Loader.jsx';
@@ -74,6 +78,38 @@ export default function SettingModal({ closeModal }) {
       setPreviewPhotoUrl(URL.createObjectURL(file));
     }
   };
+
+  // const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+  //   try {
+  //     const userData = {
+  //       ...values,
+  //       token: user.token,
+  //     };
+
+  //     if (selectedPhoto) {
+  //       await dispatch(
+  //         uploadUserPhoto({ photo: selectedPhoto, token: user.token })
+  //       ).unwrap();
+  //     }
+
+  //     if (
+  //       values.name !== user.name ||
+  //       values.email !== user.email ||
+  //       values.gender !== user.gender ||
+  //       values.password
+  //     ) {
+  //       await dispatch(updateUserInfo({ ...userData, id: user._id })).unwrap();
+  //     }
+
+  //     toast.success('Settings updated successfully');
+  //     closeModal();
+  //   } catch (error) {
+  //     toast.error('Failed to update settings');
+  //     setErrors({ submit: error.message });
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
