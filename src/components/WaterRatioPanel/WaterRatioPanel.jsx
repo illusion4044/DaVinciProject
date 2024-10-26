@@ -1,14 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import ReactSlider from 'react-slider';
-import { useSelector } from 'react-redux';
-
 import { selectPercentPerDay } from '../../redux/water/selectors';
 import { openTodayModal, closeTodayModal } from '../../redux/water/slice.js';
 import css from './WaterRatioPanel.module.css';
-
 import icon from '../../img/icons.svg';
-
-import icon from "../../img/icons.svg";
 import TodayListModal from '../TodayListModal/TodayListModal';
 
 
@@ -75,7 +70,6 @@ export default function WaterRatioPanel() {
         </div>
 
       </div>
-     
       <button className={css.addWaterBtn} type="button" onClick={() => dispatch(openTodayModal())}>
         <svg className={css.icon}>
           <use href={`${icon}#icon-plus-circle`} />
@@ -83,12 +77,8 @@ export default function WaterRatioPanel() {
         Add Water
       </button>
       {isModalOpen && <TodayListModal onClose={() => dispatch(closeTodayModal())}/>}  
-    </div>
+    <div>
     
-          
-
-
-
         <button className={css.addWaterBtn} type="button">
           <svg className={css.icon}>
             <use href={`${icon}#icon-plus-circle`} />

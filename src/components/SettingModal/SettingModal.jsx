@@ -7,7 +7,7 @@ import { selectUser } from '../../redux/auth/selectors';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
 
-import userImage from '../../img/setting_modal-img/userPhoto1x.jpg';
+// import userImage from '../../img/setting_modal-img/userPhoto1x.jpg';
 import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
 import Loader from '../Loader/Loader.jsx';
 
