@@ -11,8 +11,8 @@ import css from './SettingModal.module.css';
 import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
 import Loader from '../Loader/Loader.jsx';
 import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
-import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
-import Loader from '../Loader/Loader.jsx';
+
+
 
 const UserSchema = Yup.object().shape({
   gender: Yup.string().required('Please select your gender'),
