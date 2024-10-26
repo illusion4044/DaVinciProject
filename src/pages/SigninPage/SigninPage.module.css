@@ -1,6 +1,60 @@
-@media (min-width: 1440px) {
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.signinpage{
+        padding-bottom: 240px;
+            background-image: url("../../img/signInImg/backgroundSignPageMob1x.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            max-width: 312px;
+            padding-left: 16px;
+            padding-right: 16px;
+            margin: 0 auto 48px;
+            min-height: 100vh;
+            display: flex;
+    flex-direction: column;
+}
+
+@media (min-resolution: 2dppx) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageMob2x.jpg') ;/* Мобілка фон 2x */
+    }
+}
+@media screen and (min-width: 768px) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageTab1x.jpg'); /* Планшет фон 1x */
+        max-width: 736px;
+        margin: 0 auto 44px;
+        padding-top: 16px;
+    }
+}
+
+@media (min-resolution: 2dppx) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageTab2x.jpg') ;/* Планшет фон 2x */
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageDesk1x.jpg');/* Десктоп фон 1x */
+        max-width: 1440px;
+        margin: 0 auto 44px;
+    }
+}
+
+@media (min-resolution: 2dppx) {
+    .signinpage {
+            background-image: url('../../img/signInImg/backgroundSignPageDesk2x.jpg') ; /* Десктоп фон 2x */
+        }
+    }
+
+/*@media (min-width: 1440px) {
     .signInPageContainer {
         display: flex;
         flex-direction: column;
     }
 }
+*/
