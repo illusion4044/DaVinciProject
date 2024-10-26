@@ -1,0 +1,44 @@
+.iconGlass {
+  width: 17px;
+  height: 22px;
+}
+
+.iconPencil {
+  width: 16px;
+  height: 16px;
+}
+
+.iconTrash {
+  width: 16px;
+  height: 16px;
+}
+
+.container {
+  width: 264px;
+  min-height: 258px;
+  gap: 24px;
+  box-shadow: 0px 4px 14px 0px #407bff4d;
+  background-color: #ecf2ff;
+  padding-left: 8px;
+  margin-top: 24px;
+}
+
+.name {
+  margin-bottom: 24px;
+  padding-top: 24px;
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: left;
+  font-weight: bold;
+  color: #2f2f2f;
+}
+
+.containerList {
+  display: flex;
+  gap: 16px;
+  width: 254px;
+  height: 26px;
+  border-bottom: solid 1px #d7e3ff;
+}

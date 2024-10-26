@@ -12,31 +12,31 @@ const WaterСonsumptionTracker = () => {
           <h3 className={css.headOfSubsections}>Tracker Benefits</h3>
           <ul className={css.divSubsections}>
             <li className={css.iconText}>
-              <svg className={css.icon} width="32" height="32">
+              <svg className={css.icon}>
                 <use
                   href="../../../public/welcomePage.svg#icon-calendar"
                   className={css.iconSizeWrap}
                 />
               </svg>
-              <p>Habit drive</p>
+              <p className={css.textWrap}>Habit drive</p>
             </li>
             <li className={css.iconText}>
-              <svg className={css.icon} width="32" height="32">
+              <svg className={css.icon}>
                 <use
                   href="../../../public/welcomePage.svg#icon-statistic"
                   className={css.iconSizeWrap}
                 />
               </svg>
-              <p>View statistics</p>
+              <p className={css.textWrap}>View statistics</p>
             </li>
             <li className={css.iconText}>
-              <svg className={css.icon} width="32" height="32">
+              <svg className={css.icon}>
                 <use
                   href="../../../public/welcomePage.svg#icon-settings"
                   className={css.iconSizeWrap}
                 />
               </svg>
-              <p>Personal rate setting</p>
+              <p className={css.textWrap}>Personal rate setting</p>
             </li>
           </ul>
         </div>

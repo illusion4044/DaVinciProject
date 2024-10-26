@@ -6,6 +6,7 @@ top: 0;
 left: 0;
 background-color: rgba(0, 0, 0, 0.8);
  overflow: hidden;
+  z-index: 1000;
 }
 
 .modal{
@@ -207,6 +208,21 @@ line-height: 1.25;
 
 .timeInput {
   border: 1px solid #d7e3ff;
+border-radius: 6px;
+padding: 12px 10px;
+
+height: 44px;
+color: #407bff;
+ box-sizing: border-box;
+width: 100%;
+
+margin: 0;
+margin-top: 12px;
+margin-bottom: 24px;
+}
+
+.valueInput{
+    border: 1px solid #d7e3ff;
 border-radius: 6px;
 padding: 12px 10px;
 

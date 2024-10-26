@@ -23,7 +23,7 @@ export default function DailyNorma() {
       <h4>My daily Norma</h4>
       <p>DailyNorma: {mlLiters} L</p>
       <button onClick={() => dispatch(openDailyModal())}>Edit</button>
-      {isModalOpen && <DailyNormaModal closeModal={closeDailyModal} />}
+      {isModalOpen && <DailyNormaModal onClose={closeDailyModal} />}
     </div>
   );
 }

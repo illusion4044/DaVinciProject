@@ -71,3 +71,20 @@ ul li::marker {
   line-height: 125%;
   flex-wrap: wrap;
 }
+
+@media only screen and (min-width: 768px) {
+  .divWhyDrinkWater {
+    padding: 32px 24px;
+    width: 494px;
+    height: 332px;
+  }
+
+  .list {
+    width: 446px;
+    height: 236px;
+  }
+
+  .iconTextMod {
+    height: 20px;
+  }
+}

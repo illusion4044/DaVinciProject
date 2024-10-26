@@ -3,3 +3,9 @@
   flex-direction: column;
   gap: 40px;
 }
+
+@media only screen and (min-width: 768px) {
+  .mainWraper {
+    gap: 60px;
+  }
+}

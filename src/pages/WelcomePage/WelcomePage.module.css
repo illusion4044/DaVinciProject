@@ -19,14 +19,17 @@
 /* Tab vsersion of bgi */
 
 @media (min-width: 768px) {
-  .img-yacht {
+  .welcomePage {
     background-image: url('../../img/main-page-img/backgroundMainPageTabl1x.jpg'); /* Планшет фон 1x */
+    width: 768px;
+    height: 736px;
+    padding: 40px 32px 50px 32px;
   }
 }
 
 @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
   (min-width: 768px) and (min-resolution: 192dpi) {
-  .img-yacht {
+  .welcomePage {
     background-image: url('../../img/main-page-img/backgroundMainPageTabl2x.jpg'); /* Планшет фон 2x */
   }
 }

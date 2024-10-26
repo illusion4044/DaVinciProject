@@ -36,10 +36,10 @@ const AuthForm = () => {
 
   const user = useSelector(selectUser);
 
-  const initialValues = {
-    email: user.email ?? '',
-    password: '',
-    repeatPassword: '',
+   const initialValues = {
+    email: user.email ?? "",
+    password: "",
+    repeatPassword: "",
   };
 
   useEffect(() => {
@@ -51,6 +51,7 @@ const AuthForm = () => {
   }, [location.pathname]);
 
   const handleSubmit = ({ repeatPassword, ...loginValues }, actions) => {
+    
     switch (action) {
       case 'Sign Up':
         dispatch(register(loginValues))

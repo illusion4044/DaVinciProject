@@ -1,7 +1,8 @@
 import Logo from '../../components/Logo/Logo';
+import Logo from '../Logo/Logo';
+
 import css from './Header.module.css';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../redux/auth/selectors';
 import UserLogo from '../../components/UserLogo/UserLogo';
 import UserAuth from '../../components/UserAuth/UserAuth';
 import { selectUserInfo } from '../../redux/users/selectors';

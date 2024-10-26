@@ -1,17 +1,39 @@
 
+import { useDispatch, useSelector } from 'react-redux';
+
+
 import ReactSlider from 'react-slider';
 import { useSelector } from 'react-redux';
+
 import { selectPercentPerDay } from '../../redux/water/selectors';
+import { openTodayModal, closeTodayModal } from '../../redux/water/slice.js';
 import css from './WaterRatioPanel.module.css';
 import icon from "../../img/icons.svg";
+import TodayListModal from '../TodayListModal/TodayListModal';
 
 
 export default function WaterRatioPanel() {
-  // const rect1 = Number(useSelector(selectPercentPerDay));
-  const rect1 = 75;
+  const dispatch = useDispatch();
+  const isModalOpen = useSelector(state => state.water.isTodayModalOpen);
+
+  const rect1 = Number(useSelector(selectPercentPerDay));
+  // const rect1 = 75;
   const rect2 = 100 - rect1;
 
   return (
+
+    <>
+      <ReactSlider
+        className="horizontal-slider"
+        thumbClassName="example-thumb"
+        trackClassName="example-track"
+        renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+      />
+      {/* <div>
+        <button onClick={() => {}}> + Add Water</button>
+      </div> */}
+    </>
+
     <div className={css.container}>
       <div className={css.todayBarBox}>
         <p className={css.today}>Today</p>
@@ -40,15 +62,17 @@ export default function WaterRatioPanel() {
         </div>
       </div>
      
-      <button className={css.addWaterBtn} type="button" >
+      <button className={css.addWaterBtn} type="button" onClick={() => dispatch(openTodayModal())}>
         <svg className={css.icon}>
           <use href={`${icon}#icon-plus-circle`} />
         </svg>
         Add Water
       </button>
+      {isModalOpen && <TodayListModal onClose={() => dispatch(closeTodayModal())}/>}  
     </div>
     
           
+
 
   );
 }
