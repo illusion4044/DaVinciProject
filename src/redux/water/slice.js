@@ -8,8 +8,12 @@ import {
 const initialState = {
   dailyNorma: null,
   monthlyPortions: [],
+
   dailyPortions: [],
   percentPerDay: null,
+
+  dailyPortions: [2000],
+
   activeContent: 'pictureBottleBg',
   isLoading: false,
   isError: null,

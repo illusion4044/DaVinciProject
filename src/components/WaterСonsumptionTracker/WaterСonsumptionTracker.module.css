@@ -1,24 +1,72 @@
 .divWaterConsumptionTracker {
-  padding-top: 24px;
-  padding-bottom: 40px;
+  height: 384px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 .divTitle {
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 140px;
 }
 
 .title {
-  font-size: 28px;
   font-weight: 700;
+  font-size: 28px;
+  line-height: 114%;
 }
 
 .subtitle {
-  font-size: 24px;
   font-weight: 400;
+  font-size: 24px;
+  line-height: 125%;
+}
+
+.trackerBenefits {
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .headOfSubsections {
+  font-weight: 500;
   font-size: 18px;
-  margin-bottom: 12px;
+  line-height: 111%;
+}
+
+.divSubsections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.iconText {
+  height: 32px;
+  width: 216px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.textWrap {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+}
+
+.icon {
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+}
+.iconSizeWrap {
+  /* fill: #407bff; */
+  width: 24px;
+  height: 24px;
 }
 
 .btn {
@@ -31,4 +79,69 @@
   font-weight: 500;
   color: #ffffff;
   background-color: #407bff;
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+}
+.btn:hover {
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+}
+
+.btn:active {
+  box-shadow: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .divWaterConsumptionTracker {
+    width: 704px;
+    height: 254px;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 117%;
+  }
+
+  .subtitle {
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 123%;
+  }
+  .divTitle {
+    height: 90px;
+  }
+  .trackerBenefits {
+    height: 72px;
+  }
+
+  .divSubsections {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+  }
+  .iconText {
+    width: 224px;
+    height: 40px;
+  }
+
+  .icon {
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .headOfSubsections {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 111%;
+  }
+
+  .iconSizeWrap {
+    width: 30px;
+    height: 30px;
+  }
+
+  .btn {
+    width: 336px;
+    height: 44px;
+  }
 }

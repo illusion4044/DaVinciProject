@@ -1,13 +1,35 @@
 .welcomePage {
-  background-image: url('../../img/main-page_img/Background Main Page-mob-1x.jpg');
+  background-image: url('../../img/main-page-img/backgroundMainPageMob1x.jpg'); /* Мобілка фон 1x */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  width: 320px;
+  margin: 0 auto;
+  padding: 24px 20px 40px 20px;
+  height: 904px;
 }
 
-@media (min-resolution: 2dppx) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .welcomePage {
-    background-image: url('../../img/main-page_img/Background Main Page-mob-2x.jpg');
+    background-image: url('../../img/main-page-img/backgroundMainPageMob2x.jpg'); /* Мобілка фон 2x */
+  }
+}
+
+/* Tab vsersion of bgi */
+
+@media (min-width: 768px) {
+  .welcomePage {
+    background-image: url('../../img/main-page-img/backgroundMainPageTabl1x.jpg'); /* Планшет фон 1x */
+    width: 768px;
+    height: 736px;
+    padding: 40px 32px 50px 32px;
+  }
+}
+
+@media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
+  (min-width: 768px) and (min-resolution: 192dpi) {
+  .welcomePage {
+    background-image: url('../../img/main-page-img/backgroundMainPageTabl2x.jpg'); /* Планшет фон 2x */
   }
 }

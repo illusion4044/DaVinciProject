@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './MonthStatsTable.module.css'; // Імпорт стилів
+import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats'; 
 
 // Компонент для пагінації місяців
 const MonthPaginator = ({ selectedMonth, onMonthChange }) => {
@@ -20,22 +21,11 @@ const MonthPaginator = ({ selectedMonth, onMonthChange }) => {
 
   return (
     <div className={styles.monthPaginator}>
-      <button onClick={handlePrevMonth} disabled={selectedMonth === 0} className={styles.paginatorButton}>← Prev</button>
+      <button onClick={handlePrevMonth} disabled={selectedMonth === 0} className={styles.paginatorButton}> Prev</button>
       <span className={styles.monthDisplay}>{months[selectedMonth]}</span>
       {selectedMonth < currentMonth && (
-        <button onClick={handleNextMonth} className={styles.paginatorButton}>Next →</button>
+        <button onClick={handleNextMonth} className={styles.paginatorButton}>Next </button>
       )}
-    </div>
-  );
-};
-
-// Компонент для загальної статистики по дню
-const DaysGeneralStats = ({ day, stats }) => {
-  return (
-    <div className={styles.dayGeneralStats}>
-      <h3>Statistics for {day}</h3>
-      <p>Water: {stats.water}%</p>
-      <p>Other stats...</p>
     </div>
   );
 };

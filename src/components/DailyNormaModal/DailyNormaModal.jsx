@@ -30,14 +30,14 @@ export default function DailyNormaModal({ onClose }) {
       .typeError('Weight must be a number')
       .positive()
       .min(20, 'Minimum value is 20kg')
-      .max(300, 'Maximum value is 300kg')
-      .required('Weight is required'),
+      .max(300, 'Maximum value is 300kg'),
+
     time: Yup.number()
       .typeError('Time must be a number')
       .positive()
-      .min(0.1, 'Minimum value is 0.1h')
-      .max(24, 'Maximum value is 24h')
-      .required('Time is required'),
+      .min(0, 'Minimum value is 0h')
+      .max(24, 'Maximum value is 24h'),
+
     amountOfWater: Yup.number()
       .typeError('Water amount must be a number')
       .min(0.1, 'Minimum value is 0.1L')

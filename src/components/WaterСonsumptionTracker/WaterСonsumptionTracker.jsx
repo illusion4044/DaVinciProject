@@ -8,28 +8,37 @@ const WaterСonsumptionTracker = () => {
           <h1 className={css.title}>Water consumption tracker</h1>
           <h2 className={css.subtitle}>Record daily water intake and track</h2>
         </div>
-        <div>
+        <div className={css.trackerBenefits}>
           <h3 className={css.headOfSubsections}>Tracker Benefits</h3>
-          <div className={css.divSubsections}>
-            <div className="icon-text">
-              <svg className="icon">
-                <use href="/path/to/src/img/icons.svg#icon-calendar-days" />
+          <ul className={css.divSubsections}>
+            <li className={css.iconText}>
+              <svg className={css.icon}>
+                <use
+                  href="../../../public/welcomePage.svg#icon-calendar"
+                  className={css.iconSizeWrap}
+                />
               </svg>
-              <p>Habit drive</p>
-            </div>
-            <div className="icon-text">
-              <svg className="icon">
-                <use href="/path/to/src/img/icons.svg#icon-presentation-chart-bar" />
+              <p className={css.textWrap}>Habit drive</p>
+            </li>
+            <li className={css.iconText}>
+              <svg className={css.icon}>
+                <use
+                  href="../../../public/welcomePage.svg#icon-statistic"
+                  className={css.iconSizeWrap}
+                />
               </svg>
-              <p>View statistics</p>
-            </div>
-            <div className="icon-text">
-              <svg className="icon">
-                <use href="/path/to/src/img/icons.svg#icon-wrench-screwdriver" />
+              <p className={css.textWrap}>View statistics</p>
+            </li>
+            <li className={css.iconText}>
+              <svg className={css.icon}>
+                <use
+                  href="../../../public/welcomePage.svg#icon-settings"
+                  className={css.iconSizeWrap}
+                />
               </svg>
-              <p>Personal rate setting</p>
-            </div>
-          </div>
+              <p className={css.textWrap}>Personal rate setting</p>
+            </li>
+          </ul>
         </div>
         <button className={css.btn}>Try tracker</button>
       </div>

@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export default function DailyNorma() {
   const mlLiters = useSelector(state => state.water.dailyPortions);
-  const liters = mlLiters / 1000;
+  //   const liters = mlLiters / 1000;
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,9 +21,9 @@ export default function DailyNorma() {
   return (
     <div>
       <h4>My daily Norma</h4>
-      <p>DailyNorma: {liters} L</p>
+      <p>DailyNorma: {mlLiters} L</p>
       <button onClick={() => dispatch(openDailyModal())}>Edit</button>
-      {isModalOpen && <DailyNormaModal closeModal={closeDailyModal} />}
+      {isModalOpen && <DailyNormaModal onClose={closeDailyModal} />}
     </div>
   );
 }

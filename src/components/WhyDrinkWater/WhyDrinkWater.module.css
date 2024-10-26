@@ -1,31 +1,90 @@
-ul {
+/* ul {
   list-style-type: disc;
-}
-
+} */
+/* 
 ul li::marker {
   width: 8px;
   height: 8px;
   color: #407bff;
-}
+} */
 
 .divWhyDrinkWater {
-  padding: 40px 0;
   border-radius: 10px;
-  width: 280px;
+  height: 416px;
   background-color: #ecf2ff;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.iconText {
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconTextMod {
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  gap: 8px;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  text-align: left;
+  justify-content: start;
 }
 
 .heading {
+  font-weight: 500;
   font-size: 18px;
+  line-height: 111%;
+}
+
+.iconSvg {
+  display: block;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
 }
 
 .list {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .listItems {
   font-size: 16px;
   font-weight: 400;
+}
+
+.iconParagraph {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  flex-wrap: wrap;
+}
+
+@media only screen and (min-width: 768px) {
+  .divWhyDrinkWater {
+    padding: 32px 24px;
+    width: 494px;
+    height: 332px;
+  }
+
+  .list {
+    width: 446px;
+    height: 236px;
+  }
+
+  .iconTextMod {
+    height: 20px;
+  }
 }
