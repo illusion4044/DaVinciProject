@@ -145,3 +145,28 @@
     height: 44px;
   }
 }
+
+@media only screen and (min-width: 1440px) {
+  .divWaterConsumptionTracker {
+    width: 439px;
+    height: 366px;
+  }
+
+  .divTitle {
+    height: 90px;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 117%;
+    height: 42px;
+  }
+  .trackerBenefits {
+    width: 248px;
+    height: 184px;
+  }
+  .divSubsections {
+    flex-direction: column;
+  }
+}
