@@ -1,3 +1,4 @@
+import { cleanDigitSectionValue } from '@mui/x-date-pickers/internals/hooks/useField/useField.utils.js';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -23,17 +24,27 @@ export const register = createAsyncThunk(
   }
 );
 
-export const logIn = createAsyncThunk('/auth/login', async (user, thunkAPI) => {
-  try {
-    const response = await axios.post('/auth/signin', user);
-    const token = response.data.accessToken;
+export const logIn = createAsyncThunk(
+  '/auth/logIn',
+  async (users, thunkAPI) => {
+    console.log(users);
+    const { email, password } = users;
+    try {
+      // const response = await axios.post('/auth/signin', user);
+      const response = await axios.post('/auth/signin', {
+        email: email,
+        password: password,
+      });
+      console.log(response.data);
+      const token = response.data.accessToken;
 
-    setAuthHeader(token);
-    return response.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+      setAuthHeader(token);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const refreshUser = createAsyncThunk(
   '/auth/refresh',
