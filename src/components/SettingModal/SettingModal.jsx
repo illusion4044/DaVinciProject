@@ -10,9 +10,9 @@ import css from './SettingModal.module.css';
 // import userImage from '../../img/setting_modal-img/userPhoto1x.jpg';
 import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
 import Loader from '../Loader/Loader.jsx';
-
 import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
-import { updateUser } from '../../redux/users/operations.js';
+// import { updateUser } from '../../redux/users/operations.js';
+
 
 
 // New file

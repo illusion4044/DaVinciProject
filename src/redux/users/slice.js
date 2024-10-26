@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import { fetchLiters } from './operations.js';
 
-import { updateUserInfo, uploadUserPhoto } from './operations.js';
+import { updateUserInfo, uploadUserPhoto, getUser  } from './operations.js';
 
 const usersSlice = createSlice({
   name: 'users',
