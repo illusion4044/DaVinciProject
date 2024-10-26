@@ -36,10 +36,10 @@ const AuthForm = () => {
 
   const user = useSelector(selectUser);
 
-  const initialValues = {
-    email: user.email ?? '',
-    password: '',
-    repeatPassword: '',
+   const initialValues = {
+    email: user.email ?? "",
+    password: "",
+    repeatPassword: "",
   };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const AuthForm = () => {
           .unwrap()
           .then(() => {
             toast.success('Registration success!');
-            navigate('/signin');
+            navigate('/login');
           })
           .catch(e => {
             console.error('Registration error: ', e);
