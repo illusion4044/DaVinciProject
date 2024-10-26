@@ -1,6 +1,13 @@
 import css from './WaterСonsumptionTracker.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const WaterСonsumptionTracker = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/register'); // Переход на маршрут signUp
+  };
+
   return (
     <>
       <div className={css.divWaterConsumptionTracker}>
@@ -40,7 +47,9 @@ const WaterСonsumptionTracker = () => {
             </li>
           </ul>
         </div>
-        <button className={css.btn}>Try tracker</button>
+        <button className={css.btn} onClick={handleButtonClick}>
+          Try tracker
+        </button>
       </div>
     </>
   );
