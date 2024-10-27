@@ -36,19 +36,14 @@ export const updatePortionThunk = createAsyncThunk(
 
 export const updateWaterRateThunk = createAsyncThunk(
   'water/updateWaterRate',
-  async ({ id, newDailyNorma }, { rejectWithValue, getState }) => {
+  async ({ dailyNorma }, { rejectWithValue, getState }) => {
     const token = getState().auth.token;
     if (!token) {
       return rejectWithValue('No token found');
     }
-
     setAuthHeader(token);
-
-    if (!id) {
-      return rejectWithValue('ID is missing or undefined.');
-    }
     try {
-      const response = await axios.patch(`/water/${id}`, newDailyNorma);
+      const response = await axios.patch(`/users/norm`, {dailyNorma});
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
