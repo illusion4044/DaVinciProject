@@ -14,6 +14,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Loader from '../Loader/Loader';
 import WhyDrinkWater from '../WhyDrinkWater/WhyDrinkWater.jsx';
 import { getCurrentUser } from '../../redux/users/operations';
+import { Toaster } from 'react-hot-toast';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const SigninPage = lazy(() => import('../../pages/SigninPage/SigninPage'));
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/why-drink-water" element={<WhyDrinkWater />} />
         </Route>
       </Routes>
+     < Toaster/>
     </Suspense>
   );
 }
