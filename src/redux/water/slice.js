@@ -3,11 +3,12 @@ import {
   updatePortionThunk,
   fetchMonthlyPortionsThunk,
   fetchDailyPortionsThunk,
+  updateWaterRateThunk,
 } from './operations.js';
 import { number } from 'yup';
 
 const initialState = {
-  dailyNorma: null,
+  dailyNorma: 0,
   monthlyPortions: [],
   dailyPortions: [],
   percentPerDay: null,
@@ -16,6 +17,7 @@ const initialState = {
   isError: null,
   isOpenDailyNormaModal: false,
   isTodayModalOpen: false,
+  selectedItem: {},
 };
 
 const waterSlice = createSlice({
@@ -45,6 +47,17 @@ const waterSlice = createSlice({
     closeTodayModal: state => {
       state.isTodayModalOpen = false;
     },
+    clearStatisticData: state => {
+      state.dailyNorma = null;
+      state.monthlyPortions = [];
+      state.dailyPortions = [];
+      state.isLoading = false;
+      state.isError = null;
+      state.selectedItem = null;
+    },
+    changeSelectedItem: (state, { payload }) => {
+      state.selectedItem = payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -53,7 +66,7 @@ const waterSlice = createSlice({
         state.isError = null;
       })
       .addCase(fetchDailyPortionsThunk.fulfilled, (state, { payload }) => {
-        state.dailyNorma = payload.result.dailyWaterNorma;
+        state.dailyNorma = payload.result.dailyNorma;
         state.isLoading = false;
       })
       .addCase(fetchDailyPortionsThunk.rejected, (state, { payload }) => {
@@ -83,6 +96,17 @@ const waterSlice = createSlice({
       .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
+      })
+      .addCase(updateWaterRateThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(updateWaterRateThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(updateWaterRateThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
       });
   },
 });
@@ -94,6 +118,8 @@ export const {
   openDailyModal,
   openTodayModal,
   closeTodayModal,
+  clearStatisticData,
+  changeSelectedItem,
 } = waterSlice.actions;
 
 export default waterSlice.reducer;
