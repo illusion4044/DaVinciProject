@@ -15,22 +15,24 @@ export default function TodayWaterList() {
         <p className={css.name}>Today</p>
         {!onSaveClick && (
           <>
-            <div className={css.containerList}>
-              <svg className={css.iconGlass}>
-                <use href="src/img/icons.svg#icon-Group-4"></use>
-              </svg>
-              <p className={css.amount}>
-                {selectedItem ? selectedItem.amount : '0'} ml
-              </p>
-              <p className={css.time}>
-                {selectedItem ? selectedItem.time : '00:00'}
-              </p>
-              <svg className={css.iconPencil}>
-                <use href="/public/icons.svg#icon-Vector"></use>
-              </svg>
-              <svg className={css.iconTrash}>
-                <use href="src/img/icons.svg#icon-Vector"></use>
-              </svg>
+            <div className={css.scrollContainer}>
+              <div className={css.containerList}>
+                <svg className={css.iconGlass}>
+                  <use href="src/img/icons.svg#icon-Group-4"></use>
+                </svg>
+                <p className={css.amount}>
+                  {selectedItem ? selectedItem.amount : '0'} ml
+                </p>
+                <p className={css.time}>
+                  {selectedItem ? selectedItem.time : '00:00'}
+                </p>
+                <svg className={css.iconPencil}>
+                  <use href="/public/icons.svg#icon-Vector"></use>
+                </svg>
+                <svg className={css.iconTrash}>
+                  <use href="src/img/icons.svg#icon-Vector"></use>
+                </svg>
+              </div>
             </div>
           </>
         )}
