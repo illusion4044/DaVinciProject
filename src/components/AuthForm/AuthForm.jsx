@@ -71,6 +71,7 @@ const AuthForm = () => {
           .unwrap()
           .then(() => {
             toast.success('Login success!');
+            console.log(toast);
           })
           .catch(e => {
             console.error('Login error: ', e);
