@@ -23,6 +23,7 @@ const authSlice = createSlice({
     closeModal: state => {
       state.isModalOpen = false;
     },
+  },
 
     extraReducers: builder =>
       builder
@@ -87,6 +88,6 @@ const authSlice = createSlice({
           state.isRefreshing = false;
         }),
   },
-});
+);
 export const { openModal, closeModal } = authSlice.actions;
 export default authSlice.reducer;
