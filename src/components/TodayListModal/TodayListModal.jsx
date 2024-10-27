@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDailyNorma, selectSelectedItem } from '../../redux/water/selectors.js';
+import {
+  selectDailyNorma,
+  selectSelectedItem,
+} from '../../redux/water/selectors.js';
 import { useEffect, useState } from 'react';
 
 import {
@@ -7,7 +10,7 @@ import {
   fetchMonthlyPortionsThunk,
   updatePortionThunk,
 } from '../../redux/water/operations.js';
-import css from './TodayListModal.module.css'
+import css from './TodayListModal.module.css';
 import dayjs from 'dayjs';
 
 export default function TodayListModal({ onClose }) {
@@ -44,7 +47,7 @@ export default function TodayListModal({ onClose }) {
   };
 
   const handleInputChange = event => {
-   const value = event.target.value;
+    const value = event.target.value;
     setInputValue(value);
   };
 
@@ -88,7 +91,6 @@ export default function TodayListModal({ onClose }) {
     };
 
     console.log(payload);
-
 
     dispatch(updatePortionThunk(payload)).then(() => {
       const currentDate = getCurrentData();
@@ -202,4 +204,4 @@ export default function TodayListModal({ onClose }) {
       </div>
     </div>
   );
-};
+}

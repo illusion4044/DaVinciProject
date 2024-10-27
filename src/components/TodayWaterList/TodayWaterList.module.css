@@ -42,3 +42,24 @@
   height: 26px;
   border-bottom: solid 1px #d7e3ff;
 }
+
+.btn {
+  color: #407bff;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  display: flex;
+  flex-direction: row;
+}
+
+.iconBtn {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+}
+
+.containerBtn {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
