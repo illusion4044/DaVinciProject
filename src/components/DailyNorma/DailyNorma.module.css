@@ -1,0 +1,54 @@
+.conatainer {
+  min-width: 164px;
+  min-height: 74px;
+  /* top: 80px;
+  left: 20px;
+  padding: 8px 20px 8px 18px;
+  gap: 12px; */
+  border-radius: 10px 0px 0px 0px;
+  border: 1px 0px 0px 0px;
+}
+
+.containerLiters {
+  display: flex;
+  flex-direction: row;
+  width: 90px;
+  height: 22px;
+  gap: 12px;
+  text-align: center;
+}
+
+.nameLiters {
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: left;
+  color: #407bff;
+}
+.btn {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  color: #8baeff;
+}
+.containerName {
+  display: flex;
+  flex-direction: row;
+}
+.title {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: left;
+  color: #2f2f2f;
+  padding-left: 0;
+  margin-left: 0;
+  align-items: center;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+}

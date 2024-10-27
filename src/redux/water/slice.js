@@ -3,12 +3,14 @@ import {
   updatePortionThunk,
   fetchMonthlyPortionsThunk,
   fetchDailyPortionsThunk,
+  fetchDailyPortion,
 } from './operations.js';
+import { number } from 'yup';
 
 const initialState = {
   dailyNorma: null,
   monthlyPortions: [],
-  dailyPortions: [2000], 
+  dailyPortions: [],
   percentPerDay: null,
   activeContent: 'pictureBottleBg',
   isLoading: false,
@@ -36,7 +38,7 @@ const waterSlice = createSlice({
       state.dailyPortions = action.payload;
     },
     openDailyModal: state => {
-      state.isOpenDailyNormaModal = true; 
+      state.isOpenDailyNormaModal = true;
     },
     openTodayModal: state => {
       state.isTodayModalOpen = true;
@@ -82,6 +84,18 @@ const waterSlice = createSlice({
       .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
+      })
+      .addCase(fetchDailyPortion.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(fetchDailyPortion.fulfilled, (state, action) => {
+        state.dailyPortions = action.payload.data;
+        state.isLoading = false;
+      })
+      .addCase(fetchDailyPortion.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload || action.error.message;
       });
   },
 });

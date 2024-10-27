@@ -111,3 +111,21 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
     }
   }
 );
+
+export const fetchDailyPortion = createAsyncThunk(
+  '/water/fetchDailyPortion',
+  async (data, { rejectWithValue, getState }) => {
+    const token = getState().auth.token;
+    if (!token) {
+      return rejectWithValue('No token found');
+    }
+    setAuthHeader(token);
+    try {
+      const response = await axios.get('/water/day');
+      console.log(response);
+      return response.data.totalWaterPerDay;
+    } catch (error) {
+      return data.rejectWithValue(error.response.data.message);
+    }
+  }
+);
