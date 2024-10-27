@@ -1,67 +1,64 @@
 .monthStatsTable {
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .monthPaginator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .paginatorButton {
-    padding: 5px 10px;
-    margin: 0 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .paginatorButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .monthDisplay {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .daysList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .dayBlock {
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .dayBlock:hover {
-    background-color: #d0d0d0;
-  }
-  
-  .highlighted {
-    background-color: #ffcccc;
-  }
-  
-  .dayGeneralStats {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-  }
-  
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f4ff;
+}
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.paginator button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #5c77ff;
+}
+
+.paginator span {
+  font-size: 20px;
+  font-weight: bold;
+  color: #5c77ff;
+}
+
+.daysList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.dayBlock {
+  width: 60px;
+  height: 60px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  transition: border-color 0.3s;
+}
+
+.incomplete {
+  border-color: #FF9D43;
+}
+
+.dayNumber {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.dayPercentage {
+  font-size: 12px;
+  color: #5c77ff;
+}
