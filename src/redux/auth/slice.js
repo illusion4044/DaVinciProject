@@ -89,7 +89,7 @@ const authSlice = createSlice({
         }),
   },
 
-});
+);
 
 export const { openModal, closeModal } = authSlice.actions;
 export default authSlice.reducer;
