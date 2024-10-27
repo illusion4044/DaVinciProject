@@ -1,3 +1,5 @@
+// src/components/App/App.jsx
+
 import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { SharedLayout } from '../SharedLayout/SharedLayout';
@@ -8,7 +10,6 @@ import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Loader from '../Loader/Loader';
 import WhyDrinkWater from '../WhyDrinkWater/WhyDrinkWater.jsx';
-import { getUser } from '../../redux/users/operations';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const SigninPage = lazy(() => import('../../pages/SigninPage/SigninPage'));
@@ -21,8 +22,9 @@ export default function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(getUser(userToken));
-    dispatch(refreshUser());
+    if (userToken) {
+      dispatch(refreshUser());
+    }
   }, [dispatch, userToken]);
 
   if (isRefreshing) {
@@ -36,7 +38,7 @@ export default function App() {
           <Route
             path="/welcome"
             element={
-              <RestrictedRoute component={WelcomePage} redirectTo="/welcome" />
+              <RestrictedRoute component={WelcomePage} redirectTo="/home" />
             }
           />
           <Route

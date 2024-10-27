@@ -2,21 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { logIn, logOut, refreshUser, register } from './operations';
 
 const authSlice = createSlice({
-
-    name: 'auth',
-    initialState: {
-        user: {
-            name: null,
-            email: null,
-        },
-        token: null,
-        isLoggedIn: false,
-        isRefreshing: false,
-        isLoading: false,
-        error: null,
-        isModalOpen: false,
+  name: 'auth',
+  initialState: {
+    user: {
+      name: null,
+      email: null,
+    },
+    token: null,
+    isLoggedIn: false,
+    isRefreshing: false,
+    isLoading: false,
+    error: null,
+    isModalOpen: false,
   },
-    
+
   reducers: {
     openModal: state => {
       state.isModalOpen = true;
@@ -25,7 +24,7 @@ const authSlice = createSlice({
       state.isModalOpen = false;
     },
 
-  extraReducers: builder =>
+    extraReducers: builder =>
       builder
         // Register
         .addCase(register.pending, state => {
@@ -75,7 +74,7 @@ const authSlice = createSlice({
           state.isLoading = false;
           state.error = action.payload || action.error.message;
         })
-      // Refresh User
+        // Refresh User
         .addCase(refreshUser.pending, state => {
           state.isRefreshing = true;
         })
@@ -87,6 +86,7 @@ const authSlice = createSlice({
         .addCase(refreshUser.rejected, state => {
           state.isRefreshing = false;
         }),
-  }
-});export const { openModal, closeModal } = authSlice.actions;
+  },
+});
+export const { openModal, closeModal } = authSlice.actions;
 export default authSlice.reducer;
