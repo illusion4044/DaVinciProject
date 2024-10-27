@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { openDailyModal } from '../../redux/water/slice.js';
 import DailyNormaModal from '../DailyNormaModal/DailyNormaModal.jsx';
 import { useState } from 'react';
+import css from './DailyNorma.module.css';
+import { selectDailyNormaPortions } from '../../redux/water/selectors.js';
 
 export default function DailyNorma() {
-  const mlLiters = useSelector(state => state.water.dailyPortions);
+  const mlLiters = useSelector(selectDailyNormaPortions);
+  console.log(mlLiters);
   const liters = mlLiters / 1000;
   const dispatch = useDispatch();
 
@@ -19,11 +21,17 @@ export default function DailyNorma() {
   };
 
   return (
-    <div>
-      <h4>My daily Norma</h4>
-      <p>DailyNorma: {liters} L</p>
-      <button onClick={() => dispatch(openDailyModal())}>Edit</button>
-      {isModalOpen && <DailyNormaModal onClose={closeDailyModal} />}
+    <div className={css.container}>
+      <div className={css.containerName}>
+        <p className={css.title}>My daily Norma</p>
+      </div>
+      <div className={css.containerLiters}>
+        <p className={css.nameLiters}> {liters} L</p>
+        <p className={css.btn} onClick={() => dispatch(openDailyModal())}>
+          Edit
+        </p>
+        {isModalOpen && <DailyNormaModal onClose={closeDailyModal} />}
+      </div>
     </div>
   );
 }
