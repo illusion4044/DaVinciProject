@@ -4,12 +4,16 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { SharedLayout } from '../SharedLayout/SharedLayout';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsRefreshing, selectUser } from '../../redux/auth/selectors';
-import { refreshUser } from '../../redux/auth/operations';
+import {
+  selectIsRefreshing,
+  selectUser,
+  selectToken,
+} from '../../redux/auth/selectors';
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Loader from '../Loader/Loader';
 import WhyDrinkWater from '../WhyDrinkWater/WhyDrinkWater.jsx';
+import { getCurrentUser } from '../../redux/users/operations';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const SigninPage = lazy(() => import('../../pages/SigninPage/SigninPage'));
@@ -18,12 +22,12 @@ const WelcomePage = lazy(() => import('../../pages/WelcomePage/WelcomePage'));
 
 export default function App() {
   const dispatch = useDispatch();
-  const userToken = useSelector(selectUser);
+  const userToken = useSelector(selectToken);
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     if (userToken) {
-      dispatch(refreshUser());
+      dispatch(getCurrentUser());
     }
   }, [dispatch, userToken]);
 
