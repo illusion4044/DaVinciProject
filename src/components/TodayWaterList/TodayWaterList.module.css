@@ -14,7 +14,7 @@
 }
 
 .container {
-  width: 264px;
+  width: 280px;
   min-height: 258px;
   gap: 24px;
   box-shadow: 0px 4px 14px 0px #407bff4d;
@@ -62,4 +62,26 @@
 .containerBtn {
   padding-top: 24px;
   padding-bottom: 24px;
+}
+
+.scrollContainer {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  width: 4px;
+  height: 168px;
+}
+
+.scrollContainer::-webkit-scrollbar-track {
+  background: #d7e3ff;
+  border-radius: 8px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+  background: #9ebbff;
+  border-radius: 8px;
+  width: 4px;
+  height: 100px;
 }
