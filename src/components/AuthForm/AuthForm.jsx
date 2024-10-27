@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useId } from 'react';
 import * as yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { toast } from 'react-hot-toast';
+import  toast  from 'react-hot-toast';
 
 import { PiEyeLight } from 'react-icons/pi';
 import { PiEyeSlash } from 'react-icons/pi';
@@ -71,7 +71,6 @@ const AuthForm = () => {
           .unwrap()
           .then(() => {
             toast.success('Login success!');
-            console.log(toast);
           })
           .catch(e => {
             console.error('Login error: ', e);
