@@ -3,31 +3,20 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { selectUser } from '../../redux/auth/selectors';
+import { selectUserInfo } from '../../redux/users/selectors';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
-
-// import userImage from '../../img/setting_modal-img/userPhoto1x.jpg';
-import { uploadUserPhoto, updateUserInfo } from '../../redux/users/operations';
-import Loader from '../Loader/Loader.jsx';
 import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
 
 
 
 const UserSchema = Yup.object().shape({
   gender: Yup.string().required('Please select your gender'),
-
   name: Yup.string()
     .min(2, 'Minimum 2 characters')
-    .max(32, 'Maximum 32 characters')
-    .notRequired(),
-
-  email: Yup.string().email('Invalid email').notRequired(),
-
-  password: Yup.string()
-    .min(8, 'Password must be at least 8 characters long')
-    .notRequired(),
-
+    .max(32, 'Maximum 32 characters'),
+  email: Yup.string().email('Invalid email'),
+  password: Yup.string().min(8, 'Password must be at least 8 characters long'),
   newPassword: Yup.string()
     .min(8, 'New password must be at least 8 characters long')
     .when('password', {
@@ -36,7 +25,6 @@ const UserSchema = Yup.object().shape({
         'New password is required if old password is provided'
       ),
     }),
-
   repeatNewPassword: Yup.string()
     .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
     .when('password', {
@@ -49,13 +37,17 @@ const UserSchema = Yup.object().shape({
 
 export default function SettingModal({ closeModal }) {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.user);
-  const isLoading = useSelector(state => state.auth.isLoading);
+  const user = useSelector(selectUserInfo);
+  const isLoading = useSelector(state => state.users.isLoading);
   const [showPassword, setShowPassword] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [previewPhotoUrl, setPreviewPhotoUrl] = useState(
-    user.photo || userImage
+    user?.photo || userImage
   );
+
+  useEffect(() => {
+    setPreviewPhotoUrl(user.photo || userImage);
+  }, [user.photo]);
 
   useEffect(() => {
     const handleKeyDown = e => {
@@ -63,9 +55,7 @@ export default function SettingModal({ closeModal }) {
         closeModal();
       }
     };
-
     document.addEventListener('keydown', handleKeyDown);
-
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
@@ -79,60 +69,23 @@ export default function SettingModal({ closeModal }) {
     }
   };
 
-  // const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-  //   try {
-  //     const userData = {
-  //       ...values,
-  //       token: user.token,
-  //     };
-
-  //     if (selectedPhoto) {
-  //       await dispatch(
-  //         uploadUserPhoto({ photo: selectedPhoto, token: user.token })
-  //       ).unwrap();
-  //     }
-
-  //     if (
-  //       values.name !== user.name ||
-  //       values.email !== user.email ||
-  //       values.gender !== user.gender ||
-  //       values.password
-  //     ) {
-  //       await dispatch(updateUserInfo({ ...userData, id: user._id })).unwrap();
-  //     }
-
-  //     toast.success('Settings updated successfully');
-  //     closeModal();
-  //   } catch (error) {
-  //     toast.error('Failed to update settings');
-  //     setErrors({ submit: error.message });
-  //   } finally {
-  //     setSubmitting(false);
-  //   }
-  // };
-
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      const userData = {
-        ...values,
-        token: user.token,
-      };
+      const userData = { ...values, token: user?.token };
 
       if (selectedPhoto) {
         await dispatch(
-          uploadUserPhoto({ photo: selectedPhoto, token: user.token })
+          uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
         ).unwrap();
       }
-
       if (
-        values.name !== user.name ||
-        values.email !== user.email ||
-        values.gender !== user.gender ||
+        values.name !== user?.name ||
+        values.email !== user?.email ||
+        values.gender !== user?.gender ||
         values.password
       ) {
-        await dispatch(updateUserInfo({ ...userData, id: user._id })).unwrap();
+        await dispatch(updateUserInfo({ ...userData, id: user?._id })).unwrap();
       }
-
       toast.success('Settings updated successfully');
       closeModal();
     } catch (error) {
@@ -168,7 +121,6 @@ export default function SettingModal({ closeModal }) {
         </div>
 
         <p className={css.subheaderYourPhoto}>Your photo</p>
-
         <div className={css.wrapImageUpload}>
           <img
             className={css.userImg}
@@ -185,7 +137,6 @@ export default function SettingModal({ closeModal }) {
             </svg>
             <span className={css.uploadText}>Upload a photo</span>
           </button>
-
           <input
             id="fileInput"
             type="file"
@@ -197,9 +148,9 @@ export default function SettingModal({ closeModal }) {
 
         <Formik
           initialValues={{
-            gender: user.gender || 'woman',
-            name: user.name || '',
-            email: user.email || '',
+            gender: user?.gender || 'woman',
+            name: user?.name || '',
+            email: user?.email || '',
             password: '',
             newPassword: '',
             repeatNewPassword: '',
@@ -231,7 +182,6 @@ export default function SettingModal({ closeModal }) {
                   </div>
 
                   <p className={css.subheaderYourName}>Your name</p>
-
                   <div className={css.formGroup}>
                     <Field
                       className={css.inputName}
@@ -247,7 +197,6 @@ export default function SettingModal({ closeModal }) {
                   </div>
 
                   <p className={css.subheaderEmail}>E-mail</p>
-
                   <div className={css.formGroup}>
                     <Field
                       className={css.inputEmail}
@@ -265,7 +214,6 @@ export default function SettingModal({ closeModal }) {
 
                 <div className={css.rightColumn}>
                   <p className={css.subheaderPassword}>Password</p>
-
                   <div className={css.passwordFormGroup}>
                     <label htmlFor="password">Outdated password:</label>
                     <div className={css.modalInputWrap}>

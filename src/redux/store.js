@@ -14,11 +14,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-// Add the persist configuration for the users slice
 const usersPersistConfig = {
   key: 'users',
   storage,
-  whitelist: ['items'], // Add whitelist the part of the state we want to persist (e.g., user info)
+  whitelist: ['user'],
 };
 
 const authPersistConfig = {
@@ -35,12 +34,12 @@ const waterPersistConfig = {
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authSlice);
 const persistedWaterReducer = persistReducer(waterPersistConfig, waterReducer);
-const persistedUsersReducer = persistReducer(usersPersistConfig, usersSlice); // Add persistedUsersReducer
+const persistedUsersReducer = persistReducer(usersPersistConfig, usersSlice);
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    users: persistedUsersReducer, // Use the persisted users reducer
+    users: persistedUsersReducer,
     filters: filtersSlice,
     water: persistedWaterReducer,
   },

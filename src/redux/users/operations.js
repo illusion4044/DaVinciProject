@@ -30,7 +30,7 @@ axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
 // );
 
 export const uploadUserPhoto = createAsyncThunk(
-  'user/uploadPhoto',
+  'users/uploadPhoto',
   async ({ photo, token }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
@@ -43,44 +43,32 @@ export const uploadUserPhoto = createAsyncThunk(
         },
       };
 
-      const response = await axios.post(
-        `${API_URL}/users/photo`,
-        formData,
-        config
-      );
-
-      if (response.status === 200) {
-        return response.data;
-      }
+      const response = await axios.post('/users/photo', formData, config);
+      return response.data;
     } catch (error) {
-      if (error.response) {
-        if (error.response.status === 401) {
-          return rejectWithValue('Unauthorized. Please log in.');
-        }
-        if (error.response.status === 404) {
-          return rejectWithValue('User not found.');
-        }
-        if (error.response.status === 500) {
-          return rejectWithValue('Server error. Please try again later.');
-        }
-      }
-      return rejectWithValue('Failed to upload photo.');
+      const message =
+        error.response?.status === 401
+          ? 'Unauthorized. Please log in.'
+          : error.response?.status === 404
+          ? 'User not found.'
+          : 'Failed to upload photo.';
+      return rejectWithValue(message);
     }
   }
 );
 
 export const updateUserInfo = createAsyncThunk(
-  'user/updateInfo',
+  'users/updateInfo',
   async (
     { id, name, email, gender, password, newPassword, token },
     { rejectWithValue }
   ) => {
     try {
-      const data = {};
-      if (name) data.name = name;
-      if (email) data.email = email;
-      if (gender) data.gender = gender;
-
+      const data = {
+        ...(name && { name }),
+        ...(email && { email }),
+        ...(gender && { gender }),
+      };
       if (password && newPassword) {
         data.password = password;
         data.newPassword = newPassword;
@@ -93,48 +81,16 @@ export const updateUserInfo = createAsyncThunk(
         },
       };
 
-      const response = await axios.patch(
-        `${API_URL}/users/${id}`,
-        data,
-        config
-      );
-
-      if (response.status === 200) {
-        return response.data;
-      }
+      const response = await axios.patch(`/users/${id}`, data, config);
+      return response.data;
     } catch (error) {
-      if (error.response) {
-        if (error.response.status === 400) {
-          return rejectWithValue(
-            'New password cannot be the same as the old password.'
-          );
-        }
-        if (error.response.status === 401) {
-          return rejectWithValue('Unauthorized access. Please log in again.');
-        }
-        if (error.response.status === 404) {
-          return rejectWithValue('User not found.');
-        }
-        if (error.response.status === 500) {
-          return rejectWithValue(
-            'Internal Server Error. Please try again later.'
-          );
-        }
-      }
-      return rejectWithValue('Failed to update user information.');
+      const message =
+        error.response?.status === 400
+          ? 'New password cannot be the same as the old password.'
+          : error.response?.status === 401
+          ? 'Unauthorized access. Please log in again.'
+          : 'Failed to update user information.';
+      return rejectWithValue(message);
     }
   }
 );
-
-export const getUser = createAsyncThunk('users', async (token, thunkAPI) => {
-  try {
-    const response = await axios.get('/users', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
-  }
-});

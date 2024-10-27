@@ -88,6 +88,8 @@ const authSlice = createSlice({
           state.isRefreshing = false;
         }),
   },
-);
+
+});
+
 export const { openModal, closeModal } = authSlice.actions;
 export default authSlice.reducer;
