@@ -1,4 +1,8 @@
 .dailyStatsContainer{
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translate(-50%);
   width: 280px;
   border-radius: 10px;
   padding: 24px 13px;
@@ -8,17 +12,24 @@
   font-size: 16px;
   line-height: 1.25;
   box-shadow: 0px 4px 4px 0px #407BFF4D;
+  background-color: #FFFFFF;
 
   @media (min-width: 768px){
       width: 292px;
       padding: 24px 16px;
+      left: 0px;
+      transform: translate(0);
   };
 
+  @media (min-width: 1440px){
+      left: -27px;
+  }
 }
 
 .containerTitle{
   color: #407BFF;
   font-weight: 400;
+  text-align: start;
 }
 
 .statContainer{
