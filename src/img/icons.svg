@@ -68,5 +68,9 @@
 <symbol id="icon-Vector" viewBox="0 0 32 32">
 <path fill="none" stroke="#ef5050" style="stroke: var(--color1, #ef5050)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M20.871 8l-0.615 16M11.744 24l-0.615-16M28.85 2.293c0.608 0.092 1.212 0.19 1.817 0.295M28.85 2.293l-1.899 24.681c-0.078 1.005-0.532 1.943-1.271 2.628s-1.71 1.065-2.718 1.065h-13.924c-1.008 0-1.979-0.38-2.718-1.065s-1.194-1.623-1.271-2.628l-1.899-24.681M28.85 2.293c-2.052-0.31-4.114-0.546-6.183-0.706M3.15 2.293c-0.608 0.091-1.212 0.188-1.817 0.293M3.15 2.293c2.052-0.31 4.114-0.546 6.183-0.706M22.667 1.588v-1.628c0-2.098-1.618-3.847-3.716-3.913-1.967-0.063-3.935-0.063-5.902 0-2.098 0.066-3.716 1.817-3.716 3.913v1.628M22.667 1.588c-4.438-0.343-8.896-0.343-13.333 0"></path>
 </symbol>
+<symbol id="icon-outline" viewBox="0 0 32 32">
+<path fill="none" stroke="#407bff" style="stroke: var(--color1, #407bff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 8v16M24 16h-16"></path>
+</symbol>
+
   </defs>
 </svg>

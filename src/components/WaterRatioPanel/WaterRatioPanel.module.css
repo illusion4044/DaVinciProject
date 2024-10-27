@@ -89,13 +89,6 @@
   margin-top: 40px;
 }
 
-.icon {
-  width: 18px;
-  height: 18px;
-  fill: transparent;
-  stroke: #ffffff;  
-}
-
 @media screen and (min-width: 768px) {
   .container {
     width: 704px;

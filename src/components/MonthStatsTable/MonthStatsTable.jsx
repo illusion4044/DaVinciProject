@@ -1,90 +1,74 @@
 import React, { useState } from 'react';
-import styles from './MonthStatsTable.module.css'; // Імпорт стилів
-import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats'; 
+import styles from './MonthStatsTable.module.css';
+import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
-// Компонент для пагінації місяців
-const MonthPaginator = ({ selectedMonth, onMonthChange }) => {
-  const currentMonth = new Date().getMonth();
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  const handlePrevMonth = () => {
-    if (selectedMonth > 0) {
-      onMonthChange(selectedMonth - 1);
-    }
-  };
-
-  const handleNextMonth = () => {
-    if (selectedMonth < currentMonth) {
-      onMonthChange(selectedMonth + 1);
-    }
-  };
-
-  return (
-    <div className={styles.monthPaginator}>
-      <button onClick={handlePrevMonth} disabled={selectedMonth === 0} className={styles.paginatorButton}> Prev</button>
-      <span className={styles.monthDisplay}>{months[selectedMonth]}</span>
-      {selectedMonth < currentMonth && (
-        <button onClick={handleNextMonth} className={styles.paginatorButton}>Next </button>
-      )}
-    </div>
-  );
-};
-
-// Компонент для переліку днів місяця
-const DaysList = ({ selectedMonth, daysStats, onDayClick, highlightedDay }) => {
-  const daysInMonth = new Date(new Date().getFullYear(), selectedMonth + 1, 0).getDate();
-
-  return (
-    <div className={styles.daysList}>
-      {[...Array(daysInMonth)].map((_, day) => {
-        const dayStats = daysStats[day + 1] || { water: 0 };
-        const isHighlighted = dayStats.water < 100; // Якщо план не виконано
-        return (
-          <div
-            key={day}
-            className={`${styles.dayBlock} ${isHighlighted ? styles.highlighted : ''}`}
-            onClick={() => onDayClick(day + 1)}
-          >
-            <span>{day + 1}</span>
-            <span>Water: {dayStats.water}%</span>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-// Головний компонент сторінки
 const MonthStatsTable = () => {
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+  const currentDate = new Date();
+  const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth());
   const [selectedDay, setSelectedDay] = useState(null);
-  const [daysStats, setDaysStats] = useState({
-    // Приклад даних по днях
-    1: { water: 75 },
-    2: { water: 100 },
-    3: { water: 90 },
-    // ...
-  });
 
-  const handleMonthChange = (month) => {
-    setSelectedMonth(month);
-    setSelectedDay(null); // Скинути вибір дня при зміні місяця
+  // Приклад даних для виконання норми по дням
+  const stats = Array.from({ length: getDaysInMonth(selectedMonth, currentDate.getFullYear()) }, (_, day) => ({
+    day: day + 1,
+    waterPercentage: Math.floor(Math.random() * 100),
+    dailyNorma: 2000, // Наприклад, 2000 мл норми в день
+    servings: Math.floor(Math.random() * 10) + 1,
+  }));
+
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June', 
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const handleMonthChange = (direction) => {
+    if (direction === 'prev' && selectedMonth > 0) {
+      setSelectedMonth(selectedMonth - 1);
+    } else if (direction === 'next' && selectedMonth < currentDate.getMonth()) {
+      setSelectedMonth(selectedMonth + 1);
+    }
   };
 
-  const handleDayClick = (day) => {
-    setSelectedDay(day);
-  };
+  function getDaysInMonth(month, year) {
+    return new Date(year, month + 1, 0).getDate();
+  }
 
   return (
     <div className={styles.monthStatsTable}>
-      <MonthPaginator selectedMonth={selectedMonth} onMonthChange={handleMonthChange} />
-      <DaysList
-        selectedMonth={selectedMonth}
-        daysStats={daysStats}
-        onDayClick={handleDayClick}
-        highlightedDay={selectedDay}
-      />
-      {selectedDay && <DaysGeneralStats day={selectedDay} stats={daysStats[selectedDay]} />}
+      {/* Пагінатор для вибору місяців */}
+      <h2>Month</h2>
+      <div className={styles.paginator}>
+        <button onClick={() => handleMonthChange('prev')} disabled={selectedMonth === 0}>
+          ←
+        </button>
+        <span>{months[selectedMonth]} {currentDate.getFullYear()}</span>
+        {selectedMonth < currentDate.getMonth() && (
+          <button onClick={() => handleMonthChange('next')}>→</button>
+        )}
+      </div>
+
+      {/* Список днів з виконанням норми */}
+      <div className={styles.daysList}>
+        {stats.map((dayStat) => (
+          <div
+            key={dayStat.day}
+            className={`${styles.dayBlock} ${dayStat.waterPercentage < 100 ? styles.incomplete : ''}`}
+            onClick={() => setSelectedDay(dayStat)}
+          >
+            <span className={styles.dayNumber}>{dayStat.day}</span>
+            <span className={styles.dayPercentage}>{dayStat.waterPercentage}%</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Детальна статистика для вибраного дня */}
+      {selectedDay && (
+        <DaysGeneralStats
+          chosenDay={`${selectedDay.day}.${selectedMonth + 1}.${currentDate.getFullYear()}`}
+          dailyNorma={`${selectedDay.dailyNorma} ml`}
+          normFulfillment={`${selectedDay.waterPercentage}%`}
+          servings={selectedDay.servings}
+        />
+      )}
     </div>
   );
 };

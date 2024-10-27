@@ -33,3 +33,19 @@
     background-image: url('../../img/main-page-img/backgroundMainPageTabl2x.jpg'); /* Планшет фон 2x */
   }
 }
+
+@media (min-width: 1440px) {
+  .welcomePage {
+    background-image: url('../../img/main-page-img/main-page-desktop-1x.jpg'); /* Десктопное изображение 1x */
+    width: 1440px;
+    height: 740px;
+    padding: 80px 213px 294px 213px;
+  }
+}
+
+@media (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2),
+  (min-width: 1440px) and (min-resolution: 192dpi) {
+  .welcomePage {
+    background-image: url('../../img/main-page-img/main-page-desktop-2x.jpg'); /* Десктопное изображение 2x */
+  }
+}

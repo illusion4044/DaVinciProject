@@ -23,6 +23,7 @@ const authSlice = createSlice({
     closeModal: state => {
       state.isModalOpen = false;
     },
+  },
 
     extraReducers: builder =>
       builder
@@ -47,8 +48,8 @@ const authSlice = createSlice({
           state.error = null;
         })
         .addCase(logIn.fulfilled, (state, action) => {
-          state.user = action.payload.user;
-          state.token = action.payload.token;
+          state.user = action.payload;
+          state.token = action.payload.data;
           state.isLoggedIn = true;
           state.isLoading = false;
         })
@@ -87,6 +88,8 @@ const authSlice = createSlice({
           state.isRefreshing = false;
         }),
   },
+
 });
+
 export const { openModal, closeModal } = authSlice.actions;
 export default authSlice.reducer;

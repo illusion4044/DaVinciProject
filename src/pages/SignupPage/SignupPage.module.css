@@ -1,0 +1,47 @@
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.signinpage {
+    padding-bottom: 240px;
+    background-image: url("../../img/signInImg/backgroundSignPageMob1x.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    max-width: 312px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 0 auto 48px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageTab1x.jpg');
+        /* Планшет фон 1x */
+        max-width: 736px;
+        margin: 40 auto 44px;
+        padding-top: 16px;
+    }
+}
+
+
+@media screen and (min-width: 1440px) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageDesk1x.jpg');
+        /* Десктоп фон 1x */
+        max-width: 1440px;
+        margin: 0 auto 44px;
+    }
+}
+
+/*@media (min-width: 1440px) {
+    .signInPageContainer {
+        display: flex;
+        flex-direction: column;
+    }
+}
+*/

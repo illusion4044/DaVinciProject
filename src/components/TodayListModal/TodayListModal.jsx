@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDailyNorma, selectSelectedItem } from '../../redux/water/selectors.js';
+import {
+  selectDailyNorma,
+  selectSelectedItem,
+} from '../../redux/water/selectors.js';
 import { useEffect, useState } from 'react';
-/* import TimePicker from 'react-time-picker'; */
+
 import {
   fetchDailyPortionsThunk,
   fetchMonthlyPortionsThunk,
   updatePortionThunk,
 } from '../../redux/water/operations.js';
-import css from './TodayListModal.module.css'
+import css from './TodayListModal.module.css';
+import dayjs from 'dayjs';
 
 export default function TodayListModal({ onClose }) {
   const dispatch = useDispatch();
@@ -17,12 +21,7 @@ export default function TodayListModal({ onClose }) {
   const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
   const [inputValue, setInputValue] = useState(count);
   const [selectedTime, setSelectedTime] = useState(
-    selectedItem
-      ? selectedItem.time
-      : new Date().toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-        })
+    selectedItem ? selectedItem.time : dayjs().format('HH:mm')
   );
   const [isSaveDisabled, setIsSaveDisabled] = useState(
     count <= 0 || count > 1500
@@ -48,7 +47,7 @@ export default function TodayListModal({ onClose }) {
   };
 
   const handleInputChange = event => {
-   const value = event.target.value;
+    const value = event.target.value;
     setInputValue(value);
   };
 
@@ -61,7 +60,7 @@ export default function TodayListModal({ onClose }) {
       setCount(value);
       setIsSaveDisabled(false);
     } else {
-      setIsSaveDisabled(true); 
+      setIsSaveDisabled(true);
     }
   };
 
@@ -93,7 +92,6 @@ export default function TodayListModal({ onClose }) {
 
     console.log(payload);
 
-
     dispatch(updatePortionThunk(payload)).then(() => {
       const currentDate = getCurrentData();
       dispatch(fetchDailyPortionsThunk(currentDate));
@@ -104,6 +102,19 @@ export default function TodayListModal({ onClose }) {
   useEffect(() => {
     setCount(selectedItem ? selectedItem.amount : 0);
   }, [selectedItem]);
+
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 0; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 5) {
+        const time = dayjs().hour(hour).minute(minute).format('HH:mm');
+        options.push(time);
+      }
+    }
+    return options;
+  };
+
+  const timeOptions = generateTimeOptions();
 
   return (
     <div className={css.modalContainer} onClick={handleBackdropClick}>
@@ -153,21 +164,17 @@ export default function TodayListModal({ onClose }) {
         <div>
           <div className={css.recording}>
             <label className={css.timeText}>Recording time:</label>
-
-         {/*    <TimePicker
-              onChange={setSelectedTime}
-              value={selectedTime}
-              format="HH:mm"
-              disableClock={true}
-              clearIcon={null}
-              clockIcon={null}
-            /> */}
-            <input
+            <select
               className={css.timeInput}
-              type="time"
               value={selectedTime}
               onChange={event => setSelectedTime(event.target.value)}
-            />
+            >
+              {timeOptions.map(time => (
+                <option key={time} value={time}>
+                  {time}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
@@ -197,4 +204,4 @@ export default function TodayListModal({ onClose }) {
       </div>
     </div>
   );
-};
+}

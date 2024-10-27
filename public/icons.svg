@@ -83,6 +83,12 @@
 <symbol id="icon-calendar" viewBox="0 0 32 32">
 <path fill="none" stroke="#407bff" style="stroke: var(--color1, #407bff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4615" d="M7.385 1.231v3.692M24.615 1.231v3.692M1.231 27.077v-18.462c0-0.979 0.389-1.918 1.081-2.611s1.632-1.081 2.611-1.081h22.154c0.979 0 1.918 0.389 2.611 1.081s1.081 1.632 1.081 2.611v18.462M1.231 27.077c0 0.979 0.389 1.918 1.081 2.611s1.632 1.081 2.611 1.081h22.154c0.979 0 1.918-0.389 2.611-1.081s1.081-1.632 1.081-2.611M1.231 27.077v-12.308c0-0.979 0.389-1.918 1.081-2.611s1.632-1.081 2.611-1.081h22.154c0.979 0 1.918 0.389 2.611 1.081s1.081 1.632 1.081 2.611v12.308M16 17.231h0.013v0.013h-0.013v-0.013zM16 20.923h0.013v0.013h-0.013v-0.013zM16 24.615h0.013v0.013h-0.013v-0.013zM12.308 20.923h0.013v0.013h-0.013v-0.013zM12.308 24.615h0.013v0.013h-0.013v-0.013zM8.615 20.923h0.013v0.013h-0.013v-0.013zM8.615 24.615h0.013v0.013h-0.013v-0.013zM19.692 17.231h0.013v0.013h-0.013v-0.013zM19.692 20.923h0.013v0.013h-0.013v-0.013zM19.692 24.615h0.013v0.013h-0.013v-0.013zM23.385 17.231h0.013v0.013h-0.013v-0.013zM23.385 20.923h0.013v0.013h-0.013v-0.013z"></path>
 </symbol>
+<symbol id="icon-Vector" viewBox="0 0 32 32">
+<path fill="none" stroke="#407bff" style="stroke: var(--color1, #407bff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4.5714" d="M16 2.286v27.429M29.714 16h-27.429"></path>
+</symbol>
+<symbol id="icon-outline" viewBox="0 0 32 32">
+<path fill="none" stroke="#407bff" style="stroke: var(--color1, #407bff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 8v16M24 16h-16"></path>
+</symbol>
 
   </defs>
 </svg>

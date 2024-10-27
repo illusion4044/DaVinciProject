@@ -9,3 +9,13 @@
     gap: 60px;
   }
 }
+
+@media only screen and (min-width: 1440px) {
+  .mainWraper {
+    gap: 81px;
+    flex-direction: row;
+    width: 1014px;
+    height: 366px;
+    position: relative;
+  }
+}
