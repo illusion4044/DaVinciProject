@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { setAuthHeader } from '../../redux/auth/operations';
 
 const API_URL = 'https://dark-side-of-the-app01.onrender.com';
 
@@ -67,6 +68,27 @@ export const updateUserInfo = createAsyncThunk(
           ? 'Unauthorized access. Please log in again.'
           : 'Failed to update user information.';
       return rejectWithValue(message);
+    }
+  }
+);
+
+export const getCurrentUser = createAsyncThunk(
+  'users/current',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('No token found');
+    }
+
+    setAuthHeader(persistedToken);
+
+    try {
+      const response = await axios.get('/users');
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );

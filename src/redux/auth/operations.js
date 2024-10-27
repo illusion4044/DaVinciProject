@@ -4,7 +4,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -36,7 +36,7 @@ export const logIn = createAsyncThunk(
         password: password,
       });
       console.log(response.data);
-      const token = response.data.accessToken;
+      const token = response.data.data.accessToken;
 
       setAuthHeader(token);
       return response.data;

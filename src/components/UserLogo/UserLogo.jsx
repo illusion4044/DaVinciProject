@@ -2,7 +2,11 @@ import React from 'react';
 import css from './UserLogo.module.css';
 import { useState } from 'react';
 import { UserLogoModal } from '../../components/UserLogoModal/UserLogoModal';
-export default function UserLogo({ user }) {
+import { selectUserInfo } from '../../redux/users/selectors';
+import { useSelector } from 'react-redux';
+
+export default function UserLogo() {
+  const user = useSelector(selectUserInfo);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -18,7 +22,9 @@ export default function UserLogo({ user }) {
 
     const firstLetter = user.name
       ? user.name[0].toUpperCase()
-      : user.email[0].toUpperCase();
+      : user.email
+      ? user.email[0].toUpperCase()
+      : 'U';
     return <div className={css.user_avatar_placeholder}>{firstLetter}</div>;
   };
   return (
