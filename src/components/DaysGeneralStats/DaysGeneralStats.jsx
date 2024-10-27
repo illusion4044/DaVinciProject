@@ -14,13 +14,13 @@ const DaysGeneralStats = ({
   }
 
   const convertedDate = convertFormat(chosenDay);
-
+  const convertedDailyNorma = parseInt(dailyNorma)/1000;
   return (
      <div className={css.dailyStatsContainer}>
       <h3 className={css.containerTitle}>{convertedDate}</h3>
       <span className={css.statContainer}>
         <p className={css.statsField}>Daily norma:</p>
-        <p className={css.statsValue}>{dailyNorma}</p>
+        <p className={css.statsValue}>{convertedDailyNorma} L</p>
       </span>
       <span className={css.statContainer}>
         <p className={css.statsField}>Fulfillment of the daily norm:</p>
