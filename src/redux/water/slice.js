@@ -3,7 +3,6 @@ import {
   updatePortionThunk,
   fetchMonthlyPortionsThunk,
   fetchDailyPortionsThunk,
-  fetchDailyPortion,
 } from './operations.js';
 import { number } from 'yup';
 
@@ -84,18 +83,6 @@ const waterSlice = createSlice({
       .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
-      })
-      .addCase(fetchDailyPortion.pending, state => {
-        state.isLoading = true;
-        state.isError = null;
-      })
-      .addCase(fetchDailyPortion.fulfilled, (state, action) => {
-        state.dailyPortions = action.payload.data;
-        state.isLoading = false;
-      })
-      .addCase(fetchDailyPortion.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload || action.error.message;
       });
   },
 });
@@ -104,7 +91,6 @@ export const {
   changeDailyNorma,
   changeActiveContent,
   clearNormaCounterData,
-  changeDailyPortions,
   openDailyModal,
   openTodayModal,
   closeTodayModal,

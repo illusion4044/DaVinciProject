@@ -4,31 +4,7 @@ import { setAuthHeader } from '../../redux/auth/operations';
 
 const API_URL = 'https://dark-side-of-the-app01.onrender.com';
 
-export const fetchLiters = createAsyncThunk(
-  'auth/register',
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get('/auth/register');
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 axios.defaults.baseURL = 'https://dark-side-of-the-app01.onrender.com';
-
-// export const fetchLiters = createAsyncThunk(
-//   'auth/register',
-//   async (_, thunkAPI) => {
-//     try {
-//       const response = await axios.get('/auth/register');
-//       return response.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.massage);
-//     }
-//   }
-// );
 
 export const uploadUserPhoto = createAsyncThunk(
   'users/uploadPhoto',
