@@ -39,80 +39,95 @@ img {
   height: auto;
 }
 
-.homePage {
-  background-image: url('../../img/home-screen_img/backgroundElementHomeSscreenMob1x.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  min-width: 320px;
-  /* align-items: center; */
-}
-.bottle {
-  background-image: url('../../img/home-screen_img/bottleHomeScreenMob1x.jpg');
-  width: 280px;
-  height: 208px;
-  margin: 8px 0 16px 0;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background-image: url(../../img/homeScreenImg/BottleMob1x-min.png), url(../../img/homeScreenImg/BackgroundMob1x-min.png);
+  background-repeat: no-repeat, no-repeat;
+  background-position: center 94px, center;
+  min-width: 320px;
 }
 
 @media (min-resolution: 2dppx) {
-  .homePage {
-    background-image: url('../../img/home-screen_img/backgroundEelementHomeScreenMob2x.jpg');
+  .container {
+      background-image: url(../../img/homeScreenImg/BottleMob2x-min.png), url(../../img/homeScreenImg/BackgroundMob2x-min.png)
   }
-  .bottle {
-      background-image: url('../../img/home-screen_img/bottleHomeScreenMob2x.jpg');
-    }
+}
+
+.dailyNorma {
+  margin-bottom: 232px;
+  border: 1px solid #ecf2ff;
+  border-radius: 10px;
+  padding: 8px 20px;
+  width: 164px;
+  height: 74px;
+  box-shadow: 0 4px 8px 0 rgba(158, 187, 255, 0.12);
+  background: #fff;
+}
+
+.waterRatioPanel {
+  margin-bottom: 40px;
+}
+
+.listAndTable {
+  border-radius: 10px;
+  padding: 24px 8px;
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
+  background: #ecf2ff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 @media screen and (min-width: 768px) {
-  .homePage {
-    background-image: url('../../img/home-screen_img/backgroundElementHomeScreenTabl1x.jpg');
-    padding-top: 16px;
-  }
-
-  .bottle {
-    background-image: url('../../img/home-screen_img/bottleHomeScreenTabl1x.jpg');
-    width: 518px;
-    height: 386px;
+  .container {
+    background-image: url(../../img/homeScreenImg/BottleTabl1x-min.png), url(../../img/homeScreenImg/BackgroundTab1x-min.png);
+    background-repeat: no-repeat, no-repeat;
+    background-position: center 16px, center;
+    min-width: 768px;
   }
 
     @media (min-resolution: 2dppx) {
-      .homePage {
-        background-image: url('../../img/home-screen_img/backgroundElementHomeScreenTabl2x.jpg');
-      }
-
-      .bottle {
-        background-image: url('../../img/home-screen_img/bottleHomeScreenTabl2x.jpg');
+      .container {
+        background-image: url(../../img/homeScreenImg/BottleTabl2x-min.png), url(../../img/homeScreenImg/BackgroundTab2x-min.png)
       }
     }
+
+  .dailyNorma {
+    margin-bottom: 326px;
+    height: 76px;
+  }
+
+  .listAndTable {
+    padding: 32px 24px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-  .homePage {
-    max-width: 1440px;
-  }
-  .bottle {
-    background-image: url('../../img/home-screen_img/botleHomeScreenDesc1x.jpg');
-    width: 738px;
-    height: 548px;
+  .container {
+    background-image: url(../../img/homeScreenImg/BottleDesktop1x-min.png), url(../../img/homeScreenImg/BackgroundDesktop-min.png);
+    background-repeat: no-repeat, no-repeat;
+    background-position: top left, center;
+    min-width: 1440px;
+    position: relative;
   }
 
     @media (min-resolution: 2dppx) {
-      .bottle {
-        background-image: url('../../img/home-screen_img/botleHomescreenDesc2x.jpg');
+      .container {
+        background-image: url(../../img/homeScreenImg/BottleDesktop2x-min.png), url(../../img/homeScreenImg/BackgroundDesktop2x-min.png)
       }
     }
-  .container {
-    align-items: flex-start;
+
+  .dailyNorma {
+    margin-bottom: 466px;
+  }
+
+  .waterRatioPanel {
+    width: 592px;
+  }
+
+  .listAndTable {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 592px;
   }
 }

@@ -6,14 +6,13 @@ import css from './HomePage.module.css';
 
 export default function HomePage() {
   return (
-    <div className={css.homePage}>
-      <DailyNorma className={css.dailyNorma}/>
-      <div className={css.container}>
-        <div className={css.bottle}></div>
-        <WaterRatioPanel />
-        <TodayWaterList />
-        <MonthStatsTable />
-      </div>
-    </div>
+    <div className={css.container}>
+        <div className={css.dailyNorma }><DailyNorma /></div>
+        <div className={css.waterRatioPanel}><WaterRatioPanel /></div>
+        <div className={css.listAndTable}>
+            <TodayWaterList />
+            <MonthStatsTable />
+        </div>
+        </div>
   );
 }
