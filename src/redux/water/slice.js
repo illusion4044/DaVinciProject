@@ -5,6 +5,7 @@ import {
   fetchDailyPortionsThunk,
 } from './operations.js';
 import { number } from 'yup';
+import dayjs from 'dayjs';
 
 const initialState = {
   dailyNorma: null,
@@ -16,6 +17,7 @@ const initialState = {
   isError: null,
   isOpenDailyNormaModal: false,
   isTodayModalOpen: false,
+  selectedTime: dayjs().format('HH:mm'),
 };
 
 const waterSlice = createSlice({
@@ -44,6 +46,9 @@ const waterSlice = createSlice({
     },
     closeTodayModal: state => {
       state.isTodayModalOpen = false;
+    },
+    setSelectedTime(state, action) {
+      state.selectedTime = action.payload; // Update selected time
     },
   },
   extraReducers: builder => {
@@ -94,6 +99,7 @@ export const {
   openDailyModal,
   openTodayModal,
   closeTodayModal,
+  setSelectedTime,
 } = waterSlice.actions;
 
 export default waterSlice.reducer;
