@@ -42,8 +42,10 @@ img {
 .container {
   background-image: url(../../img/homeScreenImg/BottleMob1x-min.png), url(../../img/homeScreenImg/BackgroundMob1x-min.png);
   background-repeat: no-repeat, no-repeat;
-  background-position: center 94px, center;
-  min-width: 320px;
+  background-position: center 54px, center;
+  background-size: contain, cover;
+  max-width: 320px;
+  margin-top: 52px;
 }
 
 @media (min-resolution: 2dppx) {
@@ -53,6 +55,8 @@ img {
 }
 
 .dailyNorma {
+  position: relative;
+  top: -28px;
   margin-bottom: 232px;
   border: 1px solid #ecf2ff;
   border-radius: 10px;
@@ -82,7 +86,8 @@ img {
     background-image: url(../../img/homeScreenImg/BottleTabl1x-min.png), url(../../img/homeScreenImg/BackgroundTab1x-min.png);
     background-repeat: no-repeat, no-repeat;
     background-position: center 16px, center;
-    min-width: 768px;
+    background-size: 518px 386px, cover;
+    max-width: 768px;
   }
 
     @media (min-resolution: 2dppx) {
@@ -92,6 +97,7 @@ img {
     }
 
   .dailyNorma {
+    top: 0;
     margin-bottom: 326px;
     height: 76px;
   }
@@ -106,7 +112,9 @@ img {
     background-image: url(../../img/homeScreenImg/BottleDesktop1x-min.png), url(../../img/homeScreenImg/BackgroundDesktop-min.png);
     background-repeat: no-repeat, no-repeat;
     background-position: top left, center;
-    min-width: 1440px;
+    background-size: 738px 548px, cover;
+    max-width: 1440px;
+    padding: 20px 112px 40px 112px;
     position: relative;
   }
 
@@ -117,17 +125,20 @@ img {
     }
 
   .dailyNorma {
+    margin-top: 30px;
     margin-bottom: 466px;
   }
 
   .waterRatioPanel {
     width: 592px;
+    margin-bottom: 0;
+
   }
 
   .listAndTable {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 112px;
     width: 592px;
   }
 }

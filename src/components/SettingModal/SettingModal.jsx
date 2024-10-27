@@ -7,7 +7,7 @@ import { selectUserInfo } from '../../redux/users/selectors';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
 import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
-import { updateUserInfo, uploadUserPhoto } from 'redux/users/operations';
+import { updateUserInfo, uploadUserPhoto } from '../../redux/users/operations';
 import Loader from '../../components/Loader/Loader';
 
 const UserSchema = Yup.object().shape({
