@@ -13,6 +13,6 @@ export default function HomePage() {
             <TodayWaterList />
             <MonthStatsTable />
         </div>
-        </div>
+    </div>
   );
 }
