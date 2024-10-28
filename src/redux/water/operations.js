@@ -117,8 +117,14 @@ export const addWaterPortionThunk = createAsyncThunk(
     }
 
     setAuthHeader(token);
+
+    const formattedDate = format(new Date(date), 'yyyy-MM-dd');
+
     try {
-      const response = await axios.post('/water', { date, volume });
+      const response = await axios.post('/water', {
+        date: formattedDate,
+        volume,
+      });
       return response.data.data;
     } catch (error) {
       if (error.response && error.response.data) {

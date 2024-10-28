@@ -10,7 +10,6 @@ import {
   addWaterPortionThunk,
   fetchDailyPortionsThunk,
   fetchMonthlyPortionsThunk,
-  updatePortionThunk,
 } from '../../redux/water/operations.js';
 import css from './TodayListModal.module.css';
 import dayjs from 'dayjs';
@@ -21,10 +20,7 @@ export default function TodayListModal({ onClose }) {
   const dispatch = useDispatch();
   const selectedItem = useSelector(selectSelectedItem);
 
-<<<<<<< HEAD
    const selectedTime = useSelector(selectSelectedTime);
-=======
->>>>>>> origin/main
   const dailyNorma = useSelector(selectDailyNorma) || 0;
 
   const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
@@ -128,7 +124,6 @@ const handleInputChange = event => {
     });
   };
 
-<<<<<<< HEAD
     useEffect(() => {
       setInputValue(count);
     }, [count]);
@@ -146,14 +141,10 @@ const handleInputChange = event => {
      dispatch(setSelectedTime(dayjs().format('HH:mm')));
    }
  }, [selectedItem, dispatch]);
-=======
-  useEffect(() => {
-    setCount(selectedItem ? selectedItem.amount : 0);
-    const time = selectedItem ? selectedItem.time : dayjs().format('HH:mm');
-    dispatch(setSelectedTime(time));
-  }, [selectedItem, dispatch]);
 
->>>>>>> origin/main
+   const handleTimeChange = event => {
+     dispatch(setSelectedTime(event.target.value));
+   };
 
   const generateTimeOptions = () => {
     const options = [];
@@ -236,7 +227,7 @@ const handleInputChange = event => {
           <input
             className={css.valueInput}
             type="number"
-            value={inputValue}
+            value={inputValue ?? ''}
             min={0}
             max={1500}
             onChange={handleInputChange}
