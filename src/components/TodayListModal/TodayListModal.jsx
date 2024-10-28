@@ -19,8 +19,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function TodayListModal({ onClose }) {
   const dispatch = useDispatch();
   const selectedItem = useSelector(selectSelectedItem);
-   console.log('SelectedItem at render:', selectedItem);
-   const selectedTime = useSelector(selectSelectedTime);
+
   const dailyNorma = useSelector(selectDailyNorma) || 0;
 
   const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
@@ -102,16 +101,6 @@ const handleInputChange = event => {
   };
 
   const onSaveClick = () => {
-
-     if (count <= 0) {
-       toast.error('The amount must be greater than 0 ml.');
-       return;
-     }
-     if (count > 1500) {
-       toast.error('The amount cannot exceed 1500 ml.');
-       return;
-     }
-
     const normaValue = dailyNorma?.dailyNorma || 0;
     const consumeRatio =
       normaValue && count ? ((count / normaValue) * 100).toFixed(2) : 0;
@@ -134,38 +123,25 @@ const handleInputChange = event => {
     });
   };
 
+  useEffect(() => {
+    setCount(selectedItem ? selectedItem.amount : 0);
+    const time = selectedItem ? selectedItem.time : dayjs().format('HH:mm');
+    dispatch(setSelectedTime(time));
+  }, [selectedItem, dispatch]);
 
- useEffect(() => {
-  console.log('SelectedItem changed:', selectedItem);
-   if (selectedItem && Object.keys(selectedItem).length > 0) {
-     setCount(selectedItem.amount);
-     setInputValue(selectedItem.amount);
-     dispatch(setSelectedTime(selectedItem.time));
-     setIsSaveDisabled(selectedItem.amount <= 0);
-   } else {
-     setCount(0);
-     setInputValue(0);
-     dispatch(setSelectedTime(dayjs().format('HH:mm')));
-   }
- }, [selectedItem, dispatch]);
 
-   const handleTimeChange = event => {
-     dispatch(setSelectedTime(event.target.value));
-   };
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 0; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 5) {
+        const time = dayjs().hour(hour).minute(minute).format('HH:mm');
+        options.push(time);
+      }
+    }
+    return options;
+  };
 
-   const generateTimeOptions = () => {
-     const options = [];
-     for (let hour = 0; hour < 24; hour++) {
-       for (let minute = 0; minute < 60; minute += 5) {
-         const time = dayjs().hour(hour).minute(minute).format('HH:mm');
-         options.push(time);
-       }
-     }
-     return options;
-   };
-
-   const timeOptions = generateTimeOptions();
-
+  const timeOptions = generateTimeOptions();
 
   return (
     <div className={css.modalContainer} onClick={handleBackdropClick}>
