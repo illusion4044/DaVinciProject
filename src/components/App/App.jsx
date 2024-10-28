@@ -24,6 +24,7 @@ const WelcomePage = lazy(() => import('../../pages/WelcomePage/WelcomePage'));
 export default function App() {
   const dispatch = useDispatch();
   const userToken = useSelector(selectToken);
+  console.log('userToken:', userToken);
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
@@ -65,7 +66,7 @@ export default function App() {
           <Route path="/why-drink-water" element={<WhyDrinkWater />} />
         </Route>
       </Routes>
-     < Toaster/>
+      <Toaster />
     </Suspense>
   );
 }
