@@ -6,6 +6,7 @@
 .iconPencil {
   width: 16px;
   height: 16px;
+  margin-left: 25px;
 }
 
 .iconTrash {
@@ -37,7 +38,7 @@
 
 .containerList {
   display: flex;
-  gap: 16px;
+  flex-direction: row;
   width: 254px;
   height: 26px;
   border-bottom: solid 1px #d7e3ff;
@@ -84,4 +85,10 @@
   border-radius: 8px;
   width: 4px;
   height: 100px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
 }

@@ -17,8 +17,8 @@ import { setSelectedTime } from '../../redux/water/slice.js';
 
 export default function TodayListModal({ onClose }) {
   const dispatch = useDispatch();
-   const selectedItem = useSelector(selectSelectedItem);
-   const selectedTime = useSelector(selectSelectedTime);
+  const selectedItem = useSelector(selectSelectedItem);
+  const selectedTime = useSelector(selectSelectedTime);
   const dailyNorma = useSelector(selectDailyNorma) || 0;
 
   const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
@@ -82,7 +82,6 @@ export default function TodayListModal({ onClose }) {
   };
 
   const onSaveClick = () => {
-
     const normaValue = dailyNorma?.dailyNorma || 0;
     const consumeRatio =
       normaValue && count ? ((count / normaValue) * 100).toFixed(2) : 0;
@@ -103,30 +102,28 @@ export default function TodayListModal({ onClose }) {
     });
   };
 
+  useEffect(() => {
+    setCount(selectedItem ? selectedItem.amount : 0);
+    const time = selectedItem ? selectedItem.time : dayjs().format('HH:mm');
+    dispatch(setSelectedTime(time));
+  }, [selectedItem, dispatch]);
 
- useEffect(() => {
-   setCount(selectedItem ? selectedItem.amount : 0);
-   const time = selectedItem ? selectedItem.time : dayjs().format('HH:mm');
-   dispatch(setSelectedTime(time));
- }, [selectedItem, dispatch]);
+  const handleTimeChange = event => {
+    dispatch(setSelectedTime(event.target.value));
+  };
 
-   const handleTimeChange = event => {
-     dispatch(setSelectedTime(event.target.value));
-   };
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 0; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 5) {
+        const time = dayjs().hour(hour).minute(minute).format('HH:mm');
+        options.push(time);
+      }
+    }
+    return options;
+  };
 
-   const generateTimeOptions = () => {
-     const options = [];
-     for (let hour = 0; hour < 24; hour++) {
-       for (let minute = 0; minute < 60; minute += 5) {
-         const time = dayjs().hour(hour).minute(minute).format('HH:mm');
-         options.push(time);
-       }
-     }
-     return options;
-   };
-
-   const timeOptions = generateTimeOptions();
-
+  const timeOptions = generateTimeOptions();
 
   return (
     <div className={css.modalContainer} onClick={handleBackdropClick}>

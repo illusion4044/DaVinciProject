@@ -6,31 +6,34 @@ import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import {
   selectDailyNorma,
   selectSelectedTime,
+  selectSelectedAmount,
 } from '../../redux/water/selectors.js';
 
 export default function TodayWaterList() {
   const dispatch = useDispatch();
   const isModalOpen = useSelector(state => state.water.isTodayModalOpen);
-  const water = useSelector(selectDailyNorma);
+  // const water = useSelector(selectDailyNorma);
   const time = useSelector(selectSelectedTime);
-  const { volume } = water;
-  console.log(water.dailyNorma);
+  const amount = useSelector(selectSelectedAmount);
+  // const { volume } = water;
+  // console.log(water);
   console.log(time);
+  console.log(amount);
 
   return (
     <>
       <div className={css.container}>
         <p className={css.name}>Today</p>
-        {!onSaveClick && (
+        {onSaveClick && (
           <>
             <div className={css.containerList}>
-              <ul>
-                <li className={css.amount}>{water.dailyNorma} ml</li>
-                <li className={css.amount}>{time.date}</li>
-
+              <ul className={css.list}>
                 <svg className={css.iconGlass}>
                   <use href="src/img/icons.svg#icon-Group-4"></use>
                 </svg>
+                <li className={css.amount}>{amount} ml</li>
+                <li className={css.amount}>{time} PM</li>
+
                 <svg className={css.iconPencil}>
                   <use href="/public/icons.svg#icon-Vector"></use>
                 </svg>
