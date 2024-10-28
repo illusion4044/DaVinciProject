@@ -111,5 +111,3 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
     }
   }
 );
-
-

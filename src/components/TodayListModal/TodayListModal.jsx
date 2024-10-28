@@ -20,9 +20,9 @@ export default function TodayListModal({ onClose }) {
 
   const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
   const [inputValue, setInputValue] = useState(count);
- const [selectedTime, setSelectedTime] = useState(
-   selectedItem ? selectedItem.time : dayjs().format('HH:mm')
- );
+  const [selectedTime, setSelectedTime] = useState(
+    selectedItem ? selectedItem.time : dayjs().format('HH:mm')
+  );
   const [isSaveDisabled, setIsSaveDisabled] = useState(
     count <= 0 || count > 1500
   );
@@ -81,7 +81,6 @@ export default function TodayListModal({ onClose }) {
   };
 
   const onSaveClick = () => {
-    
     const normaValue = dailyNorma?.dailyNorma || 0;
     const consumeRatio =
       normaValue && count ? ((count / normaValue) * 100).toFixed(2) : 0;
@@ -102,10 +101,10 @@ export default function TodayListModal({ onClose }) {
     });
   };
 
- useEffect(() => {
-   setCount(selectedItem ? selectedItem.amount : 0);
-   setSelectedTime(selectedItem ? selectedItem.time : dayjs().format('HH:mm'));
- }, [selectedItem]);
+  useEffect(() => {
+    setCount(selectedItem ? selectedItem.amount : 0);
+    setSelectedTime(selectedItem ? selectedItem.time : dayjs().format('HH:mm'));
+  }, [selectedItem]);
 
   const generateTimeOptions = () => {
     const options = [];
