@@ -67,10 +67,9 @@ p {
   border-radius: 10px;
   background: #fff;
   box-sizing: border-box; */
-  max-width: 320px;
+  width: 280px;
   max-height: 90vh;
   padding: 32px 12px;
-  gap: 24px;
   border-radius: 10px;
   background: #fff;
   box-sizing: border-box;
@@ -221,6 +220,8 @@ p {
   font-style: normal;
   font-weight: 400;
   line-height: 20px; /* 125% */
+  display: flex;
+  justify-content: baseline;
 }
 
 .subheaderYourName {
@@ -280,17 +281,26 @@ input::placeholder {
   margin-bottom: 12px;
 }
 
-.formGroup label {
-  margin-bottom: 8px;
-  display: block;
-}
-
 .passwordFormGroup {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
   margin-bottom: 12px;
 }
 
+.passwordFormGroup label{
+  line-height: 1.25;
+}
+
 .passwordRepeat {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
   margin-bottom: 24px;
+}
+
+.passwordRepeat label{
+  line-height: 1.25;
 }
 
 .inputOutdated,
@@ -346,8 +356,8 @@ input::placeholder {
 
 @media screen and (min-width: 768px) and (max-width: 1439px) {
   .modal {
-    min-width: 704px;
-    height: 796px;
+    width: 704px;
+    height: 860px;
     padding: 32px 24px;
   }
 
@@ -357,7 +367,7 @@ input::placeholder {
   .inputNewPassword,
   .inputRepeatNewPassword {
     width: 392px;
-    height: 48px;
+    height: 44px;
     padding: 12px 16px;
     border-radius: 6px;
     border: 1px solid #d7e3ff;
@@ -381,13 +391,14 @@ input::placeholder {
   }
 
   .userImg {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   }
 
   .uploadText {
     font-size: 16px;
   }
+
 
   .inputRepeatNewPassword {
     width: 100%;
@@ -396,6 +407,11 @@ input::placeholder {
     border-radius: 6px;
     border: 1px solid #d7e3ff;
     box-sizing: border-box;
+  }
+
+  .submitBtnWrapper {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .submitBtn {
@@ -420,8 +436,8 @@ input::placeholder {
 
 @media screen and (min-width: 1440px) {
   .modal {
-    min-width: 1008px;
-    min-height: 592px;
+    width: 1008px;
+    height: 592px;
     padding: 32px 24px;
   }
 
@@ -501,6 +517,11 @@ input::placeholder {
 
   .inputName {
     margin-bottom: 24px;
+  }
+
+  .submitBtnWrapper {
+    display: flex;
+    align-items: flex-end;
   }
 
   .submitBtnWrapper {
