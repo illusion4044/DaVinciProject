@@ -18,7 +18,7 @@ const initialState = {
   isError: null,
   isOpenDailyNormaModal: false,
   isTodayModalOpen: false,
-
+  selectedItem: {},
   selectedTime: dayjs().format('HH:mm'),
   selectedAmount: 0,
 };
@@ -47,13 +47,11 @@ const waterSlice = createSlice({
     closeTodayModal: state => {
       state.isTodayModalOpen = false;
     },
-
     setSelectedTime(state, action) {
-      state.selectedTime = action.payload; // Update selected time
+    state.selectedTime = action.payload; // Update selected time
     },
     setSelectedAmount(state, action) {
-      state.selectedAmount = action.payload; // Update selected time
-    },
+      state.selectedAmount = action.payload;
   },
   extraReducers: builder => {
     builder
@@ -114,6 +112,7 @@ export const {
   openDailyModal,
   openTodayModal,
   closeTodayModal,
+  setSelectedItem,
   setSelectedTime,
   setSelectedAmount,
 } = waterSlice.actions;
