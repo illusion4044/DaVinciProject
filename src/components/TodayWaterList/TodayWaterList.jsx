@@ -50,6 +50,7 @@ export default function TodayWaterList() {
         <p className={css.name}>Today</p>
         {!onSaveClick && (
           <>
+
             <div className={css.containerList}>
               <ul>
                 {timeOptions.map(time => (
@@ -68,6 +69,7 @@ export default function TodayWaterList() {
                   </li>
                 ))}
               </ul>
+
             </div>
           </>
         )}
