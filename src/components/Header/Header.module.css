@@ -1,8 +1,7 @@
-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   width: 100%;
   margin: 0 auto;
 }
@@ -10,20 +9,23 @@ header {
 /* Desktop (1440px) */
 @media (min-width: 1440px) {
   header {
-    max-width: 1208px;
+    padding: 12px 112px 0px 112px;
+    max-width: 1440px;
   }
 }
 
 /* Tablet (768px) */
-@media (min-width: 768px) and (max-width: 1207px) {
+@media (min-width: 768px) and (max-width: 1439px) {
   header {
-    max-width: 708px;
+    padding: 16px 32px 0px 32px;
+    max-width: 768px;
   }
 }
 
 /* Mobile (280px) */
 @media (max-width: 768px) {
   header {
-    max-width: 280px;
+    padding: 8px 20px 0px 20px;
+    max-width: 320px;
   }
 }

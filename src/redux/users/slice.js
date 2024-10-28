@@ -52,7 +52,6 @@ const usersSlice = createSlice({
       })
 
       .addCase(getCurrentUser.fulfilled, (state, action) => {
-        console.log('action.payload:', action.payload);
         state.user = { ...state.user, ...action.payload };
         state.isLoggedIn = true;
         state.isRefreshing = false;
