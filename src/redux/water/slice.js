@@ -3,12 +3,13 @@ import {
   updatePortionThunk,
   fetchMonthlyPortionsThunk,
   fetchDailyPortionsThunk,
+  updateWaterRateThunk,
 } from './operations.js';
 import { number } from 'yup';
 import dayjs from 'dayjs';
 
 const initialState = {
-  dailyNorma: null,
+  dailyNorma: 0,
   monthlyPortions: [],
   dailyPortions: [],
   percentPerDay: null,
@@ -17,6 +18,7 @@ const initialState = {
   isError: null,
   isOpenDailyNormaModal: false,
   isTodayModalOpen: false,
+
   selectedTime: dayjs().format('HH:mm'),
 };
 
@@ -35,9 +37,6 @@ const waterSlice = createSlice({
       state.isLoading = false;
       state.isError = null;
     },
-    changeDailyPortions(state, action) {
-      state.dailyPortions = action.payload;
-    },
     openDailyModal: state => {
       state.isOpenDailyNormaModal = true;
     },
@@ -47,8 +46,10 @@ const waterSlice = createSlice({
     closeTodayModal: state => {
       state.isTodayModalOpen = false;
     },
+
     setSelectedTime(state, action) {
       state.selectedTime = action.payload; // Update selected time
+
     },
   },
   extraReducers: builder => {
@@ -58,7 +59,7 @@ const waterSlice = createSlice({
         state.isError = null;
       })
       .addCase(fetchDailyPortionsThunk.fulfilled, (state, { payload }) => {
-        state.dailyNorma = payload.result.dailyWaterNorma;
+        state.dailyNorma = payload.result.dailyNorma;
         state.isLoading = false;
       })
       .addCase(fetchDailyPortionsThunk.rejected, (state, { payload }) => {
@@ -86,6 +87,17 @@ const waterSlice = createSlice({
         state.monthlyPortions = action.payload;
       })
       .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      })
+      .addCase(updateWaterRateThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(updateWaterRateThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(updateWaterRateThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       });

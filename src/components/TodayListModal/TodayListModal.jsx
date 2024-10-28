@@ -103,6 +103,7 @@ export default function TodayListModal({ onClose }) {
     });
   };
 
+
  useEffect(() => {
    setCount(selectedItem ? selectedItem.amount : 0);
    const time = selectedItem ? selectedItem.time : dayjs().format('HH:mm');
@@ -125,6 +126,7 @@ export default function TodayListModal({ onClose }) {
    };
 
    const timeOptions = generateTimeOptions();
+
 
   return (
     <div className={css.modalContainer} onClick={handleBackdropClick}>

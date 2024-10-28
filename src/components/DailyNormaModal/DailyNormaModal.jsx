@@ -80,7 +80,7 @@ export default function DailyNormaModal({ onClose }) {
     },
     validationSchema: calculateSchema,
 
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       setIsLoading(true);
       try {
         const dailyNormaLiters = Number(values.amountOfWater);
