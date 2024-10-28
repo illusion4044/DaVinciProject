@@ -48,10 +48,11 @@ const waterSlice = createSlice({
       state.isTodayModalOpen = false;
     },
     setSelectedTime(state, action) {
-    state.selectedTime = action.payload; // Update selected time
+      state.selectedTime = action.payload; // Update selected time
     },
     setSelectedAmount(state, action) {
       state.selectedAmount = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
