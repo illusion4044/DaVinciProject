@@ -35,9 +35,6 @@ const waterSlice = createSlice({
       state.isLoading = false;
       state.isError = null;
     },
-    changeDailyPortions(state, action) {
-      state.dailyPortions = action.payload;
-    },
     openDailyModal: state => {
       state.isOpenDailyNormaModal = true;
     },
