@@ -6,6 +6,7 @@ import {
   updateWaterRateThunk,
 } from './operations.js';
 import { number } from 'yup';
+import dayjs from 'dayjs';
 
 const initialState = {
   dailyNorma: 0,
@@ -17,7 +18,8 @@ const initialState = {
   isError: null,
   isOpenDailyNormaModal: false,
   isTodayModalOpen: false,
-  selectedItem: {},
+
+  selectedTime: dayjs().format('HH:mm'),
 };
 
 const waterSlice = createSlice({
@@ -44,16 +46,10 @@ const waterSlice = createSlice({
     closeTodayModal: state => {
       state.isTodayModalOpen = false;
     },
-    clearStatisticData: state => {
-      state.dailyNorma = null;
-      state.monthlyPortions = [];
-      state.dailyPortions = [];
-      state.isLoading = false;
-      state.isError = null;
-      state.selectedItem = null;
-    },
-    changeSelectedItem: (state, { payload }) => {
-      state.selectedItem = payload;
+
+    setSelectedTime(state, action) {
+      state.selectedTime = action.payload; // Update selected time
+
     },
   },
   extraReducers: builder => {
@@ -115,8 +111,7 @@ export const {
   openDailyModal,
   openTodayModal,
   closeTodayModal,
-  clearStatisticData,
-  changeSelectedItem,
+  setSelectedTime,
 } = waterSlice.actions;
 
 export default waterSlice.reducer;
