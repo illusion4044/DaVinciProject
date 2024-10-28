@@ -7,9 +7,9 @@ import {
 import { useEffect, useState } from 'react';
 
 import {
+  addWaterPortionThunk,
   fetchDailyPortionsThunk,
   fetchMonthlyPortionsThunk,
-  updatePortionThunk,
 } from '../../redux/water/operations.js';
 import css from './TodayListModal.module.css';
 import dayjs from 'dayjs';
@@ -20,6 +20,7 @@ export default function TodayListModal({ onClose }) {
   const dispatch = useDispatch();
   const selectedItem = useSelector(selectSelectedItem);
 
+   const selectedTime = useSelector(selectSelectedTime);
   const dailyNorma = useSelector(selectDailyNorma) || 0;
 
   const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
@@ -116,19 +117,34 @@ const handleInputChange = event => {
 
 
 
-    dispatch(updatePortionThunk(payload)).then(() => {
+    dispatch(addWaterPortionThunk(payload)).then(() => {
       const currentDate = getCurrentData();
       dispatch(fetchDailyPortionsThunk(currentDate));
       dispatch(fetchMonthlyPortionsThunk(currentDate));
     });
   };
 
-  useEffect(() => {
-    setCount(selectedItem ? selectedItem.amount : 0);
-    const time = selectedItem ? selectedItem.time : dayjs().format('HH:mm');
-    dispatch(setSelectedTime(time));
-  }, [selectedItem, dispatch]);
+    useEffect(() => {
+      setInputValue(count);
+    }, [count]);
 
+ useEffect(() => {
+
+   if (selectedItem && Object.keys(selectedItem).length > 0) {
+     setCount(selectedItem.amount);
+     setInputValue(selectedItem.amount);
+     dispatch(setSelectedTime(selectedItem.time));
+     setIsSaveDisabled(selectedItem.amount <= 0);
+   } else {
+     setCount(0);
+     setInputValue(0);
+     dispatch(setSelectedTime(dayjs().format('HH:mm')));
+   }
+ }, [selectedItem, dispatch]);
+
+   const handleTimeChange = event => {
+     dispatch(setSelectedTime(event.target.value));
+   };
 
   const generateTimeOptions = () => {
     const options = [];
@@ -211,7 +227,7 @@ const handleInputChange = event => {
           <input
             className={css.valueInput}
             type="number"
-            value={inputValue}
+            value={inputValue ?? ''}
             min={0}
             max={1500}
             onChange={handleInputChange}
