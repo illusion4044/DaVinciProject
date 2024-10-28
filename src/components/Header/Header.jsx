@@ -9,13 +9,13 @@ import { selectIsLoggedIn } from '../../redux/auth/selectors';
 const Header = () => {
   // Retrieve user from Redux store
   // const user = useSelector(selectUserInfo);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectUserInfo);
   return (
     <header className={css.header}>
       <a href="/home">
         <Logo />
       </a>
-      {isLoggedIn ? <UserLogo /> : <UserAuth />}
+      {user.email ? <UserLogo /> : <UserAuth />}
     </header>
   );
 };
