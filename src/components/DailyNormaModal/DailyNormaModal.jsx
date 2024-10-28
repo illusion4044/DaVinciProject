@@ -86,7 +86,7 @@ export default function DailyNormaModal({ onClose }) {
         const dailyNormaLiters = Number(values.amountOfWater);
         const dailyNormaMl = dailyNormaLiters * 1000;
 
-        const newDailyNorma = { dailyNorma: dailyNormaMl };
+        const newDailyNorma = { dailyNorm: dailyNormaMl };
         const currentDate = getCurrentDate();
 console.log(newDailyNorma);
 
