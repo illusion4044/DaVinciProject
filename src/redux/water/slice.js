@@ -4,6 +4,7 @@ import {
   fetchMonthlyPortionsThunk,
   fetchDailyPortionsThunk,
   updateWaterRateThunk,
+  addWaterPortionThunk,
 } from './operations.js';
 import { number } from 'yup';
 import dayjs from 'dayjs';
@@ -99,6 +100,18 @@ const waterSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateWaterRateThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      })
+      .addCase(addWaterPortionThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(addWaterPortionThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.dailyPortions.push(action.payload);
+      })
+      .addCase(addWaterPortionThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       });

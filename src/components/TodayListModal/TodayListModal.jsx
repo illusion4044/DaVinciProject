@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from 'react';
 
 import {
+  addWaterPortionThunk,
   fetchDailyPortionsThunk,
   fetchMonthlyPortionsThunk,
   updatePortionThunk,
@@ -19,7 +20,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function TodayListModal({ onClose }) {
   const dispatch = useDispatch();
   const selectedItem = useSelector(selectSelectedItem);
-   console.log('SelectedItem at render:', selectedItem);
+
    const selectedTime = useSelector(selectSelectedTime);
   const dailyNorma = useSelector(selectDailyNorma) || 0;
 
@@ -127,16 +128,19 @@ const handleInputChange = event => {
 
 
 
-    dispatch(updatePortionThunk(payload)).then(() => {
+    dispatch(addWaterPortionThunk(payload)).then(() => {
       const currentDate = getCurrentData();
       dispatch(fetchDailyPortionsThunk(currentDate));
       dispatch(fetchMonthlyPortionsThunk(currentDate));
     });
   };
 
+    useEffect(() => {
+      setInputValue(count);
+    }, [count]);
 
  useEffect(() => {
-  console.log('SelectedItem changed:', selectedItem);
+
    if (selectedItem && Object.keys(selectedItem).length > 0) {
      setCount(selectedItem.amount);
      setInputValue(selectedItem.amount);

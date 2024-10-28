@@ -106,3 +106,26 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
     }
   }
 );
+
+
+export const addWaterPortionThunk = createAsyncThunk(
+  'water/addWaterPortion',
+  async ({ date, volume }, { rejectWithValue, getState }) => {
+    const token = getState().auth.token;
+    if (!token) {
+      return rejectWithValue('No token found');
+    }
+
+    setAuthHeader(token);
+    try {
+      const response = await axios.post('/water', { date, volume });
+      return response.data.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue('An unknown error occurred');
+      }
+    }
+  }
+);
