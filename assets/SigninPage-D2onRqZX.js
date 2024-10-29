@@ -1,0 +1,1 @@
+import{j as s}from"./index-CHw8qxpA.js";import{A as i}from"./AuthForm-gE4NHdk3.js";const n="_signinpage_1iuyq_6",a={signinpage:n},g=()=>s.jsx("div",{className:a.signinpage,children:s.jsx(i,{})});export{g as default};
