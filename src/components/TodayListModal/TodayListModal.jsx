@@ -101,28 +101,22 @@ const handleInputChange = event => {
     }
   };
 
-  const onSaveClick = () => {
-    const normaValue = dailyNorma?.dailyNorma || 0;
-    const consumeRatio =
-      normaValue && count ? ((count / normaValue) * 100).toFixed(2) : 0;
-    const payload = {
-      id: selectedItem.id,
-      amount: count,
-      time: selectedTime,
-      dailyNorma,
-      consumeRatio,
-    };
+ const onSaveClick = () => {
 
-    console.log(payload);
+   const currentDate = dayjs().format('YYYY-MM-DD');
+   const dateTime = `${currentDate}T${selectedTime}`;
 
+   const payload = {
+     date: dateTime,
+     volume: count,
+   };
 
-
-    dispatch(addWaterPortionThunk(payload)).then(() => {
-      const currentDate = getCurrentData();
-      dispatch(fetchDailyPortionsThunk(currentDate));
-      dispatch(fetchMonthlyPortionsThunk(currentDate));
-    });
-  };
+   dispatch(addWaterPortionThunk(payload)).then(() => {
+     const currentDate = getCurrentData();
+     dispatch(fetchDailyPortionsThunk(currentDate));
+     dispatch(fetchMonthlyPortionsThunk(currentDate));
+   });
+ };
 
     useEffect(() => {
       setInputValue(count);
