@@ -60,6 +60,9 @@ const waterSlice = createSlice({
     setVolume(state, action) {
       state.volume = action.payload;
     },
+    setDailyPortions(state, action) {
+      state.dailyPortions = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -155,6 +158,7 @@ export const {
   setSelectedAmount,
   newDailyNorma,
   volume,
+  setDailyPortions,
 } = waterSlice.actions;
 
 export default waterSlice.reducer;

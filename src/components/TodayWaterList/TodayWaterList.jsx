@@ -2,16 +2,19 @@ import onSaveClick from '../TodayListModal/TodayListModal.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import css from './TodayWaterList.module.css';
 import { openTodayModal, closeTodayModal } from '../../redux/water/slice.js';
+import { openModal, closeModal } from '../../redux/auth/slice';
 import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import {
   selectSelectedTime,
   selectVolume,
   // selectSelectedAmount,
 } from '../../redux/water/selectors.js';
+import UserLogoutModal from '../UserLogoutModal/UserLogoutModal.jsx';
 
 export default function TodayWaterList() {
   const dispatch = useDispatch();
   const isModalOpen = useSelector(state => state.water.isTodayModalOpen);
+  const isOpen = useSelector(state => state.auth.isModalOpen);
 
   const time = useSelector(selectSelectedTime);
   const amount = useSelector(selectVolume);
@@ -28,12 +31,21 @@ export default function TodayWaterList() {
                   <use href="src/img/icons.svg#icon-Group-4"></use>
                 </svg>
                 <li className={css.amount}>{amount} ml</li>
-                <li className={css.amount}>{time} PM</li>
+                <li className={css.amount}>{time} </li>
 
-                <svg className={css.iconPencil}>
+                <svg
+                  className={css.iconPencil}
+                  onClick={() => dispatch(openTodayModal())}
+                >
                   <use href="/public/icons.svg#icon-Vector"></use>
                 </svg>
-                <svg className={css.iconTrash}>
+                <svg
+                  className={css.iconTrash}
+                  onClick={() => dispatch(openModal())}
+                >
+                  {isOpen && (
+                    <UserLogoutModal onClose={() => dispatch(closeModal())} />
+                  )}
                   <use href="src/img/icons.svg#icon-Vector"></use>
                 </svg>
               </ul>
