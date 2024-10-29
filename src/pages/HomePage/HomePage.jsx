@@ -10,7 +10,7 @@ export default function HomePage() {
         <div className={css.dailyNorma }><DailyNorma /></div>
         <div className={css.waterRatioPanel}><WaterRatioPanel /></div>
         <div className={css.listAndTable}>
-            <TodayWaterList />
+            <div className={css.todayWaterList}><TodayWaterList /></div>
             <MonthStatsTable />
         </div>
     </div>
