@@ -23,6 +23,7 @@ const initialState = {
   selectedTime: dayjs().format('HH:mm'),
   selectedAmount: 0,
   totalVolume: 0,
+  newDailyNorma: 0,
 };
 
 const waterSlice = createSlice({
@@ -111,6 +112,7 @@ const waterSlice = createSlice({
         })
         .addCase(updateWaterRateThunk.fulfilled, (state, action) => {
           state.isLoading = false;
+         state.newDailyNorma = action.payload.dailyNorm;
         })
         .addCase(updateWaterRateThunk.rejected, (state, action) => {
           state.isLoading = false;
@@ -130,6 +132,9 @@ const waterSlice = createSlice({
           state.isError = action.payload;
         });
     },
+    newDailyNorma(state, action) {
+      state.newDailyNorma = action.payload;
+    },
   },
 });
 
@@ -143,6 +148,7 @@ export const {
   setSelectedItem,
   setSelectedTime,
   setSelectedAmount,
+  newDailyNorma,
 } = waterSlice.actions;
 
 export default waterSlice.reducer;
