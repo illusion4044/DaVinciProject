@@ -4,11 +4,8 @@ import { useSelector } from 'react-redux';
 import UserLogo from '../../components/UserLogo/UserLogo';
 import UserAuth from '../../components/UserAuth/UserAuth';
 import { selectUserInfo } from '../../redux/users/selectors';
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 const Header = () => {
-  // Retrieve user from Redux store
-  // const user = useSelector(selectUserInfo);
   const user = useSelector(selectUserInfo);
   return (
     <header className={css.header}>

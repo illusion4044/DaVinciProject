@@ -4,6 +4,7 @@ import {
   fetchMonthlyPortionsThunk,
   fetchDailyPortionsThunk,
   updateWaterRateThunk,
+  addWaterPortionThunk,
 } from './operations.js';
 import { number } from 'yup';
 import dayjs from 'dayjs';
@@ -21,6 +22,7 @@ const initialState = {
   selectedItem: {},
   selectedTime: dayjs().format('HH:mm'),
   selectedAmount: 0,
+  totalVolume: 0,
 };
 
 const waterSlice = createSlice({
@@ -48,10 +50,12 @@ const waterSlice = createSlice({
       state.isTodayModalOpen = false;
     },
     setSelectedTime(state, action) {
+
     state.selectedTime = action.payload; // Update selected time
     },
     setSelectedAmount(state, action) {
       state.selectedAmount = action.payload;
+
   },
   extraReducers: builder => {
     builder
@@ -61,6 +65,11 @@ const waterSlice = createSlice({
       })
       .addCase(fetchDailyPortionsThunk.fulfilled, (state, { payload }) => {
         state.dailyNorma = payload.result.dailyNorma;
+        state.dailyPortions = payload.result.dailyPortions;
+        state.totalVolume = payload.result.dailyPortions.reduce(
+          (sum, portion) => sum + portion.volume,
+          0
+        ); 
         state.isLoading = false;
       })
       .addCase(fetchDailyPortionsThunk.rejected, (state, { payload }) => {
@@ -73,7 +82,14 @@ const waterSlice = createSlice({
       })
       .addCase(updatePortionThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.dailyNorma = action.payload;
+        const updatedPortion = action.payload;
+        state.dailyPortions = state.dailyPortions.map(portion =>
+          portion._id === updatedPortion._id ? updatedPortion : portion
+        );
+        state.totalVolume = state.dailyPortions.reduce(
+          (sum, portion) => sum + portion.volume,
+          0
+        );
       })
       .addCase(updatePortionThunk.rejected, (state, action) => {
         state.isLoading = false;
@@ -99,6 +115,19 @@ const waterSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateWaterRateThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      })
+      .addCase(addWaterPortionThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(addWaterPortionThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.dailyPortions.push(action.payload);
+        state.totalVolume += action.payload.volume;
+      })
+      .addCase(addWaterPortionThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       });
