@@ -56,6 +56,7 @@ const waterSlice = createSlice({
     setSelectedAmount(state, action) {
       state.selectedAmount = action.payload;
     },
+  },
     extraReducers: builder => {
       builder
         .addCase(fetchDailyPortionsThunk.pending, state => {
@@ -64,6 +65,7 @@ const waterSlice = createSlice({
         })
         .addCase(fetchDailyPortionsThunk.fulfilled, (state, { payload }) => {
           state.dailyNorma = payload.result.dailyNorma;
+          state.percentPerDay = payload.result.percentPerDay;
           state.dailyPortions = payload.result.dailyPortions;
           state.totalVolume = payload.result.dailyPortions.reduce(
             (sum, portion) => sum + portion.volume,
@@ -135,8 +137,7 @@ const waterSlice = createSlice({
     newDailyNorma(state, action) {
       state.newDailyNorma = action.payload;
     },
-  },
-});
+  });
 
 export const {
   changeDailyNorma,
