@@ -24,6 +24,7 @@ const initialState = {
   selectedAmount: 0,
   totalVolume: 0,
   newDailyNorma: 0,
+  volume: 0,
 };
 
 const waterSlice = createSlice({
@@ -56,85 +57,89 @@ const waterSlice = createSlice({
     setSelectedAmount(state, action) {
       state.selectedAmount = action.payload;
     },
-    extraReducers: builder => {
-      builder
-        .addCase(fetchDailyPortionsThunk.pending, state => {
-          state.isLoading = true;
-          state.isError = null;
-        })
-        .addCase(fetchDailyPortionsThunk.fulfilled, (state, { payload }) => {
-          state.dailyNorma = payload.result.dailyNorma;
-          state.dailyPortions = payload.result.dailyPortions;
-          state.totalVolume = payload.result.dailyPortions.reduce(
-            (sum, portion) => sum + portion.volume,
-            0
-          );
-          state.isLoading = false;
-        })
-        .addCase(fetchDailyPortionsThunk.rejected, (state, { payload }) => {
-          state.isLoading = false;
-          state.isError = payload;
-        })
-        .addCase(updatePortionThunk.pending, state => {
-          state.isLoading = true;
-          state.isError = null;
-        })
-        .addCase(updatePortionThunk.fulfilled, (state, action) => {
-          state.isLoading = false;
-          const updatedPortion = action.payload;
-          state.dailyPortions = state.dailyPortions.map(portion =>
-            portion._id === updatedPortion._id ? updatedPortion : portion
-          );
-          state.totalVolume = state.dailyPortions.reduce(
-            (sum, portion) => sum + portion.volume,
-            0
-          );
-        })
-        .addCase(updatePortionThunk.rejected, (state, action) => {
-          state.isLoading = false;
-          state.isError = action.payload;
-        })
-        .addCase(fetchMonthlyPortionsThunk.pending, state => {
-          state.isLoading = true;
-          state.isError = null;
-        })
-        .addCase(fetchMonthlyPortionsThunk.fulfilled, (state, action) => {
-          state.isLoading = false;
-          state.monthlyPortions = action.payload;
-        })
-        .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
-          state.isLoading = false;
-          state.isError = action.payload;
-        })
-        .addCase(updateWaterRateThunk.pending, state => {
-          state.isLoading = true;
-          state.isError = null;
-        })
-        .addCase(updateWaterRateThunk.fulfilled, (state, action) => {
-          state.isLoading = false;
-         state.newDailyNorma = action.payload.dailyNorm;
-        })
-        .addCase(updateWaterRateThunk.rejected, (state, action) => {
-          state.isLoading = false;
-          state.isError = action.payload;
-        })
-        .addCase(addWaterPortionThunk.pending, state => {
-          state.isLoading = true;
-          state.isError = null;
-        })
-        .addCase(addWaterPortionThunk.fulfilled, (state, action) => {
-          state.isLoading = false;
-          state.dailyPortions.push(action.payload);
-          state.totalVolume += action.payload.volume;
-        })
-        .addCase(addWaterPortionThunk.rejected, (state, action) => {
-          state.isLoading = false;
-          state.isError = action.payload;
-        });
+    setVolume(state, action) {
+      state.volume = action.payload;
     },
-    newDailyNorma(state, action) {
-      state.newDailyNorma = action.payload;
-    },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchDailyPortionsThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(fetchDailyPortionsThunk.fulfilled, (state, { payload }) => {
+        state.dailyNorma = payload.result.dailyNorma;
+        state.dailyPortions = payload.result.dailyPortions;
+        state.totalVolume = payload.result.dailyPortions.reduce(
+          (sum, portion) => sum + portion.volume,
+          0
+        );
+        state.isLoading = false;
+      })
+      .addCase(fetchDailyPortionsThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = payload;
+      })
+      .addCase(updatePortionThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(updatePortionThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const updatedPortion = action.payload;
+        state.dailyPortions = state.dailyPortions.map(portion =>
+          portion._id === updatedPortion._id ? updatedPortion : portion
+        );
+        state.totalVolume = state.dailyPortions.reduce(
+          (sum, portion) => sum + portion.volume,
+          0
+        );
+      })
+      .addCase(updatePortionThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      })
+      .addCase(fetchMonthlyPortionsThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(fetchMonthlyPortionsThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.monthlyPortions = action.payload;
+      })
+      .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      })
+      .addCase(updateWaterRateThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(updateWaterRateThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.newDailyNorma = action.payload.dailyNorm;
+      })
+      .addCase(updateWaterRateThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      })
+      .addCase(addWaterPortionThunk.pending, state => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(addWaterPortionThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.dailyPortions.push(action.payload);
+        state.totalVolume += action.payload.volume;
+        state.volume = action.payload.data.volume;
+      })
+      .addCase(addWaterPortionThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      });
+  },
+  newDailyNorma(state, action) {
+    state.newDailyNorma = action.payload;
   },
 });
 
@@ -149,6 +154,7 @@ export const {
   setSelectedTime,
   setSelectedAmount,
   newDailyNorma,
+  volume,
 } = waterSlice.actions;
 
 export default waterSlice.reducer;

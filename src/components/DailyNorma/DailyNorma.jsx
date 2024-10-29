@@ -3,18 +3,13 @@ import DailyNormaModal from '../DailyNormaModal/DailyNormaModal.jsx';
 import { useState } from 'react';
 import css from './DailyNorma.module.css';
 import { selectUserInfo } from '../../redux/users/selectors.js';
-import { selectDailyNorma } from '../../redux/water/selectors.js';
 
 export default function DailyNorma() {
   const mlLiters = useSelector(selectUserInfo);
-  const updateMl = useSelector(selectDailyNorma);
-  console.log(mlLiters);
 
   const { dailyNorm } = mlLiters;
   const liters = dailyNorm / 1000;
 
-  const { dailyNorma } = updateMl;
-  const newMLiters = dailyNorma / 1000;
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);

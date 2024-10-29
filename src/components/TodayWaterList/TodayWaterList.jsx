@@ -4,21 +4,17 @@ import css from './TodayWaterList.module.css';
 import { openTodayModal, closeTodayModal } from '../../redux/water/slice.js';
 import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import {
-  selectDailyNorma,
   selectSelectedTime,
-  selectSelectedAmount,
+  selectVolume,
+  // selectSelectedAmount,
 } from '../../redux/water/selectors.js';
 
 export default function TodayWaterList() {
   const dispatch = useDispatch();
   const isModalOpen = useSelector(state => state.water.isTodayModalOpen);
-  // const water = useSelector(selectDailyNorma);
+
   const time = useSelector(selectSelectedTime);
-  const amount = useSelector(selectSelectedAmount);
-  // const { volume } = water;
-  // console.log(water);
-  console.log(time);
-  console.log(amount);
+  const amount = useSelector(selectVolume);
 
   return (
     <>
