@@ -71,39 +71,38 @@ export default function DailyNormaModal({ onClose }) {
     };
   }, [onClose]);
 
-  const formik = useFormik({
-    initialValues: {
-      gender: selectedGender,
-      weight: dailyNorma?.weight || '',
-      time: dailyNorma?.time || '',
-      amountOfWater: dailyNorma?.dailyNormaLiters || '',
-    },
-    validationSchema: calculateSchema,
+ const formik = useFormik({
+   initialValues: {
+     gender: selectedGender,
+     weight: dailyNorma?.weight || '',
+     time: dailyNorma?.time || '',
+     amountOfWater: dailyNorma?.dailyNormaLiters || '',
+   },
+   validationSchema: calculateSchema,
 
-    onSubmit: async (values) => {
-      setIsLoading(true);
-      try {
-        const dailyNormaLiters = Number(values.amountOfWater);
-        const dailyNormaMl = dailyNormaLiters * 1000;
+   onSubmit: async values => {
+     setIsLoading(true);
+     try {
+       const dailyNormaLiters = Number(values.amountOfWater);
+       const dailyNormaMl = dailyNormaLiters * 1000;
 
-        const newDailyNorma = { dailyNorm: dailyNormaMl };
-        const currentDate = getCurrentDate();
+       const newDailyNorma = { dailyNorm: dailyNormaMl };
+       const currentDate = getCurrentDate();
 
+       dispatch(changeDailyNorma(newDailyNorma));
+       dispatch(updateWaterRateThunk(newDailyNorma));
+       dispatch(fetchMonthlyPortionsThunk(currentDate));
 
-        dispatch(changeDailyNorma(newDailyNorma));
-
-         dispatch(updateWaterRateThunk(newDailyNorma));
-         dispatch(fetchMonthlyPortionsThunk(currentDate));
- 
-        toast.success('Data saved successfully!');
-        onClose();
-      } catch (error) {
-        toast.error('An error occurred while saving data!');
-      } finally {
-        setIsLoading(false);
-      }
-    },
-  });
+       toast.success('Data saved successfully!');
+       onClose();
+     } catch (error) {
+       toast.error('An error occurred while saving data!');
+      
+     } finally {
+       setIsLoading(false);
+     }
+   },
+ });
 
   const handleGenderChange = e => {
     setSelectedGender(e.target.value);
