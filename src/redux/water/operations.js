@@ -36,14 +36,14 @@ export const updatePortionThunk = createAsyncThunk(
 
 export const updateWaterRateThunk = createAsyncThunk(
   'water/updateWaterRate',
-  async ({ dailyNorma }, { rejectWithValue, getState }) => {
+  async ({ dailyNorm }, { rejectWithValue, getState }) => {
     const token = getState().auth.token;
     if (!token) {
       return rejectWithValue('No token found');
     }
     setAuthHeader(token);
     try {
-      const response = await axios.patch(`/users/norm`, {dailyNorma});
+      const response = await axios.patch(`/users/norm`, {dailyNorm});
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -117,21 +117,23 @@ export const addWaterPortionThunk = createAsyncThunk(
     }
 
     setAuthHeader(token);
-
-    const formattedDate = format(new Date(date), 'yyyy-MM-dd');
-
     try {
-      const response = await axios.post('/water', {
-        date: formattedDate,
-        volume,
-      });
-      return response.data.data;
-    } catch (error) {
-      if (error.response && error.response.data) {
-        return rejectWithValue(error.response.data);
-      } else {
-        return rejectWithValue('An unknown error occurred');
+      const token = getState().auth.token;
+      if (!token) {
+        return rejectWithValue('No token found');
       }
+      const payload = { date, volume };
+      const response = await axios.post('/water', payload);
+      if (response.status === 201) {
+      
+        return response.data;
+      } else {
+        throw new Error(`Unexpected response code: ${response.status}`);
+      }
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || 'An unknown error occurred'
+      );
     }
   }
 );

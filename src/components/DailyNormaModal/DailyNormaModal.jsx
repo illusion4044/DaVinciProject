@@ -86,15 +86,15 @@ export default function DailyNormaModal({ onClose }) {
         const dailyNormaLiters = Number(values.amountOfWater);
         const dailyNormaMl = dailyNormaLiters * 1000;
 
-        const newDailyNorma = { dailyNorma: dailyNormaMl };
+        const newDailyNorma = { dailyNorm: dailyNormaMl };
         const currentDate = getCurrentDate();
-console.log(newDailyNorma);
+
 
         dispatch(changeDailyNorma(newDailyNorma));
 
          dispatch(updateWaterRateThunk(newDailyNorma));
          dispatch(fetchMonthlyPortionsThunk(currentDate));
-
+ 
         toast.success('Data saved successfully!');
         onClose();
       } catch (error) {
