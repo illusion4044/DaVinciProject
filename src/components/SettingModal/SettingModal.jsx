@@ -148,7 +148,8 @@ export default function SettingModal({ closeModal }) {
 
         <Formik
           initialValues={{
-            gender: user?.gender || 'woman',
+            // gender: user?.gender || 'woman',
+            gender: user?.gender || 'Woman',
             name: user?.name || '',
             email: user?.email || '',
             password: '',
@@ -166,11 +167,11 @@ export default function SettingModal({ closeModal }) {
                   <div className={css.formGroup}>
                     <div className={css.radioGroup}>
                       <label>
-                        <Field type="radio" name="gender" value="woman" />
+                        <Field type="radio" name="gender" value="Woman" />
                         Woman
                       </label>
                       <label>
-                        <Field type="radio" name="gender" value="man" />
+                        <Field type="radio" name="gender" value="Man" />
                         Man
                       </label>
                     </div>

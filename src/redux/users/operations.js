@@ -13,7 +13,7 @@ export const uploadUserPhoto = createAsyncThunk(
   'users/uploadPhoto',
   async ({ photo, token }, { rejectWithValue }) => {
     try {
-      setAuthHeader(token);
+      // setAuthHeader(token);
       const formData = new FormData();
       formData.append('photo', photo);
 
@@ -41,7 +41,7 @@ export const updateUserInfo = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      setAuthHeader(token);
+      // setAuthHeader(token);
       const data = {
         ...(name && { name }),
         ...(email && { email }),
@@ -52,10 +52,10 @@ export const updateUserInfo = createAsyncThunk(
         data.newPassword = newPassword;
       }
 
-      const response = await axios.patch(`/users/${id}`, data, {
+      const response = await axios.patch('/users', data, {
         headers: { 'Content-Type': 'application/json' },
       });
-      return response.data;
+      return response.data.data.value;
     } catch (error) {
       const message =
         error.response?.status === 400
