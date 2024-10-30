@@ -5,4 +5,4 @@ export const selectPercentPerDay = state => state.water.percentPerDay;
 export const selectSelectedTime = state => state.water.selectedTime;
 export const selectSelectedAmount = state => state.water.selectedAmount;
 export const selectVolume = state => state.water.volume;
-export const selectMonthlyPortions = state => state.water.monthlyPortions;
+// export const selectMonthlyPortions = state => state.water.monthlyPortions;
