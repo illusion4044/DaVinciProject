@@ -1,4 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMonthlyPortionsThunk } from '../../redux/water/operations'; 
 import styles from './MonthStatsTable.module.css';
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
@@ -13,6 +15,15 @@ const MonthStatsTable = () => {
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
+
+  // Redux state and dispatch
+  const dispatch = useDispatch();
+  const monthlyPortions = useSelector((state) => state.water.monthlyPortions);
+
+  useEffect(() => {
+    // Fetch the monthly portions data whenever the selected month changes
+    dispatch(fetchMonthlyPortionsThunk({ month: selectedMonth, year: currentYear }));
+  }, [dispatch, selectedMonth, currentYear]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,22 +40,23 @@ const MonthStatsTable = () => {
 
   const stats = useMemo(() => {
     const daysInMonth = getDaysInMonth(selectedMonth, currentYear);
-    return Array.from({ length: daysInMonth }, (_, day) => {
-      let waterPercentage = Math.floor(Math.random() * 101);
-
-      // Randomizer TEST
-      if (Math.random() < 0.2) { 
-        waterPercentage = 100;
-      }
+    const monthStats = Array.from({ length: daysInMonth }, (_, day) => {
+      const dayData = monthlyPortions.find((portion) => portion.day === day + 1) || {
+        waterPercentage: 0, // Default if no data is available
+        dailyNorma: 2000, // Example daily norma, can be fetched from state if needed
+        servings: 0,
+      };
 
       return {
         day: day + 1,
-        waterPercentage,
-        dailyNorma: 2000,
-        servings: Math.floor(Math.random() * 10) + 1,
+        waterPercentage: dayData.waterPercentage,
+        dailyNorma: dayData.dailyNorma,
+        servings: dayData.servings,
       };
     });
-  }, [selectedMonth, currentYear]);
+
+    return monthStats;
+  }, [selectedMonth, currentYear, monthlyPortions]);
 
   const handleMonthChange = (direction) => {
     if (direction === 'prev' && selectedMonth > 0) {
