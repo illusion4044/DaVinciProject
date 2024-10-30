@@ -14,9 +14,9 @@ export default function UserLogo() {
   };
 
   const getAvatarContent = () => {
-    if (user.avatar) {
+    if (user.photo) {
       return (
-        <img className={css.user_avatar} src={user.avatar} alt={user.name} />
+        <img className={css.user_avatar} src={user.photo} alt={user.name} />
       );
     }
 
