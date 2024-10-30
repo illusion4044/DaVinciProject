@@ -67,11 +67,12 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-export const logOut = createAsyncThunk('auth/logOut', async (_, thunkAPI) => {
+export const logOut = createAsyncThunk('auth/signout', async (_, thunkAPI) => {
   try {
-    await axios.post('/auth/logout');
+    await axios.post('/auth/signout');
     localStorage.removeItem('token');
-    setAuthHeader('');
+    clearAuthHeader();
+    return true;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

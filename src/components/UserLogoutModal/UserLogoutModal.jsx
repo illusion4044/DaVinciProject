@@ -2,6 +2,7 @@ import css from "./UserLogoutModal.module.css"
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { logOut } from "../../redux/auth/operations"
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../redux/auth/slice';
 import CloseIcon from '@mui/icons-material/Close';
@@ -9,6 +10,15 @@ import CloseIcon from '@mui/icons-material/Close';
 export default function UserLogoutModal() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.auth.isModalOpen);
+
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    const result = await dispatch(logOut());
+    console.log(result);
+    dispatch(closeModal());
+    navigate('/login');
+};
+
 
   return (
     <Modal
@@ -31,7 +41,7 @@ export default function UserLogoutModal() {
           <button className={css.backBtn} onClick={() => dispatch(closeModal())} color="secondary">
             Cancel
           </button>
-          <button className={css.deleteBtn} color="primary" onClick={() =>dispatch(logOut())}>
+          <button className={css.deleteBtn} color="primary" onClick={handleLogout}>
             Log out
           </button>
         </div>

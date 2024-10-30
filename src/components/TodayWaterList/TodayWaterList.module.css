@@ -14,23 +14,39 @@
 
 .containerList {
   display: flex;
-  flex-direction: row;
   width: 254px;
   height: 26px;
   align-items: center;
 }
-.icons {
+.amountAndTime {
+  width: 161px;
   display: flex;
-  align-items: center;
-  margin-left: 38px;
-  width: 50px;
-  justify-content: space-between;
+  gap: 12px;
+  margin-right: 38px;
 }
 .iconGlass {
   width: 17px;
   height: 22px;
 }
+.amount {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33333;
+  color: #407bff;
+}
 
+.time {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 2;
+  color: #2f2f2f;
+}
+.icons {
+  display: flex;
+  align-items: center;
+  width: 50px;
+  justify-content: space-between;
+}
 .iconPencil {
   width: 14px;
   height: 12px;
@@ -45,20 +61,7 @@
   display: flex;
   flex-direction: row;
 }
-.amount {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.33333;
-  color: #407bff;
-  margin-left: 12px;
-}
-.time {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 2;
-  color: #2f2f2f;
-  margin-left: 12px;
-}
+
 .line {
   border: 1px solid #d7e3ff;
   width: 254px;
@@ -74,6 +77,7 @@
 }
 
 .btn {
+  cursor: pointer;
   color: #407bff;
   font-family: Roboto;
   font-size: 16px;
@@ -110,16 +114,16 @@
     font-size: 26px;
     line-height: 1.23077;
   }
-  .time {
-    margin-left: 16px;
-  }
   .containerList {
     width: 646px;
     height: 36px;
   }
-  .icons {
-    margin-left: 390px;
+  .amountAndTime {
+    width: 206px;
+    gap: 16px;
+    margin-right: 390px;
   }
+
   .line {
       width: 646px;
   }
@@ -141,8 +145,8 @@
   .containerList {
     width: 534px;
   }
-  .icons {
-    margin-left: 350px;
+  .amountAndTime {
+    margin-right: 278px;
   }
   .line {
     width: 534px;
