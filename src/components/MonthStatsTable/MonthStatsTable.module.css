@@ -1,16 +1,18 @@
-.monthStatsTable {
+.monthStatsTable{
   text-align: center;
   padding: 0;
   position: relative;
+
+  width: 264px;
+
+
 }
 
-.container {
+.container{
   display: flex;
-  justify-content: space-between; /* Вирівнює заголовок зліва, а кнопки праворуч */
+  justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  margin-top: -50px;
+  margin-bottom: 16px;
 }
 
 .title {
@@ -29,7 +31,9 @@
 .svg {
   width: 6px;
   height: 10px;
+
   fill: currentColor;
+
   cursor: pointer;
 }
 
@@ -41,24 +45,31 @@
 }
 
 .daysList {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 10 кружків в рядку */
-  gap: 5px; /* Зменшений пробіл між кружками */
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 26px;
+  row-gap: 16px;
+}
+
+.dayBlockContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
 }
 
 .dayBlock {
-  width: 40px; /* Менший розмір кружка */
-  height: 40px;
+  width: 32px;
+  height: 32px;
   background-color: #ffffff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #ffffff;
+  border: 1px solid #ffffff;
   transition: border-color 0.3s;
   cursor: pointer;
-  margin-bottom: 5px; /* Відступ для відсотка */
+  margin-bottom: 5px;
 }
 
 .incomplete {
@@ -66,22 +77,49 @@
 }
 
 .dayNumber {
-  font-size: 12px; /* Менший розмір тексту */
+  font-size: 16px;
   font-weight: bold;
   color: #333333;
 }
 
 .dayPercentage {
-  font-size: 10px; /* Менший розмір тексту для відсотків */
+  font-size: 12px;
   color: #9EBBFF;
   text-align: center;
 }
 
-/* Адаптивні стилі для планшетної версії */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .monthStatsTable {
-    padding: 0 24px; /* Відступи з боків для планшета */
-  }
+@media (min-width: 768px){
+
+    .monthStatsTable {
+      width: 656px;
+    }
+
+    .daysList {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 20px;
+      column-gap: 34px;
+      margin: 0 auto;
+    }
+
+    .dayBlockContainer {
+      width: 34px;
+    }
+
+    .dayBlock {
+      width: 34px;
+      height: 34px;
+      font-size: 16px;
+    }
+
+    .dayNumber {
+      font-size: 16px;
+    }
+
+    .dayPercentage {
+      font-size: 13px;
+    }
+
 
   .daysList {
     display: grid;
@@ -120,15 +158,16 @@
     top: 636px; /* Позиціонування з верху */
     left: 32px; /* Відступ зліва */
   }
+
 }
 
-/* Адаптивні стилі для мобільної версії */
-@media (max-width: 768px) {
+@media (min-width: 1440px){
   .monthStatsTable {
-    padding: 10px;
-  }
+      width: 544px;
+    }
 
   .daysList {
+
     display: flex;
     flex-wrap: wrap; /* Дозволяє кружкам переходити на новий рядок */
     justify-content: center; /* Центрує кружки в контейнері */
@@ -162,3 +201,4 @@
     gap: 24px;
   }
 }
+

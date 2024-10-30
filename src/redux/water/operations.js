@@ -71,7 +71,8 @@ export const fetchMonthlyPortionsThunk = createAsyncThunk(
       const response = await axios.get('/water/month', {
         params: { date: formattedDate },
       });
-      return response.data.waterData;
+      console.log(response.data)
+      return response.data.data.waterData;
     } catch (error) {
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data);
@@ -111,17 +112,15 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
 export const addWaterPortionThunk = createAsyncThunk(
   'water/addWaterPortion',
   async ({ date, volume }, { rejectWithValue, getState }) => {
-    const token = getState().auth.token;
-    if (!token) {
-      return rejectWithValue('No token found');
-    }
+   
 
-    setAuthHeader(token);
     try {
       const token = getState().auth.token;
-      if (!token) {
-        return rejectWithValue('No token found');
-      }
+      console.log(token)
+      // if (!token) {
+      //   return rejectWithValue('No token found');
+      // }
+      // setAuthHeader(token);
       const payload = { date, volume };
       const response = await axios.post('/water', payload);
       if (response.status === 201) {

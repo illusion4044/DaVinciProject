@@ -98,19 +98,20 @@ export default function AddWaterModal({ onClose }) {
   const onSaveClick = () => {
     if (count <= 0) {
       return;
+      
     }
-
     const currentDate = getCurrentDate();
     const dateTime = `${currentDate}T${selectedTime}`;
-
+    
     const currentDateMonth = getCurrentMonth();
-
+    
     const payload = {
       date: dateTime,
       volume: count,
     };
-
+    
     dispatch(addWaterPortionThunk(payload)).then(async () => {
+      console.log ("onSaveClick")
       await dispatch(fetchDailyPortionsThunk(currentDate));
       await dispatch(fetchMonthlyPortionsThunk(currentDateMonth));
 

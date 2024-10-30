@@ -76,10 +76,14 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(logOut.fulfilled, (state) => {
-        state.user = { name: null, email: null };
+        state.user = {
+                name: null,
+                email: null,
+            };
         state.token = null;
         state.isLoggedIn = false;
         state.isLoading = false;
+        localStorage.removeItem('user');
       })
       .addCase(logOut.rejected, (state, action) => {
         state.isLoading = false;
