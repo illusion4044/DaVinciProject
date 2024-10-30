@@ -23,7 +23,7 @@
 }
 
 /* Mobile (280px) */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   header {
     padding: 8px 20px 0px 20px;
     max-width: 320px;
