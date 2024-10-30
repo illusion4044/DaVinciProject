@@ -17,6 +17,14 @@ img {
     flex-direction: column;
 }
 
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageMob2x.jpg');
+        /* Мобілка фон 2x */
+    }
+}
+
 @media screen and (min-width: 768px) {
     .signinpage {
         background-image: url('../../img/signInImg/backgroundSignPageTab1x.jpg'); /* Планшет фон 1x */
@@ -26,12 +34,27 @@ img {
     }
 }
 
+@media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
+(min-width: 768px) and (min-resolution: 192dpi) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageTab2x.jpg');
+        /* Планшет фон 2x */
+    }
+}
 
 @media screen and (min-width: 1440px) {
     .signinpage {
         background-image: url('../../img/signInImg/backgroundSignPageDesk1x.jpg');/* Десктоп фон 1x */
         max-width: 1440px;
         margin: 0 auto 44px;
+    }
+}
+
+@media (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2),
+(min-width: 1440px) and (min-resolution: 192dpi) {
+    .signinpage {
+        background-image: url('../../img/signInImg/backgroundSignPageDesk2x.jpg');
+        /* Десктопное изображение 2x */
     }
 }
 
