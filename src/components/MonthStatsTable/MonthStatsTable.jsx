@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import styles from './MonthStatsTable.module.css';
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
@@ -7,23 +7,32 @@ const MonthStatsTable = () => {
   const currentYear = currentDate.getFullYear();
   const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth());
   const [selectedDay, setSelectedDay] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  function getDaysInMonth(month, year) {
-    return new Date(year, month + 1, 0).getDate();
-  }
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
 
-  
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const getDaysInMonth = (month, year) => {
+    return new Date(year, month + 1, 0).getDate();
+  };
+
   const stats = useMemo(() => {
     const daysInMonth = getDaysInMonth(selectedMonth, currentYear);
     return Array.from({ length: daysInMonth }, (_, day) => {
       let waterPercentage = Math.floor(Math.random() * 101);
 
-      //Ranomizer TEST
+      // Randomizer TEST
       if (Math.random() < 0.2) { 
         waterPercentage = 100;
       }
@@ -31,7 +40,7 @@ const MonthStatsTable = () => {
       return {
         day: day + 1,
         waterPercentage,
-        dailyNorma: 2000, // Приклад: 2000 мл норми в день
+        dailyNorma: 2000,
         servings: Math.floor(Math.random() * 10) + 1,
       };
     });
@@ -40,7 +49,7 @@ const MonthStatsTable = () => {
   const handleMonthChange = (direction) => {
     if (direction === 'prev' && selectedMonth > 0) {
       setSelectedMonth(selectedMonth - 1);
-      setSelectedDay(null); // Скидаємо вибір дня при зміні місяця
+      setSelectedDay(null);
     } else if (direction === 'next' && selectedMonth < currentDate.getMonth()) {
       setSelectedMonth(selectedMonth + 1);
       setSelectedDay(null);
@@ -49,38 +58,37 @@ const MonthStatsTable = () => {
 
   return (
     <div className={styles.monthStatsTable}>
-
-      {/* Пагінатор для вибору місяців */}
+      {/* Paginator for month selection */}
       <div className={styles.container}>
         <h2 className={styles.title}>Month</h2>
         <div className={styles.paginator}>
-          <svg className={styles.svg} onClick={() => handleMonthChange('prev')} disabled={selectedMonth === 0}
-          >
+          <svg className={styles.svg} onClick={() => handleMonthChange('prev')} disabled={selectedMonth === 0}>
             <use href='../../img/icons.svg#icon-right'></use>
           </svg>
-          <span>{months[selectedMonth]} {currentDate.getFullYear()}</span>
+          <span>{months[selectedMonth]} {currentYear}</span>
           {selectedMonth < currentDate.getMonth() && (
             <button onClick={() => handleMonthChange('next')}>→</button>
           )}
         </div>
-
       </div>
 
-      {/* Список днів з виконанням норми */}
+      {/* List of days with water intake stats */}
       <div className={styles.daysList}>
         {stats.map((dayStat) => (
-          <div
-            key={dayStat.day}
-            className={`${styles.dayBlock} ${dayStat.waterPercentage < 100 ? styles.incomplete : ''}`}
-            onClick={() => setSelectedDay(dayStat)}
-          >
-            <span className={styles.dayNumber}>{dayStat.day}</span>
+          <div key={dayStat.day} onClick={() => setSelectedDay(dayStat)}>
+            <div
+              className={`${styles.dayBlock} ${
+                dayStat.waterPercentage < 100 ? styles.incomplete : ''
+              }`}
+            >
+              <span className={styles.dayNumber}>{dayStat.day}</span>
+            </div>
             <span className={styles.dayPercentage}>{dayStat.waterPercentage}%</span>
           </div>
         ))}
       </div>
 
-      {/* Детальна статистика для вибраного дня */}
+      {/* Detailed stats for selected day */}
       {selectedDay && (
         <DaysGeneralStats
           chosenDay={`${selectedDay.day}.${selectedMonth + 1}.${currentYear}`}
