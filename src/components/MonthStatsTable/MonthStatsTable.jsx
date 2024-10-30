@@ -16,9 +16,8 @@ const MonthStatsTable = () => {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  // Redux state and dispatch
   const dispatch = useDispatch();
-  const monthlyPortions = useSelector((state) => state.water.monthlyPortions);
+  const monthlyPortions = useSelector((state) => state.water.monthlyPortions) || []; 
 
   useEffect(() => {
     // Fetch the monthly portions data whenever the selected month changes
@@ -41,16 +40,17 @@ const MonthStatsTable = () => {
   const stats = useMemo(() => {
     const daysInMonth = getDaysInMonth(selectedMonth, currentYear);
     const monthStats = Array.from({ length: daysInMonth }, (_, day) => {
-      const dayData = monthlyPortions.find((portion) => portion.day === day + 1) || {
-        waterPercentage: 0, // Default if no data is available
-        dailyNorma: 2000, // Example daily norma, can be fetched from state if needed
-        servings: 0,
+      // Знаходимо відповідні дані по дням
+      const dayData = monthlyPortions.find((portion) => new Date(portion._id).getDate() === day + 1) || {
+        totalVolume: 0, 
+        servings: 0, 
+        percent: 0,
       };
 
       return {
         day: day + 1,
-        waterPercentage: dayData.waterPercentage,
-        dailyNorma: dayData.dailyNorma,
+        waterPercentage: dayData.percent,
+        dailyNorma: dayData.totalVolume, // Припустимо, що totalVolume - це ваша норма на день
         servings: dayData.servings,
       };
     });
