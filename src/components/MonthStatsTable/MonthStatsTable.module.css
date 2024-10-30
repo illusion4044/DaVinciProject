@@ -1,54 +1,49 @@
 .monthStatsTable {
   text-align: center;
-  padding: 20px;
-  background-color: #f0f4ff;
+  /* padding: 20px;
+  background-color: #f0f4ff; */
+}
+.container {
+  display: flex;
+}
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.25;
+  color: #2f2f2f;
 }
 
 .paginator {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+
+  gap: 12px;
+
   margin-bottom: 20px;
 }
-
-.paginator button {
+.svg {
+  width: 6px;
+  height: 10px;
+  stroke: currentColor;
+  fill: currentColor;
+}
+/* .paginator button {
   background-color: transparent;
   border: none;
   font-size: 20px;
   cursor: pointer;
   color: #5c77ff;
-  padding: 0 10px;
-  position: relative;
-  margin-bottom: 7px; 
-}
 
+} */
 
-
-.paginator button::before {
-  content: '';
-  display: inline-block;
-  width: 8px; 
-  height: 8px; 
-  border-top: 1.5px solid #5c77ff; 
-  border-right: 1.5px solid #5c77ff; 
-  position: absolute;
-  transform: rotate(45deg);
-}
-
-.paginator button:first-of-type::before {
-  left: 5px;
-  transform: rotate(225deg); 
-}
-
-.paginator button:last-of-type::before {
-  right: 5px;
-}
 
 .paginator span {
-  font-size: 20px;
-  font-weight: bold;
-  color: #5c77ff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: center;
+  color: #407bff;
 }
 
 .daysList {

@@ -16,6 +16,7 @@
   color: #407bff;
 }
 .btn {
+  cursor: pointer;
   font-family: Roboto;
   font-size: 16px;
   font-weight: 400;

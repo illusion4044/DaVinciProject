@@ -27,28 +27,32 @@ export default function TodayWaterList() {
           <>
             <div className={css.containerList}>
               <ul className={css.list}>
-                <svg className={css.iconGlass}>
-                  <use href="src/img/icons.svg#icon-Group-4"></use>
-                </svg>
-                <li className={css.amount}>{amount} ml</li>
-                <li className={css.time}>{time} PM</li>
+                <div className={css.amountAndTime}>
+                  <svg className={css.iconGlass}>
+                    <use href="src/img/icons.svg#icon-Group-4"></use>
+                  </svg>
+                  <li className={css.amount}>{amount} ml</li>
+                  <li className={css.time}>{time} PM</li>
+                </div>
 
-                <svg
-                  className={css.iconPencil}
-                  onClick={() => dispatch(openTodayModal())}
-                >
-                  <use href="/public/icons.svg#icon-Vector"></use>
-                </svg>
-                <svg
-                  className={css.iconTrash}
-                  onClick={() => dispatch(openModal())}
-                >
-                  {isOpen && (
-                    <UserLogoutModal onClose={() => dispatch(closeModal())} />
-                  )}
-                  <use href="src/img/icons.svg#icon-Vector"></use>
-                </svg>
-        
+                <div className={css.icons}>
+                  <svg
+                    className={css.iconPencil}
+                    onClick={() => dispatch(openTodayModal())}
+                  >
+                    <use href="/public/icons.svg#icon-Vector"></use>
+                  </svg>
+                  <svg
+                    className={css.iconTrash}
+                    onClick={() => dispatch(openModal())}
+                  >
+                    {isOpen && (
+                      <UserLogoutModal onClose={() => dispatch(closeModal())} />
+                    )}
+                    <use href="src/img/icons.svg#icon-Vector"></use>
+                  </svg>
+                </div>
+
               </ul>
             </div>
             <div className={css.line}></div>

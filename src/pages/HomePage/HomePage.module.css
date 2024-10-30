@@ -79,12 +79,15 @@ img {
   background: #ecf2ff;
   display: flex;
   flex-direction: column;
+  width: 280px;
   align-items: center;
   gap: 24px;
 }
 .todayWaterList {
-  width: 264px;
   height: 258px;
+}
+.monthStatsTable {
+  height: 506;
 }
 
 @media screen and (min-width: 768px) {
@@ -123,7 +126,7 @@ img {
   .container {
     background-image: url(../../img/homeScreenImg/BottleDesktop1x-min.png), url(../../img/homeScreenImg/BackgroundDesktop-min.png);
     background-repeat: no-repeat, no-repeat;
-    background-position: top left, center;
+    background-position: top left 2px, center;
     background-size: 738px 548px, cover;
     max-width: 1440px;
     padding: 20px 112px 40px 112px;
@@ -157,5 +160,9 @@ img {
   .todayWaterList {
     width: 544px;
     height: 260px;
+  }
+  .monthStatsTable {
+    width: 544px;
+    height: 332px;
   }
 }
