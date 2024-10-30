@@ -39,6 +39,7 @@ const MonthStatsTable = () => {
 
   const stats = useMemo(() => {
     const daysInMonth = getDaysInMonth(selectedMonth, currentYear);
+
     const monthStats = Array.from({ length: daysInMonth }, (_, day) => {
       // Знаходимо відповідні дані по дням
       const dayData = monthlyPortions.find((portion) => new Date(portion._id).getDate() === day + 1) || {
@@ -46,6 +47,7 @@ const MonthStatsTable = () => {
         servings: 0, 
         percent: 0,
       };
+
 
       return {
         day: day + 1,
@@ -87,7 +89,7 @@ const MonthStatsTable = () => {
       {/* List of days with water intake stats */}
       <div className={styles.daysList}>
         {stats.map((dayStat) => (
-          <div key={dayStat.day} onClick={() => setSelectedDay(dayStat)}>
+          <div className={styles.dayBlockContainer} key={dayStat.day} onClick={() => setSelectedDay(dayStat)}>
             <div
               className={`${styles.dayBlock} ${
                 dayStat.waterPercentage < 100 ? styles.incomplete : ''
