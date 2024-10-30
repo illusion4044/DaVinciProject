@@ -78,6 +78,7 @@ export function UserLogoModal() {
       </ul>
 
       {isSettingModalOpen && <SettingModal closeModal={closeSettingModal} />}
+      <UserLogoutModal/>
     </div>
   );
 }
