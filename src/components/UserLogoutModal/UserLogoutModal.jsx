@@ -13,11 +13,15 @@ export default function UserLogoutModal() {
 
   const navigate = useNavigate();
   const handleLogout = async () => {
-    const result = await dispatch(logOut());
-    console.log(result);
-    dispatch(closeModal());
-    navigate('/login');
-};
+    try {
+      await dispatch(logOut()).unwrap();
+      navigate('/login');
+      console.log(localStorage.getItem('user'));
+
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
 
   return (
