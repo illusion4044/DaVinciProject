@@ -16,7 +16,7 @@ const MonthStatsTable = () => {
   }));
 
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June', 
+    'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
@@ -35,15 +35,18 @@ const MonthStatsTable = () => {
   return (
     <div className={styles.monthStatsTable}>
       {/* Пагінатор для вибору місяців */}
-      <h2>Month</h2>
-      <div className={styles.paginator}>
-        <button onClick={() => handleMonthChange('prev')} disabled={selectedMonth === 0}>
-          ←
-        </button>
-        <span>{months[selectedMonth]} {currentDate.getFullYear()}</span>
-        {selectedMonth < currentDate.getMonth() && (
-          <button onClick={() => handleMonthChange('next')}>→</button>
-        )}
+      <div className={styles.container}>
+        <h2 className={styles.title}>Month</h2>
+        <div className={styles.paginator}>
+          <svg className={styles.svg} onClick={() => handleMonthChange('prev')} disabled={selectedMonth === 0}
+          >
+            <use href='../../img/icons.svg#icon-right'></use>
+          </svg>
+          <span>{months[selectedMonth]} {currentDate.getFullYear()}</span>
+          {selectedMonth < currentDate.getMonth() && (
+            <button onClick={() => handleMonthChange('next')}>→</button>
+          )}
+        </div>
       </div>
 
       {/* Список днів з виконанням норми */}

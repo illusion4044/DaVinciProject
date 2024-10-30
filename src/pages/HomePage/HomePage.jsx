@@ -11,7 +11,7 @@ export default function HomePage() {
         <div className={css.waterRatioPanel}><WaterRatioPanel /></div>
         <div className={css.listAndTable}>
             <div className={css.todayWaterList}><TodayWaterList /></div>
-            <MonthStatsTable />
+            <div className={css.monthStatsTable}><MonthStatsTable /></div>
         </div>
     </div>
   );
