@@ -33,7 +33,7 @@ const MonthStatsTable = () => {
       let waterPercentage = Math.floor(Math.random() * 101);
 
       // Randomizer TEST
-      if (Math.random() < 0.2) { 
+      if (Math.random() < 0.2) {
         waterPercentage = 100;
       }
 
@@ -75,7 +75,7 @@ const MonthStatsTable = () => {
       {/* List of days with water intake stats */}
       <div className={styles.daysList}>
         {stats.map((dayStat) => (
-          <div key={dayStat.day} onClick={() => setSelectedDay(dayStat)}>
+          <div className={styles.dayBlockContainer} key={dayStat.day} onClick={() => setSelectedDay(dayStat)}>
             <div
               className={`${styles.dayBlock} ${
                 dayStat.waterPercentage < 100 ? styles.incomplete : ''
