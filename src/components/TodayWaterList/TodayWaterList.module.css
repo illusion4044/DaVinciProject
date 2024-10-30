@@ -1,33 +1,9 @@
-.iconGlass {
-  width: 17px;
-  height: 22px;
-}
-
-.iconPencil {
-  width: 16px;
-  height: 16px;
-  margin-left: 25px;
-}
-
-.iconTrash {
-  width: 16px;
-  height: 16px;
-}
-
 .container {
-  width: 280px;
-  min-height: 258px;
-  gap: 24px;
-  box-shadow: 0px 4px 14px 0px #407bff4d;
-  background-color: #ecf2ff;
-  padding-left: 8px;
-  margin-top: 24px;
+  margin: 0 auto;
 }
 
 .name {
-  margin-bottom: 24px;
-  padding-top: 24px;
-  font-family: Roboto;
+  margin-bottom: 16px;
   font-size: 24px;
   font-weight: 500;
   line-height: 30px;
@@ -41,28 +17,73 @@
   flex-direction: row;
   width: 254px;
   height: 26px;
-  border-bottom: solid 1px #d7e3ff;
+  align-items: center;
+}
+.icons {
+  display: flex;
+  align-items: center;
+  margin-left: 38px;
+  width: 50px;
+  justify-content: space-between;
+}
+.iconGlass {
+  width: 17px;
+  height: 22px;
+}
+
+.iconPencil {
+  width: 14px;
+  height: 12px;
+}
+
+.iconTrash {
+  width: 12px;
+  height: 12px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+}
+.amount {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33333;
+  color: #407bff;
+  margin-left: 12px;
+}
+.time {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 2;
+  color: #2f2f2f;
+  margin-left: 12px;
+}
+.line {
+  border: 1px solid #d7e3ff;
+  width: 254px;
+  height: 0px;
+  margin: 12px 0;
+}
+.containerBtn {
+  display: flex;
+  justify-content: space-between;
+  width: 97px;
+  height: 20px;
+  margin-top: 12px;
 }
 
 .btn {
   color: #407bff;
   font-family: Roboto;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 24px;
-  display: flex;
-  flex-direction: row;
+  line-height: 1.25;
 }
 
 .iconBtn {
-  width: 24px;
-  height: 24px;
-  margin-left: 8px;
-}
-
-.containerBtn {
-  padding-top: 24px;
-  padding-bottom: 24px;
+  width: 10px;
+  height: 10px;
 }
 
 .scrollContainer {
@@ -70,12 +91,9 @@
   overflow-y: auto;
 }
 
-.scrollContainer::-webkit-scrollbar {
-  width: 4px;
-  height: 168px;
-}
-
 .scrollContainer::-webkit-scrollbar-track {
+  height: 170px;
+  width: 2px;
   background: #d7e3ff;
   border-radius: 8px;
 }
@@ -87,8 +105,49 @@
   height: 100px;
 }
 
-.list {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
+@media screen and (min-width: 768px) {
+  .name {
+    font-size: 26px;
+    line-height: 1.23077;
+  }
+  .time {
+    margin-left: 16px;
+  }
+  .containerList {
+    width: 646px;
+    height: 36px;
+  }
+  .icons {
+    margin-left: 390px;
+  }
+  .line {
+      width: 646px;
+  }
+  .containerBtn {
+    width: 114px;
+    height: 24px;
+  }
+  .btn {
+      font-size: 18px;
+  }
+  .iconBtn {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+  }
 }
+
+@media screen and (min-width: 1440px) {
+  .containerList {
+    width: 534px;
+  }
+  .icons {
+    margin-left: 350px;
+  }
+  .line {
+    width: 534px;
+  }
+
+}
+
+

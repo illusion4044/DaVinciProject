@@ -65,13 +65,13 @@ export const fetchMonthlyPortionsThunk = createAsyncThunk(
 
     setAuthHeader(token);
 
-    const formattedDate = format(new Date(date), 'yyyy-MM-dd');
+    const formattedDate = format(new Date(date), 'yyyy-MM');
 
     try {
       const response = await axios.get('/water/month', {
         params: { date: formattedDate },
       });
-      return response.data.data;
+      return response.data.waterData;
     } catch (error) {
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data);
@@ -125,7 +125,7 @@ export const addWaterPortionThunk = createAsyncThunk(
       const payload = { date, volume };
       const response = await axios.post('/water', payload);
       if (response.status === 201) {
-      
+
         return response.data;
       } else {
         throw new Error(`Unexpected response code: ${response.status}`);

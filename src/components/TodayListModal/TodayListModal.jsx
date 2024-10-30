@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectDailyNorma,
+
   selectSelectedItem,
   selectSelectedTime,
 } from '../../redux/water/selectors.js';
@@ -14,27 +14,17 @@ import {
 import css from './TodayListModal.module.css';
 import dayjs from 'dayjs';
 import { setSelectedTime } from '../../redux/water/slice.js';
-import toast, { Toaster } from 'react-hot-toast';
 
 export default function TodayListModal({ onClose }) {
   const dispatch = useDispatch();
   const selectedItem = useSelector(selectSelectedItem);
-
-   const selectedTime = useSelector(selectSelectedTime);
-  const dailyNorma = useSelector(selectDailyNorma) || 0;
-
+  const selectedTime = useSelector(selectSelectedTime);
   const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
   const [inputValue, setInputValue] = useState(count);
-
-const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-   const isFirstRecord = !selectedItem || Object.keys(selectedItem).length === 0;
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const isFirstRecord = !selectedItem || Object.keys(selectedItem).length === 0;
 
   const handleDecrement = () => {
-
-      if (count <= 0) {
-        toast.error('The amount cannot be less than 0 ml.');
-        return;
-      }
     if (count > 0) {
       const newCount = Math.max(0, count - 50);
       setCount(newCount);
@@ -44,11 +34,6 @@ const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   };
 
   const handleIncrement = () => {
-
-       if (count >= 1500) {
-         toast.error('The amount cannot exceed 1500 ml.');
-         return;
-       }
     if (count < 1500) {
       const newCount = Math.min(1500, count + 50);
       setCount(newCount);
@@ -57,20 +42,16 @@ const [isSaveDisabled, setIsSaveDisabled] = useState(true);
     }
   };
 
-const handleInputChange = event => {
-  const value = event.target.value;
-  const numericValue = Number(value);
-  setInputValue(value);
+  const handleInputChange = event => {
+    const value = event.target.value;
+    const numericValue = Number(value);
+    setInputValue(value);
 
-  if (!isNaN(numericValue) && numericValue >= 0 && numericValue <= 1500) {
-    setCount(numericValue);
-    setIsSaveDisabled(numericValue <= 0);
-  } else if (numericValue > 1500) {
-    toast.error('The amount cannot exceed 1500 ml.');
-  } else if (numericValue < 0) {
-    toast.error('The amount cannot be less than 0 ml.');
-  }
-};
+    if (!isNaN(numericValue) && numericValue >= 0 && numericValue <= 1500) {
+      setCount(numericValue);
+      setIsSaveDisabled(numericValue <= 0);
+    }
+  };
 
   const handleInputBlur = () => {
     const value = Number(inputValue);
@@ -85,14 +66,13 @@ const handleInputChange = event => {
     }
   };
 
-  const getCurrentData = () => {
-    const currentDate = new Date();
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth() + 1;
-    const currentYear = currentDate.getFullYear();
-    currentDay = currentDay < 10 ? '0' + currentDay : currentDay;
-    currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth;
-    return currentDay + '-' + currentMonth + '-' + currentYear;
+
+  const getCurrentDate = () => {
+    return dayjs().format('YYYY-MM-DD');
+  };
+
+  const getCurrentMonth = () => {
+    return dayjs().format('YYYY-MM');
   };
 
   const handleBackdropClick = e => {
@@ -101,44 +81,47 @@ const handleInputChange = event => {
     }
   };
 
- const onSaveClick = () => {
+  const onSaveClick = () => {
+    if (count <= 0) {
+      return;
+    }
 
-   const currentDate = dayjs().format('YYYY-MM-DD');
-   const dateTime = `${currentDate}T${selectedTime}`;
+    const currentDate = getCurrentDate();
+    const dateTime = `${currentDate}T${selectedTime}`;
 
-   const payload = {
-     date: dateTime,
-     volume: count,
-   };
+    const currentDateMonth = getCurrentMonth();
 
-   dispatch(addWaterPortionThunk(payload)).then(() => {
-     const currentDate = getCurrentData();
-     dispatch(fetchDailyPortionsThunk(currentDate));
-     dispatch(fetchMonthlyPortionsThunk(currentDate));
-   });
- };
+    const payload = {
+      date: dateTime,
+      volume: count,
+    };
 
-    useEffect(() => {
-      setInputValue(count);
-    }, [count]);
+    dispatch(addWaterPortionThunk(payload)).then(() => {
+      dispatch(fetchDailyPortionsThunk(currentDate));
+      dispatch(fetchMonthlyPortionsThunk(currentDateMonth));
+    });
+  };
 
- useEffect(() => {
+  useEffect(() => {
+    setInputValue(count);
+  }, [count]);
 
-   if (selectedItem && Object.keys(selectedItem).length > 0) {
-     setCount(selectedItem.amount);
-     setInputValue(selectedItem.amount);
-     dispatch(setSelectedTime(selectedItem.time));
-     setIsSaveDisabled(selectedItem.amount <= 0);
-   } else {
-     setCount(0);
-     setInputValue(0);
-     dispatch(setSelectedTime(dayjs().format('HH:mm')));
-   }
- }, [selectedItem, dispatch]);
+  useEffect(() => {
+    if (selectedItem && Object.keys(selectedItem).length > 0) {
+      setCount(selectedItem.amount);
+      setInputValue(selectedItem.amount);
+      dispatch(setSelectedTime(selectedItem.time));
+      setIsSaveDisabled(selectedItem.amount <= 0);
+    } else {
+      setCount(0);
+      setInputValue(0);
+      dispatch(setSelectedTime(dayjs().format('HH:mm')));
+    }
+  }, [selectedItem, dispatch]);
 
-   const handleTimeChange = event => {
-     dispatch(setSelectedTime(event.target.value));
-   };
+  const handleTimeChange = event => {
+    dispatch(setSelectedTime(event.target.value));
+  };
 
   const generateTimeOptions = () => {
     const options = [];
@@ -155,7 +138,6 @@ const handleInputChange = event => {
 
   return (
     <div className={css.modalContainer} onClick={handleBackdropClick}>
-      <Toaster position="top-right" reverseOrder={false} />
       <div className={css.modal}>
         <div className={css.headerContainer}>
           <h1 className={css.modalHeader}>Edit the entered amount of water</h1>

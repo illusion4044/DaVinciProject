@@ -31,7 +31,7 @@ export default function TodayWaterList() {
                   <use href="src/img/icons.svg#icon-Group-4"></use>
                 </svg>
                 <li className={css.amount}>{amount} ml</li>
-                <li className={css.amount}>{time} </li>
+                <li className={css.time}>{time} PM</li>
 
                 <svg
                   className={css.iconPencil}
@@ -48,8 +48,10 @@ export default function TodayWaterList() {
                   )}
                   <use href="src/img/icons.svg#icon-Vector"></use>
                 </svg>
+        
               </ul>
             </div>
+            <div className={css.line}></div>
           </>
         )}
 
