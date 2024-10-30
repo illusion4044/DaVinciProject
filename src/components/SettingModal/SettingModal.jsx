@@ -4,12 +4,78 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { selectUserInfo } from '../../redux/users/selectors';
+// import { selectUser } from '../../redux/auth/selectors.js';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
 import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
 import { updateUserInfo, uploadUserPhoto } from '../../redux/users/operations';
 import Loader from '../../components/Loader/Loader';
 
+// 13-17
+// const UserSchema = Yup.object().shape({
+//   gender: Yup.string().required('Please select your gender'),
+//   name: Yup.string()
+//     .min(2, 'Minimum 2 characters')
+//     .max(32, 'Maximum 32 characters'),
+//   email: Yup.string().email('Invalid email'),
+
+//   // Old Password field
+//   password: Yup.string().min(8, 'Password must be at least 8 characters long'),
+
+//   // New Password field, required only if old password is provided
+//   newPassword: Yup.string()
+//     .min(8, 'New password must be at least 8 characters long')
+//     .when('password', {
+//       is: val => !!val,
+//       then: Yup.string().required(
+//         'New password is required if old password is provided'
+//       ),
+//       otherwise: Yup.string().notRequired(),
+//     }),
+
+//   // Repeat New Password field, required only if old password is provided
+//   repeatNewPassword: Yup.string()
+//     .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+//     .when('password', {
+//       is: val => !!val,
+//       then: Yup.string().required(
+//         'Repeat new password is required if old password is provided'
+//       ),
+//       otherwise: Yup.string().notRequired(),
+//     }),
+// });
+//12-55
+// const UserSchema = Yup.object().shape({
+//   gender: Yup.string().required('Please select your gender'),
+//   name: Yup.string()
+//     .min(2, 'Minimum 2 characters')
+//     .max(32, 'Maximum 32 characters'),
+//   email: Yup.string().email('Invalid email'),
+
+//   password: Yup.string().min(8, 'Password must be at least 8 characters long'),
+
+//   newPassword: Yup.string()
+//     .min(8, 'New password must be at least 8 characters long')
+//     .when('password', {
+//       is: val => !!val, // Only validate if old password (password) is provided
+//       then: Yup.string().required(
+//         'New password is required if old password is provided'
+//       ),
+//       otherwise: Yup.string().notRequired(), // Make it optional if no old password
+//     }),
+
+//   repeatNewPassword: Yup.string()
+//     .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+//     .when('password', {
+//       is: val => !!val, // Only validate if old password (password) is provided
+//       then: Yup.string().required(
+//         'Repeat new password is required if old password is provided'
+//       ),
+//       otherwise: Yup.string().notRequired(), // Make it optional if no old password
+//     }),
+// });
+
+12 - 50;
 const UserSchema = Yup.object().shape({
   gender: Yup.string().required('Please select your gender'),
   name: Yup.string()
@@ -17,26 +83,31 @@ const UserSchema = Yup.object().shape({
     .max(32, 'Maximum 32 characters'),
   email: Yup.string().email('Invalid email'),
   password: Yup.string().min(8, 'Password must be at least 8 characters long'),
-  newPassword: Yup.string()
-    .min(8, 'New password must be at least 8 characters long')
-    .when('password', {
-      is: val => Boolean(val),
-      then: Yup.string().required(
-        'New password is required if old password is provided'
-      ),
-    }),
-  repeatNewPassword: Yup.string()
-    .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-    .when('password', {
-      is: val => Boolean(val),
-      then: Yup.string().required(
-        'Repeat new password is required if old password is provided'
-      ),
-    }),
+  newPassword: Yup.string().min(
+    8,
+    'New password must be at least 8 characters long'
+  ),
+  // .when('password', {
+  //   is: val => Boolean(val),
+  //   then: Yup.string().required(
+  //     'New password is required if old password is provided'
+  //   ),
+  // }),
+  repeatNewPassword: Yup.string().oneOf(
+    [Yup.ref('newPassword'), null],
+    'Passwords must match'
+  ),
+  // .when('password', {
+  //   is: val => Boolean(val),
+  //   then: Yup.string().required(
+  //     'Repeat new password is required if old password is provided'
+  //   ),
+  // }),
 });
 
 export default function SettingModal({ closeModal }) {
   const dispatch = useDispatch();
+  // const user = useSelector(selectUser);
   const user = useSelector(selectUserInfo);
   const isLoading = useSelector(state => state.users.isLoading);
   const [showPassword, setShowPassword] = useState(false);
@@ -45,8 +116,13 @@ export default function SettingModal({ closeModal }) {
     user?.photo || userImage
   );
 
+  console.log('User from Redux state:', user);
+  console.log('Photo URL from Redux state:', user.photo);
+
   useEffect(() => {
+    console.log(user.photo);
     setPreviewPhotoUrl(user.photo || userImage);
+    console.log('Updated previewPhotoUrl:', user.photo || userImage);
   }, [user.photo]);
 
   useEffect(() => {
@@ -69,10 +145,48 @@ export default function SettingModal({ closeModal }) {
     }
   };
 
+  // 13-50
+  // const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+  //   try {
+  //     const userData = { ...values, token: user?.token };
+
+  //     if (selectedPhoto) {
+  //       const response = await dispatch(
+  //         uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
+  //       ).unwrap();
+
+  //       setPreviewPhotoUrl(response.data.photo);
+  //     }
+
+  //     if (selectedPhoto) {
+  //       await dispatch(
+  //         uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
+  //       ).unwrap();
+  //     }
+
+  //     if (
+  //       values.name !== user?.name ||
+  //       values.email !== user?.email ||
+  //       values.gender !== user?.gender ||
+  //       values.password
+  //     ) {
+  //       await dispatch(updateUserInfo({ ...userData, id: user?._id })).unwrap();
+  //     }
+  //     toast.success('Settings updated successfully');
+  //     closeModal();
+  //   } catch (error) {
+  //     toast.error('Failed to update settings');
+  //     setErrors({ submit: error.message });
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+
+  // from storage -passwords, conditions 30.10.24
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      const userData = { ...values, token: user?.token };
-
+      const userData = { ...values };
+      console.log('Value', values);
       if (selectedPhoto) {
         await dispatch(
           uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
@@ -82,9 +196,9 @@ export default function SettingModal({ closeModal }) {
         values.name !== user?.name ||
         values.email !== user?.email ||
         values.gender !== user?.gender ||
-        values.password
+        values.newPassword
       ) {
-        await dispatch(updateUserInfo({ ...userData, id: user?._id })).unwrap();
+        await dispatch(updateUserInfo({ ...userData })).unwrap();
       }
       toast.success('Settings updated successfully');
       closeModal();

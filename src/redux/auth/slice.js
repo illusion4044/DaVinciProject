@@ -46,6 +46,7 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
+
       .addCase(register.fulfilled, (state, action) => {
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;

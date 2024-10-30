@@ -24,6 +24,8 @@ const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['token'],
+  // corrected by petro 30.10.24
+  // whitelist: ['token', 'user'],
 };
 
 const waterPersistConfig = {
