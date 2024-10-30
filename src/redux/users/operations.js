@@ -37,7 +37,7 @@ export const uploadUserPhoto = createAsyncThunk(
 export const updateUserInfo = createAsyncThunk(
   'users/updateInfo',
   async (
-    { id, name, email, gender, password, newPassword, token },
+    { name, email, gender, password, newPassword },
     { rejectWithValue }
   ) => {
     try {
@@ -47,15 +47,16 @@ export const updateUserInfo = createAsyncThunk(
         ...(email && { email }),
         ...(gender && { gender }),
       };
-      if (password && newPassword) {
-        data.password = password;
-        data.newPassword = newPassword;
+      if (newPassword) {
+        // data.password = password;
+        // data.newPassword = newPassword;
+        data.password = newPassword;
       }
 
       const response = await axios.patch('/users', data, {
         headers: { 'Content-Type': 'application/json' },
       });
-      return response.data.data.value;
+      return response.data.data;
     } catch (error) {
       const message =
         error.response?.status === 400

@@ -46,6 +46,7 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
+
       .addCase(register.fulfilled, (state, action) => {
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
@@ -75,10 +76,14 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(logOut.fulfilled, (state) => {
-        state.user = { name: null, email: null };
+        state.user = {
+                name: null,
+                email: null,
+            };
         state.token = null;
         state.isLoggedIn = false;
         state.isLoading = false;
+        localStorage.removeItem('user');
       })
       .addCase(logOut.rejected, (state, action) => {
         state.isLoading = false;

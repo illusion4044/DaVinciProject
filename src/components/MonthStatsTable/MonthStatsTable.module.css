@@ -2,7 +2,10 @@
   text-align: center;
   padding: 0;
   position: relative;
+
   width: 264px;
+
+
 }
 
 .container{
@@ -123,6 +126,7 @@
     }
 
   .daysList {
+
       display: flex;
       flex-wrap: wrap;
       column-gap: 22px;
@@ -130,3 +134,4 @@
       margin: 0 auto;
     }
 }
+

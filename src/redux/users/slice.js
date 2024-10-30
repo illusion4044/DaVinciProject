@@ -40,14 +40,39 @@ const usersSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+      // 13-26
+      // .addCase(uploadUserPhoto.fulfilled, (state, action) => {
+      //   state.user.photo = action.payload.data.photo;
+      //   console.log('Upload photo response payload:', action.payload);
+      //   console.log(
+      //     'Updated user state:',
+      //     JSON.parse(JSON.stringify(state.user))
+      //   );
+      //   state.loading = false;
+      // })
+      // 10-02
       .addCase(uploadUserPhoto.fulfilled, (state, action) => {
-        state.user.photo = action.payload.data.user.photo;
+        state.user.photo = action.payload.data; // Adjust to match the exact path to the photo URL in your response
+        console.log('Action payload', action.payload);
+
         state.loading = false;
       })
+      // 9-45
+      // .addCase(uploadUserPhoto.fulfilled, (state, action) => {
+      //   state.user.photo = action.payload.data.photo;
+      //   console.log(state.user.photo);
+      //   state.loading = false;
+      // })
+      //leter version
+      // .addCase(uploadUserPhoto.fulfilled, (state, action) => {
+      //   state.user.photo = action.payload.data.user.photo;
+      //   state.loading = false;
+      // })
       .addCase(uploadUserPhoto.rejected, (state, action) => {
         state.error = action.payload || 'Failed to upload photo';
         state.loading = false;
       })
+
       // Refresh User
       .addCase(getCurrentUser.pending, state => {
         state.isRefreshing = true;

@@ -109,6 +109,7 @@ const waterSlice = createSlice({
       .addCase(fetchMonthlyPortionsThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.monthlyPortions = action.payload;
+        console.log(action.payload)
       })
       .addCase(fetchMonthlyPortionsThunk.rejected, (state, action) => {
         state.isLoading = false;
@@ -136,10 +137,7 @@ const waterSlice = createSlice({
         state.totalVolume += action.payload.volume;
         state.volume = action.payload.data.volume;
       })
-      .addCase(addWaterPortionThunk.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload;
-      });
+
   },
 });
 
