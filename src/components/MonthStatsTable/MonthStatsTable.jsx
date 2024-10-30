@@ -12,16 +12,28 @@ const MonthStatsTable = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   const dispatch = useDispatch();
-  const monthlyPortions = useSelector((state) => state.water.monthlyPortions) || []; 
+  const monthlyPortions = useSelector((state) => state.water.monthlyPortions); 
 
   useEffect(() => {
     // Fetch the monthly portions data whenever the selected month changes
-    dispatch(fetchMonthlyPortionsThunk({ month: selectedMonth, year: currentYear }));
+    dispatch(
+      fetchMonthlyPortionsThunk({ month: selectedMonth, year: currentYear })
+    );
   }, [dispatch, selectedMonth, currentYear]);
 
   useEffect(() => {
@@ -41,7 +53,7 @@ const MonthStatsTable = () => {
     const daysInMonth = getDaysInMonth(selectedMonth, currentYear);
 
     const monthStats = Array.from({ length: daysInMonth }, (_, day) => {
-      const dayData = monthlyPortions.find((portion) => new Date(portion._id).getDate() === day + 1) || {
+      const dayData = monthlyPortions?.find((portion) => new Date(portion._id).getDate() === day + 1) || {
         totalVolume: 0, 
         servings: 0, 
         percent: 0,
@@ -58,7 +70,7 @@ const MonthStatsTable = () => {
     return monthStats;
   }, [selectedMonth, currentYear, monthlyPortions]); 
 
-  const handleMonthChange = (direction) => {
+  const handleMonthChange = direction => {
     if (direction === 'prev' && selectedMonth > 0) {
       setSelectedMonth(selectedMonth - 1);
       setSelectedDay(null);
@@ -74,10 +86,16 @@ const MonthStatsTable = () => {
       <div className={styles.container}>
         <h2 className={styles.title}>Month</h2>
         <div className={styles.paginator}>
-          <svg className={styles.svg} onClick={() => handleMonthChange('prev')} disabled={selectedMonth === 0}>
-            <use href='../../../public/icons.svg#icon-right'></use>
+          <svg
+            className={styles.svg}
+            onClick={() => handleMonthChange('prev')}
+            disabled={selectedMonth === 0}
+          >
+            <use href="../../img/icons.svg#icon-right"></use>
           </svg>
-          <span>{months[selectedMonth]} {currentYear}</span>
+          <span>
+            {months[selectedMonth]} {currentYear}
+          </span>
           {selectedMonth < currentDate.getMonth() && (
             <button onClick={() => handleMonthChange('next')}>
               <svg className={styles.svg}>
@@ -99,7 +117,9 @@ const MonthStatsTable = () => {
             >
               <span className={styles.dayNumber}>{dayStat.day}</span>
             </div>
-            <span className={styles.dayPercentage}>{dayStat.waterPercentage}%</span>
+            <span className={styles.dayPercentage}>
+              {dayStat.waterPercentage}%
+            </span>
           </div>
         ))}
       </div>

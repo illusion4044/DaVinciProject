@@ -30,7 +30,8 @@ export default function TodayWaterList() {
               <ul className={css.list}>
                 {dailyPortions.map(portion => (
                   <li key={portion._id}>
-                    {portion.volume}
+                    <p> {portion.volume} ml</p>
+                    <p>{portion.date.split('T')[1]}</p>
                     {/* <div className={css.amountAndTime}> */}
                     {/* <li className={css.amount}>{amount} ml</li>
                       <li className={css.time}>{time} PM</li> */}
