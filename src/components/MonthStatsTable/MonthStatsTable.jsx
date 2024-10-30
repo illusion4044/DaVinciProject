@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchMonthlyPortionsThunk } from '../../redux/water/operations'; 
+import { fetchMonthlyPortionsThunk } from '../../redux/water/operations';
 import styles from './MonthStatsTable.module.css';
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
@@ -77,11 +77,13 @@ const MonthStatsTable = () => {
         <h2 className={styles.title}>Month</h2>
         <div className={styles.paginator}>
           <svg className={styles.svg} onClick={() => handleMonthChange('prev')} disabled={selectedMonth === 0}>
-            <use href='../../img/icons.svg#icon-right'></use>
+            <use href='../../../public/icons.svg#icon-right'></use>
           </svg>
           <span>{months[selectedMonth]} {currentYear}</span>
           {selectedMonth < currentDate.getMonth() && (
-            <button onClick={() => handleMonthChange('next')}>→</button>
+            <button onClick={() => handleMonthChange('next')}><svg className={styles.svg}>
+            <use href='../../../public/icons.svg#icon-left'></use>
+          </svg></button>
           )}
         </div>
       </div>
