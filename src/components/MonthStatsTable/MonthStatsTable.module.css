@@ -1,3 +1,4 @@
+
 .monthStatsTable{
   text-align: center;
   padding: 0;
@@ -31,9 +32,7 @@
 .svg {
   width: 6px;
   height: 10px;
-
-  fill: currentColor;
-
+  stroke: #407BFF;
   cursor: pointer;
 }
 
@@ -120,45 +119,6 @@
       font-size: 13px;
     }
 
-
-  .daysList {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Зменшуємо кількість кружків у рядку */
-    gap: 10px; /* Пробіл між кружками */
-    margin: 0 auto;
-  }
-
-  .dayBlock {
-    width: 50px; /* Збільшено розмір кружка для планшета */
-    height: 50px;
-    font-size: 14px; /* Збільшено розмір тексту */
-  }
-
-  .dayNumber {
-    font-size: 14px; /* Збільшено розмір тексту */
-  }
-
-  .dayPercentage {
-    font-size: 10px; /* Розмір тексту для відсотків */
-  }
-
-  /* Додаткові стилі для ._listAndTable_1b9j9_149 */
-  .listAndTable {
-    border-radius: 10px;
-    padding: 32px 24px; /* Згідно з вашими вимогами */
-    box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
-    background: #ecf2ff;
-    display: flex;
-    flex-direction: column;
-    width: 280px; /* Ширина для планшетної версії */
-    align-items: center;
-    gap: 24px;
-    height: 688px; /* Висота для планшетної версії */
-    position: relative; /* Додано для можливого позиціонування */
-    top: 636px; /* Позиціонування з верху */
-    left: 32px; /* Відступ зліва */
-  }
-
 }
 
 @media (min-width: 1440px){
@@ -168,37 +128,11 @@
 
   .daysList {
 
-    display: flex;
-    flex-wrap: wrap; /* Дозволяє кружкам переходити на новий рядок */
-    justify-content: center; /* Центрує кружки в контейнері */
-    gap: 10px; /* Зменшений пробіл між кружками */
-  }
-
-  .dayBlock {
-    width: 35px; /* Менший розмір кружка */
-    height: 35px;
-    font-size: 12px;
-  }
-
-  .dayNumber {
-    font-size: 12px;
-  }
-
-  .dayPercentage {
-    font-size: 8px;
-  }
-
-  /* Додаткові стилі для ._listAndTable_1b9j9_149 */
-  .listAndTable {
-    border-radius: 10px;
-    padding: 24px 8px;
-    box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
-    background: #ecf2ff;
-    display: flex;
-    flex-direction: column;
-    width: 280px; /* Ширина для мобільної версії */
-    align-items: center;
-    gap: 24px;
-  }
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 22px;
+      row-gap: 20px;
+      margin: 0 auto;
+    }
 }
 
