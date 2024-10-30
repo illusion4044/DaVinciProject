@@ -41,24 +41,22 @@ const MonthStatsTable = () => {
     const daysInMonth = getDaysInMonth(selectedMonth, currentYear);
 
     const monthStats = Array.from({ length: daysInMonth }, (_, day) => {
-      // Знаходимо відповідні дані по дням
       const dayData = monthlyPortions.find((portion) => new Date(portion._id).getDate() === day + 1) || {
         totalVolume: 0, 
         servings: 0, 
         percent: 0,
       };
 
-
       return {
         day: day + 1,
         waterPercentage: dayData.percent,
-        dailyNorma: dayData.totalVolume, // Припустимо, що totalVolume - це ваша норма на день
+        dailyNorma: dayData.totalVolume, 
         servings: dayData.servings,
       };
     });
 
     return monthStats;
-  }, [selectedMonth, currentYear, monthlyPortions]);
+  }, [selectedMonth, currentYear, monthlyPortions]); 
 
   const handleMonthChange = (direction) => {
     if (direction === 'prev' && selectedMonth > 0) {
@@ -81,9 +79,11 @@ const MonthStatsTable = () => {
           </svg>
           <span>{months[selectedMonth]} {currentYear}</span>
           {selectedMonth < currentDate.getMonth() && (
-            <button onClick={() => handleMonthChange('next')}><svg className={styles.svg}>
-            <use href='../../../public/icons.svg#icon-left'></use>
-          </svg></button>
+            <button onClick={() => handleMonthChange('next')}>
+              <svg className={styles.svg}>
+                <use href='../../../public/icons.svg#icon-left'></use>
+              </svg>
+            </button>
           )}
         </div>
       </div>
