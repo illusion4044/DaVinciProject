@@ -1,54 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './MonthStatsTable.module.css';
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
+import { fetchMonthlyPortionsThunk } from '../../redux/water/operations';
+import { selectMonthlyPortions } from '../../redux/water/selectors';
 
 const MonthStatsTable = () => {
+  const dispatch = useDispatch();
   const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
   const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth());
   const [selectedDay, setSelectedDay] = useState(null);
-
-  // Приклад даних для виконання норми по дням
-  const stats = Array.from({ length: getDaysInMonth(selectedMonth, currentDate.getFullYear()) }, (_, day) => ({
-    day: day + 1,
-    waterPercentage: Math.floor(Math.random() * 100),
-    dailyNorma: 2000, // Наприклад, 2000 мл норми в день
-    servings: Math.floor(Math.random() * 10) + 1,
-  }));
+  const monthlyPortions = useSelector(selectMonthlyPortions);
 
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June', 
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
+  useEffect(() => {
+    const selectedMonthString = `${currentYear}-${String(selectedMonth + 1).padStart(2, '0')}`;
+    dispatch(fetchMonthlyPortionsThunk(selectedMonthString));
+  }, [dispatch, selectedMonth, currentYear]);
+
   const handleMonthChange = (direction) => {
     if (direction === 'prev' && selectedMonth > 0) {
       setSelectedMonth(selectedMonth - 1);
+      setSelectedDay(null);
     } else if (direction === 'next' && selectedMonth < currentDate.getMonth()) {
       setSelectedMonth(selectedMonth + 1);
+      setSelectedDay(null);
     }
   };
 
-  function getDaysInMonth(month, year) {
-    return new Date(year, month + 1, 0).getDate();
-  }
-
   return (
     <div className={styles.monthStatsTable}>
-      {/* Пагінатор для вибору місяців */}
       <h2>Month</h2>
       <div className={styles.paginator}>
         <button onClick={() => handleMonthChange('prev')} disabled={selectedMonth === 0}>
-          ←
+          {/* Ліва стрілка */}
         </button>
-        <span>{months[selectedMonth]} {currentDate.getFullYear()}</span>
-        {selectedMonth < currentDate.getMonth() && (
-          <button onClick={() => handleMonthChange('next')}>→</button>
-        )}
+        <span>{months[selectedMonth]} {currentYear}</span>
+        <button onClick={() => handleMonthChange('next')} disabled={selectedMonth >= currentDate.getMonth()}>
+          {/* Права стрілка */}
+        </button>
       </div>
 
-      {/* Список днів з виконанням норми */}
       <div className={styles.daysList}>
-        {stats.map((dayStat) => (
+        {monthlyPortions.map((dayStat) => (
           <div
             key={dayStat.day}
             className={`${styles.dayBlock} ${dayStat.waterPercentage < 100 ? styles.incomplete : ''}`}
@@ -60,10 +59,9 @@ const MonthStatsTable = () => {
         ))}
       </div>
 
-      {/* Детальна статистика для вибраного дня */}
       {selectedDay && (
         <DaysGeneralStats
-          chosenDay={`${selectedDay.day}.${selectedMonth + 1}.${currentDate.getFullYear()}`}
+          chosenDay={`${selectedDay.day}.${selectedMonth + 1}.${currentYear}`}
           dailyNorma={`${selectedDay.dailyNorma} ml`}
           normFulfillment={`${selectedDay.waterPercentage}%`}
           servings={selectedDay.servings}

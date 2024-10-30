@@ -8,16 +8,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   margin-bottom: 20px;
 }
 
 .paginator button {
   background-color: transparent;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   color: #5c77ff;
+  padding: 0 10px;
+  position: relative;
+  margin-bottom: 7px; 
+}
+
+
+
+.paginator button::before {
+  content: '';
+  display: inline-block;
+  width: 8px; 
+  height: 8px; 
+  border-top: 1.5px solid #5c77ff; 
+  border-right: 1.5px solid #5c77ff; 
+  position: absolute;
+  transform: rotate(45deg);
+}
+
+.paginator button:first-of-type::before {
+  left: 5px;
+  transform: rotate(225deg); 
+}
+
+.paginator button:last-of-type::before {
+  right: 5px;
 }
 
 .paginator span {
