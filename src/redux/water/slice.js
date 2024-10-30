@@ -68,14 +68,16 @@ const waterSlice = createSlice({
         state.isError = null;
       })
       .addCase(fetchDailyPortionsThunk.fulfilled, (state, { payload }) => {
-        state.dailyNorma = payload.result.dailyNorma;
-        state.percentPerDay = payload.result.percentPerDay;
-        state.dailyPortions = payload.result.dailyPortions;
-        state.totalVolume = payload.result.dailyPortions.reduce(
-          (sum, portion) => sum + portion.volume,
-          0
-        );
+        // state.dailyNorma = payload.result.dailyNorma;
+        state.percentPerDay = payload.percentPerDay;
+        // state.dailyPortions = payload.servings;
+        // state.totalVolume = payload.result.dailyPortions.reduce(
+        //   (sum, portion) => sum + portion.volume,
+        //   0
+        // );
+        state.totalVolume = payload.totalWaterPerDay;
         state.isLoading = false;
+        state.dailyPortions = payload.data;
       })
       .addCase(fetchDailyPortionsThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
