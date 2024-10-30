@@ -2,23 +2,22 @@ import onSaveClick from '../TodayListModal/TodayListModal.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import css from './TodayWaterList.module.css';
 import { openTodayModal, closeTodayModal } from '../../redux/water/slice.js';
+import { openModal, closeModal } from '../../redux/auth/slice';
 import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import {
-  selectDailyNorma,
   selectSelectedTime,
-  selectSelectedAmount,
+  selectVolume,
+  // selectSelectedAmount,
 } from '../../redux/water/selectors.js';
+import UserLogoutModal from '../UserLogoutModal/UserLogoutModal.jsx';
 
 export default function TodayWaterList() {
   const dispatch = useDispatch();
   const isModalOpen = useSelector(state => state.water.isTodayModalOpen);
-  // const water = useSelector(selectDailyNorma);
+  const isOpen = useSelector(state => state.auth.isModalOpen);
+
   const time = useSelector(selectSelectedTime);
-  const amount = useSelector(selectSelectedAmount);
-  // const { volume } = water;
-  // console.log(water);
-  console.log(time);
-  console.log(amount);
+  const amount = useSelector(selectVolume);
 
   return (
     <>
@@ -34,14 +33,22 @@ export default function TodayWaterList() {
                 <li className={css.amount}>{amount} ml</li>
                 <li className={css.time}>{time} PM</li>
 
-                <div className={css.icons}>
-                  <svg className={css.iconPencil}>
-                    <use href="/public/icons.svg#icon-Vector"></use>
-                  </svg>
-                  <svg className={css.iconTrash}>
-                    <use href="src/img/icons.svg#icon-Vector"></use>
-                  </svg>
-                </div>
+                <svg
+                  className={css.iconPencil}
+                  onClick={() => dispatch(openTodayModal())}
+                >
+                  <use href="/public/icons.svg#icon-Vector"></use>
+                </svg>
+                <svg
+                  className={css.iconTrash}
+                  onClick={() => dispatch(openModal())}
+                >
+                  {isOpen && (
+                    <UserLogoutModal onClose={() => dispatch(closeModal())} />
+                  )}
+                  <use href="src/img/icons.svg#icon-Vector"></use>
+                </svg>
+        
               </ul>
             </div>
             <div className={css.line}></div>
