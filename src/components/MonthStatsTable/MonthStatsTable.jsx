@@ -91,7 +91,7 @@ const MonthStatsTable = () => {
             onClick={() => handleMonthChange('prev')}
             disabled={selectedMonth === 0}
           >
-            <use href="../../img/icons.svg#icon-right"></use>
+            <use href="../../../public/icons.svg#icon-right"></use>
           </svg>
           <span>
             {months[selectedMonth]} {currentYear}
