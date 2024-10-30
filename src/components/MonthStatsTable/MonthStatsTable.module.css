@@ -17,7 +17,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 12px;
+
   margin-bottom: 20px;
 }
 .svg {
@@ -29,10 +31,12 @@
 /* .paginator button {
   background-color: transparent;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   color: #5c77ff;
+
 } */
+
 
 .paginator span {
   font-weight: 400;
