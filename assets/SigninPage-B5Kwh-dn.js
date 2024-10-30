@@ -1,1 +1,0 @@
-import{j as s}from"./index-DGvE3Dz2.js";import{A as i}from"./AuthForm-COT-StP2.js";const n="_signinpage_1iuyq_6",a={signinpage:n},g=()=>s.jsx("div",{className:a.signinpage,children:s.jsx(i,{})});export{g as default};
