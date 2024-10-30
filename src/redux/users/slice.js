@@ -4,6 +4,7 @@ import {
   updateUserInfo,
   uploadUserPhoto,
 } from './operations.js';
+import { logOut } from '../auth/operations.js';
 
 const usersSlice = createSlice({
   name: 'users',
@@ -86,6 +87,22 @@ const usersSlice = createSlice({
       .addCase(getCurrentUser.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload || 'Failed to refresh user';
+      })
+      .addCase(logOut.fulfilled, () => {
+        return {
+          items: [],
+          loading: false,
+          error: null,
+          user: {
+            _id: null,
+            name: null,
+            email: null,
+            photo: null,
+            dailyNorm: 0,
+            dailyWaterIntake: 0,
+            gender: '',
+          },
+        };
       }),
 });
 

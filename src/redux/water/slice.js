@@ -6,8 +6,9 @@ import {
   updateWaterRateThunk,
   addWaterPortionThunk,
 } from './operations.js';
-import { number } from 'yup';
+import { number, object } from 'yup';
 import dayjs from 'dayjs';
+import { logOut } from '../auth/operations.js';
 
 const initialState = {
   dailyNorma: 0,
@@ -137,7 +138,11 @@ const waterSlice = createSlice({
         state.totalVolume += action.payload.volume;
         state.volume = action.payload.data.volume;
       })
-
+.addCase(logOut.fulfilled, ()=> {
+return {
+  ...initialState
+}
+} )
   },
 });
 

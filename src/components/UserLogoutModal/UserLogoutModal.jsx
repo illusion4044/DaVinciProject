@@ -12,6 +12,7 @@ export default function UserLogoutModal() {
   const isOpen = useSelector((state) => state.auth.isModalOpen);
 
   const navigate = useNavigate();
+  // console.log()
   const handleLogout = async () => {
     try {
       await dispatch(logOut()).unwrap();
