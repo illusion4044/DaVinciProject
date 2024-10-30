@@ -29,7 +29,6 @@
 .svg {
   width: 6px;
   height: 10px;
-  stroke: currentColor;
   fill: currentColor;
   cursor: pointer;
 }
@@ -104,7 +103,7 @@
   .dayPercentage {
     font-size: 10px; /* Розмір тексту для відсотків */
   }
-  
+
   /* Додаткові стилі для ._listAndTable_1b9j9_149 */
   .listAndTable {
     border-radius: 10px;
@@ -149,7 +148,7 @@
   .dayPercentage {
     font-size: 8px;
   }
-  
+
   /* Додаткові стилі для ._listAndTable_1b9j9_149 */
   .listAndTable {
     border-radius: 10px;
