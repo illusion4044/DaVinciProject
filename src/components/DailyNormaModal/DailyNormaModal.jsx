@@ -154,7 +154,7 @@ export default function DailyNormaModal({ onClose }) {
         <div className={css.placeholderContainer}>
           <p className={css.placeholder}>
             <span>
-              * V is the volume of the water norm in liters per day, M is your
+            <span className={css.star}>*</span> V is the volume of the water norm in liters per day, M is your
               body weight, T is the time of active sports, or another type of
               activity commensurate in terms of loads (in the absence of these,
               you must set 0)
