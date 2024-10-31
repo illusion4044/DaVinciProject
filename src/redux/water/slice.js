@@ -5,6 +5,7 @@ import {
   fetchDailyPortionsThunk,
   updateWaterRateThunk,
   addWaterPortionThunk,
+  deletePortionThunk,
 } from './operations.js';
 import { number, object } from 'yup';
 import dayjs from 'dayjs';
@@ -139,6 +140,7 @@ const waterSlice = createSlice({
         state.isLoading = true;
         state.isError = null;
       })
+
       .addCase(addWaterPortionThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.dailyPortions.push(action.payload);
@@ -150,6 +152,16 @@ const waterSlice = createSlice({
           ...initialState,
         };
       });
+
+      .addCase(deletePortionThunk.fulfilled, (state, action) => {
+        state.dailyPortions = state.dailyPortions.filter(portion => portion._id !== action.payload._id);
+      })
+.addCase(logOut.fulfilled, ()=> {
+return {
+  ...initialState
+}
+} )
+
   },
 });
 
