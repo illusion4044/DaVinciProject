@@ -13,6 +13,11 @@ import {
 import css from './AddWaterModal.module.css';
 import dayjs from 'dayjs';
 import { setSelectedTime } from '../../redux/water/slice.js';
+import sprite from "../../img/icons.svg"
+console.log(sprite)
+
+
+
 
 const formatTimeMinutes = time => {
   const [h, m] = time.split(':');
@@ -193,16 +198,16 @@ export default function AddWaterModal({ onClose }) {
           <div className={css.buttonContainer}>
             <button className={css.minus} onClick={handleDecrement}>
               <svg className={css.svgMinus}>
-                <use href="src/img/icons.svg#icon-minus-small"></use>
+                <use href={`${sprite}#icon-minus-small`}></use>
               </svg>
             </button>
             <span className={css.span}>{count} ml</span>
             <button className={css.plus} onClick={handleIncrement}>
               <svg className={css.svgPlus}>
-                <use href="src/img/icons.svg#icon-minus-small"></use>
+                <use href={`${sprite}#icon-minus-small`}></use>
               </svg>
               <svg className={css.svgPlusSecond}>
-                <use href="src/img/icons.svg#icon-minus-small"></use>
+                <use href={`${sprite}#icon-minus-small`}></use>
               </svg>
             </button>
           </div>

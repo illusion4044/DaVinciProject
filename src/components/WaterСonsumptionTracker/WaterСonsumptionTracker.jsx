@@ -1,6 +1,9 @@
 import css from './WaterСonsumptionTracker.module.css';
 import { useNavigate } from 'react-router-dom';
 
+import sprite from "../../img/icons.svg"
+console.log(sprite)
+
 const WaterСonsumptionTracker = () => {
   const navigate = useNavigate();
 
@@ -21,7 +24,7 @@ const WaterСonsumptionTracker = () => {
             <li className={css.iconText}>
               <svg className={css.icon}>
                 <use
-                  href="../../../public/welcomePage.svg#icon-calendar"
+                  href={`${sprite}#icon-calendar`}
                   className={css.iconSizeWrap}
                 />
               </svg>
@@ -30,7 +33,7 @@ const WaterСonsumptionTracker = () => {
             <li className={css.iconText}>
               <svg className={css.icon}>
                 <use
-                  href="../../../public/welcomePage.svg#icon-statistic"
+                  href={`${sprite}#icon-statistic`}
                   className={css.iconSizeWrap}
                 />
               </svg>
@@ -39,7 +42,7 @@ const WaterСonsumptionTracker = () => {
             <li className={css.iconText}>
               <svg className={css.icon}>
                 <use
-                  href="../../../public/welcomePage.svg#icon-settings"
+                  href={`${sprite}#icon-settings`}
                   className={css.iconSizeWrap}
                 />
               </svg>

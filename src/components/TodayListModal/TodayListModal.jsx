@@ -12,6 +12,8 @@ import {
 } from '../../redux/water/operations.js';
 import css from './TodayListModal.module.css';
 import dayjs from 'dayjs';
+import sprite from "../../img/icons.svg"
+console.log(sprite)
 
 
 
@@ -158,7 +160,7 @@ export default function TodayListModal({ onClose, portion }) {
 
         <div className={css.waterContainer}>
           <svg className={css.svg}>
-            <use href="src/img/icons.svg#icon-Group-4"></use>
+            <use href={`${sprite}#icon-Group-4`}></use>
           </svg>
 
           <p className={css.amount}>
@@ -175,16 +177,16 @@ export default function TodayListModal({ onClose, portion }) {
           <div className={css.buttonContainer}>
             <button className={css.minus} onClick={handleDecrement}>
               <svg className={css.svgMinus}>
-                <use href="src/img/icons.svg#icon-minus-small"></use>
+                <use href={`${sprite}#icon-minus-small`}></use>
               </svg>
             </button>
             <span className={css.span}>{count} ml</span>
             <button className={css.plus} onClick={handleIncrement}>
               <svg className={css.svgPlus}>
-                <use href="src/img/icons.svg#icon-minus-small"></use>
+                <use href={`${sprite}#icon-minus-small`}></use>
               </svg>
               <svg className={css.svgPlusSecond}>
-                <use href="src/img/icons.svg#icon-minus-small"></use>
+                <use href={`${sprite}#icon-minus-small`}></use>
               </svg>
             </button>
           </div>

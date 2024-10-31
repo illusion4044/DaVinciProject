@@ -4,6 +4,9 @@ import { fetchMonthlyPortionsThunk } from '../../redux/water/operations';
 import styles from './MonthStatsTable.module.css';
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
+import sprite from "../../img/icons.svg"
+console.log(sprite)
+
 
 const MonthStatsTable = () => {
   const currentDate = new Date();
@@ -98,7 +101,7 @@ const MonthStatsTable = () => {
             onClick={() => handleMonthChange('prev')}
             disabled={selectedMonth === 0}
           >
-            <use href="../../../public/icons.svg#icon-right"></use>
+            <use href={`${sprite}#icon-right`}></use>
           </svg>
           <span>
             {months[selectedMonth]} {currentYear}
@@ -106,7 +109,7 @@ const MonthStatsTable = () => {
           {selectedMonth < currentDate.getMonth() && (
             <button onClick={() => handleMonthChange('next')}>
               <svg className={styles.svg}>
-                <use href='../../../public/icons.svg#icon-left'></use>
+                <use href={`${sprite}#icon-left`}></use>
               </svg>
             </button>
           )}

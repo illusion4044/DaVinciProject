@@ -10,6 +10,9 @@ import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
 import { updateUserInfo, uploadUserPhoto } from '../../redux/users/operations';
 import Loader from '../../components/Loader/Loader';
 
+import sprite from "../../img/icons.svg"
+console.log(sprite)
+
 const UserSchema = Yup.object().shape({
   gender: Yup.string().required('Please select your gender'),
   name: Yup.string()
@@ -106,7 +109,7 @@ export default function SettingModal({ closeModal }) {
           <p className={css.modalHeading}>Settings</p>
           <button type="button" className={css.uploadBtn} onClick={closeModal}>
             <svg className={css.closeIcon} width="24" height="24">
-              <use href="/icons.svg#icon-x-mark"></use>
+              <use href={`${sprite}#icon-x-mark`}></use>
             </svg>
           </button>
         </div>
@@ -124,7 +127,7 @@ export default function SettingModal({ closeModal }) {
             onClick={() => document.getElementById('fileInput').click()}
           >
             <svg className={css.arrowUpTrayIcon} width="16" height="16">
-              <use href="/icons.svg#icon-arrow-up-tray"></use>
+              <use href={`${sprite}#icon-arrow-up-tray`}></use>
             </svg>
             <span className={css.uploadText}>Upload a photo</span>
           </button>
@@ -235,9 +238,7 @@ export default function SettingModal({ closeModal }) {
                         onClick={() => setShowPassword(prev => !prev)}
                       >
                         <use
-                          href={`/icons.svg#icon-eye${
-                            showPassword ? '' : '-slash'
-                          }`}
+                          href={`${sprite}#icon-eye${showPassword ? '' : '-slash'}`}
                         ></use>
                       </svg>
                     </div>
@@ -277,7 +278,7 @@ export default function SettingModal({ closeModal }) {
                         onClick={() => setShowNewPassword(prev => !prev)}
                       >
                         <use
-                          href={`/icons.svg#icon-eye${
+                          href={`${sprite}#icon-eye${
                             showNewPassword ? '' : '-slash'
                           }`}
                         ></use>
@@ -321,7 +322,7 @@ export default function SettingModal({ closeModal }) {
                         onClick={() => setShowRepeatNewPassword(prev => !prev)}
                       >
                         <use
-                          href={`/icons.svg#icon-eye${
+                          href={`${sprite}#icon-eye${
                             showRepeatNewPassword ? '' : '-slash'
                           }`}
                         ></use>
