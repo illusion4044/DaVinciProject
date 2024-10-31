@@ -112,6 +112,8 @@ import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import DeleteEntryModal from '../DeleteEntryModal/DeleteEntryModal.jsx';
 import { fetchDailyPortionsThunk } from '../../redux/water/operations';
 import { useEffect } from 'react';
+import sprite from "../../img/icons.svg"
+console.log(sprite)
 
 export default function TodayWaterList() {
   const dispatch = useDispatch();
@@ -121,8 +123,8 @@ export default function TodayWaterList() {
 
   const dailyPortions = useSelector(selectDailyPortions);
   useEffect(() => {
-        dispatch(fetchDailyPortionsThunk(new Date()));
-      }, [dispatch]);
+    dispatch(fetchDailyPortionsThunk(new Date()));
+  }, [dispatch]);
 
   return (
     <>
@@ -135,7 +137,7 @@ export default function TodayWaterList() {
               {dailyPortions.map(portion => (
                 <li className={css.list} key={portion._id}>
                   <svg className={css.iconGlass}>
-                    <use href="src/img/icons.svg#icon-Group-4"></use>
+                <use href={`${sprite}#icon-Group-4`}></use>
                   </svg>
                   <p className={css.amount}> {portion.volume} ml</p>
                   <p className={css.time}>{portion.date?.split('T')[1]}</p>
@@ -145,23 +147,28 @@ export default function TodayWaterList() {
                       className={css.iconPencil}
                       onClick={() => dispatch(openTodayModal())} // Open the edit modal
                     >
-                      <use href="/public/icons.svg#icon-Vector"></use>
+                      <use href={`${sprite}#icon-Vector`}></use>
                     </svg>
 
                     <svg
                       className={css.iconTrash}
                       onClick={() => dispatch(openDeleteModal())} // Open the delete modal
                     >
-                      <use href="src/img/icons.svg#icon-Vector"></use>
+                      <use href={`${sprite}#icon-Vector`}></use>
                     </svg>
                   </div>
                   {/* Conditionally Render the TodayListModal and DeleteEntryModal at the root level */}
-      {isEditModalOpen && (
-        <TodayListModal onClose ={() => dispatch(closeTodayModal())} portion= {portion} />
-      )}
-      {isDeleteModalOpen && (
-        <DeleteEntryModal onClose={() => dispatch(closeDeleteModal())} />
-      )}
+                  {isEditModalOpen && (
+                    <TodayListModal
+                      onClose={() => dispatch(closeTodayModal())}
+                      portion={portion}
+                    />
+                  )}
+                  {isDeleteModalOpen && (
+                    <DeleteEntryModal
+                      onClose={() => dispatch(closeDeleteModal())}
+                    />
+                  )}
                 </li>
               ))}
             </ul>
@@ -172,7 +179,7 @@ export default function TodayWaterList() {
         <div className={css.containerBtn}>
           <p className={css.btn} onClick={() => dispatch(openAddModal())}>
             <svg className={css.iconBtn}>
-              <use href="src/img/icons.svg#icon-outline"></use>
+              <use href={`${sprite}#icon-outline`}></use>
             </svg>
             Add Water
           </p>
@@ -181,8 +188,6 @@ export default function TodayWaterList() {
           )}
         </div>
       </div>
-
-      
     </>
   );
 }
