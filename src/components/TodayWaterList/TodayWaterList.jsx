@@ -1,57 +1,50 @@
 import onSaveClick from '../TodayListModal/TodayListModal.jsx';
+import onSaveClickAddModal from '../AddWaterModal/AddWaterModal.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import css from './TodayWaterList.module.css';
 import { openTodayModal, closeTodayModal } from '../../redux/water/slice.js';
-import { openModal, closeModal } from '../../redux/auth/slice';
+import { openAddModal, closeAddModal } from '../../redux/water/slice.js';
 import AddWaterModal from '../AddWaterModal/AddWaterModal.jsx';
-import {
-  selectSelectedTime,
-  selectVolume,
-  selectDailyPortions,
-} from '../../redux/water/selectors.js';
-import UserLogoutModal from '../UserLogoutModal/UserLogoutModal.jsx';
+import { selectDailyPortions } from '../../redux/water/selectors.js';
+import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 
 export default function TodayWaterList() {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector(state => state.water.isTodayModalOpen);
-  const isOpen = useSelector(state => state.auth.isModalOpen);
+  const isEditModalOpen = useSelector(state => state.water.isTodayModalOpen);
+  const isAddModalOpen = useSelector(state => state.water.isAddModalOpen);
 
-  const time = useSelector(selectSelectedTime);
-  const amount = useSelector(selectVolume);
   const dailyPortions = useSelector(selectDailyPortions);
-  const id = dailyPortions.id;
+
   return (
     <>
-      <div className={css.container}>
+      <div className={css.containerMain}>
         <p className={css.name}>Today</p>
-        {onSaveClick && (
-          <>
-            <div className={css.containerList}>
-              <ul className={css.list}>
+
+        <>
+          <div className={css.container}>
+            <div className={css.scrollContainer}>
+              <ul className={css.containerList}>
                 {dailyPortions.map(portion => (
-                  <li key={portion._id}>
-                    <p> {portion.volume} ml</p>
-                    <p>{portion.date?.split('T')[1]}</p>
-                    {/* <div className={css.amountAndTime}> */}
-                    {/* <li className={css.amount}>{amount} ml</li>
-                      <li className={css.time}>{time} PM</li> */}
-                    {/* </div> */}
+                  <li className={css.list} key={portion._id}>
+                    <svg className={css.iconGlass}>
+                      <use href="src/img/icons.svg#icon-Group-4"></use>
+                    </svg>
+                    <p className={css.amount}> {portion.volume} ml</p>
+                    <p className={css.time}>{portion.date?.split('T')[1]}</p>
+
                     <div className={css.icons}>
                       <svg
                         className={css.iconPencil}
                         onClick={() => dispatch(openTodayModal())}
                       >
-                        <use href="/public/icons.svg#icon-Vector"></use>
-                      </svg>
-                      <svg
-                        className={css.iconTrash}
-                        onClick={() => dispatch(openModal())}
-                      >
-                        {isOpen && (
-                          <UserLogoutModal
-                            onClose={() => dispatch(closeModal())}
+                        {isEditModalOpen && (
+                          <TodayListModal
+                            onClose={() => dispatch(closeTodayModal())}
                           />
                         )}
+                        <use href="/public/icons.svg#icon-Vector"></use>
+                      </svg>
+                      <svg className={css.iconTrash}>
                         <use href="src/img/icons.svg#icon-Vector"></use>
                       </svg>
                     </div>
@@ -59,25 +52,22 @@ export default function TodayWaterList() {
                 ))}
               </ul>
             </div>
-            <div className={css.line}></div>
-          </>
-        )}
+          </div>
+        </>
 
-        {onSaveClick && (
-          <>
-            <div className={css.containerBtn}>
-              <p className={css.btn} onClick={() => dispatch(openTodayModal())}>
-                <svg className={css.iconBtn}>
-                  <use href="src/img/icons.svg#icon-outline"></use>
-                </svg>
-                Add Water
-              </p>
-              {isModalOpen && (
-                <AddWaterModal onClose={() => dispatch(closeTodayModal())} />
-              )}
-            </div>
-          </>
-        )}
+        <>
+          <div className={css.containerBtn}>
+            <p className={css.btn} onClick={() => dispatch(openAddModal())}>
+              <svg className={css.iconBtn}>
+                <use href="src/img/icons.svg#icon-outline"></use>
+              </svg>
+              Add Water
+            </p>
+            {isAddModalOpen && (
+              <AddWaterModal onClose={() => dispatch(closeAddModal())} />
+            )}
+          </div>
+        </>
       </div>
     </>
   );
