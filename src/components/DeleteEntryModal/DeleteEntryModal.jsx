@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../redux/auth/slice.js';
+
 import {
   deletePortionThunk,
   fetchDailyPortionsThunk,
@@ -8,6 +8,7 @@ import {
 } from '../../redux/water/operations.js';
 import { selectSelectedItem } from '../../redux/water/selectors.js';
 import css from './DeleteEntryModal.module.css';
+import { closeDeleteModal } from '../../redux/water/slice.js';
 
 
 export default function DeleteEntryModal() {
@@ -29,7 +30,7 @@ const onDeleteClick = () => {
 
 
   dispatch(deletePortionThunk(dailyPortions._id)).then(() => {
-    dispatch(closeModal());
+    dispatch(closeDeleteModal());
     const today = new Date();
     const currentDate = getCurrentDate();
     dispatch(fetchDailyPortionsThunk(formingTodayDate(today)));
@@ -44,7 +45,7 @@ const onDeleteClick = () => {
           <h1 className={css.header}>Delete entry</h1>
           <button
             onClick={() => {
-              dispatch(closeModal());
+              dispatch(closeDeleteModal());
             }}
             className={css.closeButton}
           >
@@ -57,7 +58,7 @@ const onDeleteClick = () => {
           <button className={css.delete} onClick={onDeleteClick}>Delete</button>
         <button className={css.cancel}
           onClick={() => {
-            dispatch(closeModal());
+            dispatch(closeDeleteModal());
           }}
         >
           Cancel
