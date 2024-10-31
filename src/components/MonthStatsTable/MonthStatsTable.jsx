@@ -4,6 +4,7 @@ import { fetchMonthlyPortionsThunk } from '../../redux/water/operations';
 import styles from './MonthStatsTable.module.css';
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
+
 const MonthStatsTable = () => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -28,6 +29,12 @@ const MonthStatsTable = () => {
 
   const dispatch = useDispatch();
   const monthlyPortions = useSelector((state) => state.water.monthlyPortions); 
+
+  useEffect(() => {
+    
+    dispatch(fetchMonthlyPortionsThunk(new Date())); 
+  }, [dispatch]);
+
 
   useEffect(() => {
     // Fetch the monthly portions data whenever the selected month changes
