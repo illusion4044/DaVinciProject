@@ -15,6 +15,8 @@ import AddWaterModal from '../AddWaterModal/AddWaterModal.jsx';
 import { selectDailyPortions } from '../../redux/water/selectors.js';
 import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import DeleteEntryModal from '../DeleteEntryModal/DeleteEntryModal.jsx';
+import { useEffect } from 'react';
+import { fetchDailyPortionsThunk } from '../../redux/water/operations';
 
 export default function TodayWaterList() {
   const dispatch = useDispatch();
@@ -23,6 +25,10 @@ export default function TodayWaterList() {
   const isDeleteModalOpen = useSelector(state => state.water.isDeleteModalOpen);
 
   const dailyPortions = useSelector(selectDailyPortions);
+
+  useEffect(() => {
+    dispatch(fetchDailyPortionsThunk(new Date()));
+  }, [dispatch]);
 
   return (
     <>
