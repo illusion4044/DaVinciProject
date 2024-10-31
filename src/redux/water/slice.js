@@ -106,6 +106,7 @@ const waterSlice = createSlice({
       .addCase(updatePortionThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         const updatedPortion = action.payload;
+        console.log(action.payload)
         state.dailyPortions = state.dailyPortions.map(portion =>
           portion._id === updatedPortion._id ? updatedPortion : portion
         );
@@ -137,7 +138,8 @@ const waterSlice = createSlice({
       })
       .addCase(updateWaterRateThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.newDailyNorma = action.payload.dailyNorm;
+        console.log(action.payload)
+        state.dailyNorma = action.payload.dailyNorm;
       })
       .addCase(updateWaterRateThunk.rejected, (state, action) => {
         state.isLoading = false;

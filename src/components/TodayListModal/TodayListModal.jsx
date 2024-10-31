@@ -2,24 +2,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 
   selectSelectedItem,
-  selectSelectedTime,
 } from '../../redux/water/selectors.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
-  addWaterPortionThunk,
+  updatePortionThunk,
   fetchDailyPortionsThunk,
   fetchMonthlyPortionsThunk,
 } from '../../redux/water/operations.js';
 import css from './TodayListModal.module.css';
 import dayjs from 'dayjs';
-import { setSelectedTime } from '../../redux/water/slice.js';
 
-export default function TodayListModal({ onClose }) {
+
+
+export default function TodayListModal({ onClose, portion }) {
   const dispatch = useDispatch();
+  const initialPortion = useMemo (()=>{
+  return {
+    time: portion.date.split("T")[1],
+    volume:portion.volume
+  } 
+  // eslint-disable-next-line
+  },[])
   const selectedItem = useSelector(selectSelectedItem);
-  const selectedTime = useSelector(selectSelectedTime);
-  const [count, setCount] = useState(selectedItem ? selectedItem.amount : 0);
+  // const selectedTime = useSelector(selectSelectedTime);
+  const [count, setCount] = useState(initialPortion.volume);
+  const[selectedTime, setSelectedTime] = useState(initialPortion.time)
   const [inputValue, setInputValue] = useState(count);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const isFirstRecord = !selectedItem || Object.keys(selectedItem).length === 0;
@@ -94,9 +102,10 @@ export default function TodayListModal({ onClose }) {
     const payload = {
       date: dateTime,
       volume: count,
+      id: portion._id
     };
 
-    dispatch(addWaterPortionThunk(payload)).then(() => {
+    dispatch(updatePortionThunk(payload)).then(() => {
       dispatch(fetchDailyPortionsThunk(currentDate));
       dispatch(fetchMonthlyPortionsThunk(currentDateMonth));
     });
@@ -110,17 +119,17 @@ export default function TodayListModal({ onClose }) {
     if (selectedItem && Object.keys(selectedItem).length > 0) {
       setCount(selectedItem.amount);
       setInputValue(selectedItem.amount);
-      dispatch(setSelectedTime(selectedItem.time));
+      setSelectedTime(selectedItem.time);
       setIsSaveDisabled(selectedItem.amount <= 0);
     } else {
       setCount(0);
       setInputValue(0);
-      dispatch(setSelectedTime(dayjs().format('HH:mm')));
+      setSelectedTime(dayjs().format('HH:mm'));
     }
   }, [selectedItem, dispatch]);
 
   const handleTimeChange = event => {
-    dispatch(setSelectedTime(event.target.value));
+    setSelectedTime(event.target.value);
   };
 
   const generateTimeOptions = () => {
@@ -153,10 +162,10 @@ export default function TodayListModal({ onClose }) {
           </svg>
 
           <p className={css.amount}>
-            {selectedItem ? selectedItem.amount : 0} ml
+            { initialPortion.volume } ml
           </p>
           <p className={css.time}>
-            {selectedItem ? selectedItem.time : '00:00'}
+            {initialPortion.time}
           </p>
         </div>
 

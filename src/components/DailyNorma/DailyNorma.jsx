@@ -2,13 +2,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import DailyNormaModal from '../DailyNormaModal/DailyNormaModal.jsx';
 import { useState } from 'react';
 import css from './DailyNorma.module.css';
-import { selectUserInfo } from '../../redux/users/selectors.js';
+// import { selectUserInfo } from '../../redux/users/selectors.js';
+import {selectDailyNorma} from '../../redux/water/selectors.js'
 
 export default function DailyNorma() {
-  const mlLiters = useSelector(selectUserInfo);
+  const dailyNorm = useSelector(selectDailyNorma);
 
-  const { dailyNorm } = mlLiters;
-  const liters = dailyNorm / 1000;
+  // const { dailyNorm } = mlLiters;
+  console.log(dailyNorm)
+  const liters = typeof dailyNorm === "object"? dailyNorm.dailyNorm / 1000: dailyNorm / 1000;
 
   const dispatch = useDispatch();
 

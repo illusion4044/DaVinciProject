@@ -44,7 +44,7 @@ export const updateWaterRateThunk = createAsyncThunk(
     setAuthHeader(token);
     try {
       const response = await axios.patch(`/users/norm`, {dailyNorm});
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data);
