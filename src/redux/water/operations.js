@@ -140,14 +140,21 @@ export const addWaterPortionThunk = createAsyncThunk(
 
 export const deletePortionThunk = createAsyncThunk(
   'water/deletePortion',
-  async (id, { rejectWithValue }) => {
+  async (id, { rejectWithValue, getState }) => {
+    if (!id) {
+      return rejectWithValue('No valid ID provided');
+    }
     try {
+      const token = getState().auth.token; 
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+
       const response = await axios.delete(`/water/${id}`);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response?.data || 'An unknown error occurred'
+      );
     }
   }
 );
-
 
