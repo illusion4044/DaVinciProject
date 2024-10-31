@@ -112,7 +112,7 @@ export const fetchDailyPortionsThunk = createAsyncThunk(
 export const addWaterPortionThunk = createAsyncThunk(
   'water/addWaterPortion',
   async ({ date, volume }, { rejectWithValue, getState }) => {
-   
+
 
     try {
       const token = getState().auth.token;
@@ -136,3 +136,18 @@ export const addWaterPortionThunk = createAsyncThunk(
     }
   }
 );
+
+
+export const deletePortionThunk = createAsyncThunk(
+  'water/deletePortion',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(`/water/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
