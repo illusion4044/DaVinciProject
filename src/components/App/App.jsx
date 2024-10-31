@@ -1,7 +1,7 @@
 // src/components/App/App.jsx
 
 import { lazy, Suspense, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { SharedLayout } from '../SharedLayout/SharedLayout';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -46,6 +46,10 @@ export default function App() {
             element={
               <RestrictedRoute component={WelcomePage} redirectTo="/home" />
             }
+          />
+          <Route
+            path="/"
+            element={<Navigate to={userToken ? '/home' : '/welcome'} />}
           />
           <Route
             path="/register"
