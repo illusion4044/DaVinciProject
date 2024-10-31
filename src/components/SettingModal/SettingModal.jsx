@@ -216,7 +216,7 @@ export default function SettingModal({ closeModal }) {
                         name="password"
                         placeholder="Password"
                       />
-                      <svg
+                      {/* <svg
                         className={css.eyeIcon}
                         width="16"
                         height="16"
@@ -225,6 +225,18 @@ export default function SettingModal({ closeModal }) {
                         <use
                           href={`/icons.svg#icon-eye-${
                             showPassword ? '' : 'slash'
+                          }`}
+                        ></use>
+                      </svg> */}
+                      <svg
+                        className={css.eyeIcon}
+                        width="16"
+                        height="16"
+                        onClick={() => setShowPassword(prev => !prev)}
+                      >
+                        <use
+                          href={`/icons.svg#icon-eye${
+                            showPassword ? '' : '-slash'
                           }`}
                         ></use>
                       </svg>
@@ -246,7 +258,7 @@ export default function SettingModal({ closeModal }) {
                         name="newPassword"
                         placeholder="New password"
                       />
-                      <svg
+                      {/* <svg
                         className={css.eyeIcon}
                         width="16"
                         height="16"
@@ -255,6 +267,18 @@ export default function SettingModal({ closeModal }) {
                         <use
                           href={`/icons.svg#icon-eye-${
                             showNewPassword ? '' : 'slash'
+                          }`}
+                        ></use>
+                      </svg> */}
+                      <svg
+                        className={css.eyeIcon}
+                        width="16"
+                        height="16"
+                        onClick={() => setShowNewPassword(prev => !prev)}
+                      >
+                        <use
+                          href={`/icons.svg#icon-eye${
+                            showNewPassword ? '' : '-slash'
                           }`}
                         ></use>
                       </svg>
@@ -278,7 +302,7 @@ export default function SettingModal({ closeModal }) {
                         name="repeatNewPassword"
                         placeholder="Repeat password"
                       />
-                      <svg
+                      {/* <svg
                         className={css.eyeIcon}
                         width="16"
                         height="16"
@@ -287,6 +311,18 @@ export default function SettingModal({ closeModal }) {
                         <use
                           href={`/icons.svg#icon-eye-${
                             showRepeatNewPassword ? '' : 'slash'
+                          }`}
+                        ></use>
+                      </svg> */}
+                      <svg
+                        className={css.eyeIcon}
+                        width="16"
+                        height="16"
+                        onClick={() => setShowRepeatNewPassword(prev => !prev)}
+                      >
+                        <use
+                          href={`/icons.svg#icon-eye${
+                            showRepeatNewPassword ? '' : '-slash'
                           }`}
                         ></use>
                       </svg>
