@@ -22,6 +22,7 @@ const initialState = {
   isOpenDailyNormaModal: false,
   isTodayModalOpen: false,
   isAddModalOpen: false,
+  isDeleteModalOpen: false,
   selectedItem: {},
   selectedTime: dayjs().format('HH:mm'),
   selectedAmount: 0,
@@ -59,6 +60,12 @@ const waterSlice = createSlice({
     },
     closeAddModal: state => {
       state.isAddModalOpen = false;
+    },
+    openDeleteModal: state => {
+      state.isDeleteModalOpen = true;
+    },
+    closeDeleteModal: state => {
+      state.isDeleteModalOpen = false;
     },
     setSelectedTime(state, action) {
       state.selectedTime = action.payload; // Update selected time
@@ -152,20 +159,8 @@ const waterSlice = createSlice({
           ...initialState,
         };
       });
-
-    //     .addCase(deletePortionThunk.fulfilled, (state, action) => {
-    //       state.dailyPortions = state.dailyPortions.filter(
-    //         portion => portion._id !== action.payload._id
-    //       );
-    //     })
-    //     .addCase(logOut.fulfilled, () => {
-    //       return {
-    //         ...initialState,
-    //       };
-    //     });
   },
 });
-
 export const {
   changeDailyNorma,
   changeActiveContent,
@@ -181,6 +176,8 @@ export const {
   setDailyPortions,
   openAddModal,
   closeAddModal,
+  openDeleteModal,
+  closeDeleteModal,
 } = waterSlice.actions;
 
 export default waterSlice.reducer;
