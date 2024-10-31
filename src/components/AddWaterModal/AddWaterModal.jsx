@@ -36,6 +36,7 @@ export default function AddWaterModal({ onClose }) {
   const [count, setCount] = useState(50);
   const [inputValue, setInputValue] = useState(count);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+
   //   const isFirstRecord = !selectedItem || Object.keys(selectedItem).length === 0;
 
   const handleDecrement = () => {
@@ -98,22 +99,21 @@ export default function AddWaterModal({ onClose }) {
   const onSaveClick = () => {
     if (count <= 0) {
       return;
-      
     }
     const currentDate = getCurrentDate();
     const dateTime = `${currentDate}T${selectedTime}`;
-    
+
     const currentDateMonth = getCurrentMonth();
-    
+
     const payload = {
       date: dateTime,
       volume: count,
     };
-    
-    dispatch(addWaterPortionThunk(payload)).then(async () => {
-      console.log ("onSaveClick")
-      await dispatch(fetchDailyPortionsThunk(currentDate));
-      await dispatch(fetchMonthlyPortionsThunk(currentDateMonth));
+
+    dispatch(addWaterPortionThunk(payload)).then(() => {
+      console.log('onSaveClick');
+      dispatch(fetchDailyPortionsThunk(currentDate));
+      dispatch(fetchMonthlyPortionsThunk(currentDateMonth));
 
       onClose();
     });
