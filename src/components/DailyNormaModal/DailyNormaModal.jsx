@@ -23,7 +23,7 @@ export default function DailyNormaModal({ onClose }) {
   const [isLoading, setIsLoading] = useState(false);
   const gender = useSelector(selectGender);
   const dailyNorma = useSelector(selectDailyNorma);
-  const [selectedGender, setSelectedGender] = useState(gender);
+  const [selectedGender, setSelectedGender] = useState('woman');
 
   const calculateSchema = Yup.object({
     weight: Yup.number()
@@ -97,7 +97,7 @@ export default function DailyNormaModal({ onClose }) {
        onClose();
      } catch (error) {
        toast.error('An error occurred while saving data!');
-      
+
      } finally {
        setIsLoading(false);
      }
@@ -154,10 +154,10 @@ export default function DailyNormaModal({ onClose }) {
         <div className={css.placeholderContainer}>
           <p className={css.placeholder}>
             <span>
-            <span className={css.star}>*</span> V is the volume of the water norm in liters per day, M is your
-              body weight, T is the time of active sports, or another type of
-              activity commensurate in terms of loads (in the absence of these,
-              you must set 0)
+              <span className={css.star}>*</span> V is the volume of the water
+              norm in liters per day, M is your body weight, T is the time of
+              active sports, or another type of activity commensurate in terms
+              of loads (in the absence of these, you must set 0)
             </span>
           </p>
         </div>
@@ -174,7 +174,7 @@ export default function DailyNormaModal({ onClose }) {
                   onChange={handleGenderChange}
                   className={css.gender}
                 />
-                For woman
+                <span style={{ marginLeft: '8px' }}>For woman</span>
               </label>
               <label>
                 <input
@@ -185,7 +185,7 @@ export default function DailyNormaModal({ onClose }) {
                   onChange={handleGenderChange}
                   className={css.gender}
                 />
-                For man
+                <span style={{ marginLeft: '8px' }}>For man</span>
               </label>
             </div>
 
