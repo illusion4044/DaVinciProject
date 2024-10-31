@@ -153,15 +153,16 @@ const waterSlice = createSlice({
         };
       });
 
-      .addCase(deletePortionThunk.fulfilled, (state, action) => {
-        state.dailyPortions = state.dailyPortions.filter(portion => portion._id !== action.payload._id);
-      })
-.addCase(logOut.fulfilled, ()=> {
-return {
-  ...initialState
-}
-} )
-
+    //     .addCase(deletePortionThunk.fulfilled, (state, action) => {
+    //       state.dailyPortions = state.dailyPortions.filter(
+    //         portion => portion._id !== action.payload._id
+    //       );
+    //     })
+    //     .addCase(logOut.fulfilled, () => {
+    //       return {
+    //         ...initialState,
+    //       };
+    //     });
   },
 });
 
