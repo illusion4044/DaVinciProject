@@ -61,12 +61,6 @@ p {
 }
 
 .modal {
-  /* max-width: 320px;
-  padding: 32px 12px;
-  gap: 24px;
-  border-radius: 10px;
-  background: #fff;
-  box-sizing: border-box; */
   width: 280px;
   max-height: 90vh;
   padding: 32px 12px;
@@ -288,7 +282,7 @@ input::placeholder {
   margin-bottom: 12px;
 }
 
-.passwordFormGroup label{
+.passwordFormGroup label {
   line-height: 1.25;
 }
 
@@ -299,7 +293,7 @@ input::placeholder {
   margin-bottom: 24px;
 }
 
-.passwordRepeat label{
+.passwordRepeat label {
   line-height: 1.25;
 }
 
@@ -325,7 +319,21 @@ input::placeholder {
   width: 16px;
   cursor: pointer;
   pointer-events: all;
+  z-index: 1; /* Ensure it stays above the input field */
 }
+
+/* .eyeIcon {
+  fill: transparent;
+  stroke: #407bff;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  pointer-events: all;
+} */
 
 .modalInputWrap {
   position: relative;
@@ -378,18 +386,6 @@ input::placeholder {
     width: 392px;
   }
 
-  .eyeIcon {
-    fill: transparent;
-    stroke: #407bff;
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    height: 16px;
-    width: 16px;
-  }
-
   .userImg {
     width: 80px;
     height: 80px;
@@ -398,7 +394,6 @@ input::placeholder {
   .uploadText {
     font-size: 16px;
   }
-
 
   .inputRepeatNewPassword {
     width: 100%;

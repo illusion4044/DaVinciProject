@@ -4,78 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { selectUserInfo } from '../../redux/users/selectors';
-// import { selectUser } from '../../redux/auth/selectors.js';
 import toast from 'react-hot-toast';
 import css from './SettingModal.module.css';
 import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
 import { updateUserInfo, uploadUserPhoto } from '../../redux/users/operations';
 import Loader from '../../components/Loader/Loader';
 
-// 13-17
-// const UserSchema = Yup.object().shape({
-//   gender: Yup.string().required('Please select your gender'),
-//   name: Yup.string()
-//     .min(2, 'Minimum 2 characters')
-//     .max(32, 'Maximum 32 characters'),
-//   email: Yup.string().email('Invalid email'),
-
-//   // Old Password field
-//   password: Yup.string().min(8, 'Password must be at least 8 characters long'),
-
-//   // New Password field, required only if old password is provided
-//   newPassword: Yup.string()
-//     .min(8, 'New password must be at least 8 characters long')
-//     .when('password', {
-//       is: val => !!val,
-//       then: Yup.string().required(
-//         'New password is required if old password is provided'
-//       ),
-//       otherwise: Yup.string().notRequired(),
-//     }),
-
-//   // Repeat New Password field, required only if old password is provided
-//   repeatNewPassword: Yup.string()
-//     .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-//     .when('password', {
-//       is: val => !!val,
-//       then: Yup.string().required(
-//         'Repeat new password is required if old password is provided'
-//       ),
-//       otherwise: Yup.string().notRequired(),
-//     }),
-// });
-//12-55
-// const UserSchema = Yup.object().shape({
-//   gender: Yup.string().required('Please select your gender'),
-//   name: Yup.string()
-//     .min(2, 'Minimum 2 characters')
-//     .max(32, 'Maximum 32 characters'),
-//   email: Yup.string().email('Invalid email'),
-
-//   password: Yup.string().min(8, 'Password must be at least 8 characters long'),
-
-//   newPassword: Yup.string()
-//     .min(8, 'New password must be at least 8 characters long')
-//     .when('password', {
-//       is: val => !!val, // Only validate if old password (password) is provided
-//       then: Yup.string().required(
-//         'New password is required if old password is provided'
-//       ),
-//       otherwise: Yup.string().notRequired(), // Make it optional if no old password
-//     }),
-
-//   repeatNewPassword: Yup.string()
-//     .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-//     .when('password', {
-//       is: val => !!val, // Only validate if old password (password) is provided
-//       then: Yup.string().required(
-//         'Repeat new password is required if old password is provided'
-//       ),
-//       otherwise: Yup.string().notRequired(), // Make it optional if no old password
-//     }),
-// });
-
-12 - 50;
 const UserSchema = Yup.object().shape({
   gender: Yup.string().required('Please select your gender'),
   name: Yup.string()
@@ -87,42 +21,28 @@ const UserSchema = Yup.object().shape({
     8,
     'New password must be at least 8 characters long'
   ),
-  // .when('password', {
-  //   is: val => Boolean(val),
-  //   then: Yup.string().required(
-  //     'New password is required if old password is provided'
-  //   ),
-  // }),
   repeatNewPassword: Yup.string().oneOf(
     [Yup.ref('newPassword'), null],
     'Passwords must match'
   ),
-  // .when('password', {
-  //   is: val => Boolean(val),
-  //   then: Yup.string().required(
-  //     'Repeat new password is required if old password is provided'
-  //   ),
-  // }),
 });
 
 export default function SettingModal({ closeModal }) {
   const dispatch = useDispatch();
-  // const user = useSelector(selectUser);
   const user = useSelector(selectUserInfo);
   const isLoading = useSelector(state => state.users.isLoading);
+
   const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showRepeatNewPassword, setShowRepeatNewPassword] = useState(false);
+
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [previewPhotoUrl, setPreviewPhotoUrl] = useState(
     user?.photo || userImage
   );
 
-  console.log('User from Redux state:', user);
-  console.log('Photo URL from Redux state:', user.photo);
-
   useEffect(() => {
-    console.log(user.photo);
     setPreviewPhotoUrl(user.photo || userImage);
-    console.log('Updated previewPhotoUrl:', user.photo || userImage);
   }, [user.photo]);
 
   useEffect(() => {
@@ -145,48 +65,9 @@ export default function SettingModal({ closeModal }) {
     }
   };
 
-  // 13-50
-  // const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-  //   try {
-  //     const userData = { ...values, token: user?.token };
-
-  //     if (selectedPhoto) {
-  //       const response = await dispatch(
-  //         uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
-  //       ).unwrap();
-
-  //       setPreviewPhotoUrl(response.data.photo);
-  //     }
-
-  //     if (selectedPhoto) {
-  //       await dispatch(
-  //         uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
-  //       ).unwrap();
-  //     }
-
-  //     if (
-  //       values.name !== user?.name ||
-  //       values.email !== user?.email ||
-  //       values.gender !== user?.gender ||
-  //       values.password
-  //     ) {
-  //       await dispatch(updateUserInfo({ ...userData, id: user?._id })).unwrap();
-  //     }
-  //     toast.success('Settings updated successfully');
-  //     closeModal();
-  //   } catch (error) {
-  //     toast.error('Failed to update settings');
-  //     setErrors({ submit: error.message });
-  //   } finally {
-  //     setSubmitting(false);
-  //   }
-  // };
-
-  // from storage -passwords, conditions 30.10.24
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const userData = { ...values };
-      console.log('Value', values);
       if (selectedPhoto) {
         await dispatch(
           uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
@@ -208,10 +89,6 @@ export default function SettingModal({ closeModal }) {
     } finally {
       setSubmitting(false);
     }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(prev => !prev);
   };
 
   return (
@@ -262,7 +139,6 @@ export default function SettingModal({ closeModal }) {
 
         <Formik
           initialValues={{
-            // gender: user?.gender || 'woman',
             gender: user?.gender || 'Woman',
             name: user?.name || '',
             email: user?.email || '',
@@ -329,6 +205,8 @@ export default function SettingModal({ closeModal }) {
 
                 <div className={css.rightColumn}>
                   <p className={css.subheaderPassword}>Password</p>
+
+                  {/* Outdated Password Field */}
                   <div className={css.passwordFormGroup}>
                     <label htmlFor="password">Outdated password:</label>
                     <div className={css.modalInputWrap}>
@@ -342,7 +220,7 @@ export default function SettingModal({ closeModal }) {
                         className={css.eyeIcon}
                         width="16"
                         height="16"
-                        onClick={togglePasswordVisibility}
+                        onClick={() => setShowPassword(prev => !prev)}
                       >
                         <use
                           href={`/icons.svg#icon-eye-${
@@ -358,12 +236,13 @@ export default function SettingModal({ closeModal }) {
                     />
                   </div>
 
+                  {/* New Password Field */}
                   <div className={css.passwordFormGroup}>
                     <label htmlFor="newPassword">New Password:</label>
                     <div className={css.modalInputWrap}>
                       <Field
                         className={css.inputNewPassword}
-                        type={showPassword ? 'text' : 'password'}
+                        type={showNewPassword ? 'text' : 'password'}
                         name="newPassword"
                         placeholder="New password"
                       />
@@ -371,11 +250,11 @@ export default function SettingModal({ closeModal }) {
                         className={css.eyeIcon}
                         width="16"
                         height="16"
-                        onClick={togglePasswordVisibility}
+                        onClick={() => setShowNewPassword(prev => !prev)}
                       >
                         <use
                           href={`/icons.svg#icon-eye-${
-                            showPassword ? '' : 'slash'
+                            showNewPassword ? '' : 'slash'
                           }`}
                         ></use>
                       </svg>
@@ -387,6 +266,7 @@ export default function SettingModal({ closeModal }) {
                     />
                   </div>
 
+                  {/* Repeat New Password Field */}
                   <div className={css.passwordRepeat}>
                     <label htmlFor="repeatNewPassword">
                       Repeat New Password:
@@ -394,7 +274,7 @@ export default function SettingModal({ closeModal }) {
                     <div className={css.modalInputWrap}>
                       <Field
                         className={css.inputRepeatNewPassword}
-                        type={showPassword ? 'text' : 'password'}
+                        type={showRepeatNewPassword ? 'text' : 'password'}
                         name="repeatNewPassword"
                         placeholder="Repeat password"
                       />
@@ -402,11 +282,11 @@ export default function SettingModal({ closeModal }) {
                         className={css.eyeIcon}
                         width="16"
                         height="16"
-                        onClick={togglePasswordVisibility}
+                        onClick={() => setShowRepeatNewPassword(prev => !prev)}
                       >
                         <use
                           href={`/icons.svg#icon-eye-${
-                            showPassword ? '' : 'slash'
+                            showRepeatNewPassword ? '' : 'slash'
                           }`}
                         ></use>
                       </svg>
@@ -443,334 +323,3 @@ export default function SettingModal({ closeModal }) {
 SettingModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
 };
-
-// import PropTypes from 'prop-types';
-// import { useState, useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import * as Yup from 'yup';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import { selectUserInfo } from '../../redux/users/selectors';
-// import toast from 'react-hot-toast';
-// import css from './SettingModal.module.css';
-// import userImage from '../../img/settingModalImg/userPhoto1x.jpg';
-// import { updateUserInfo, uploadUserPhoto } from '../../redux/users/operations';
-// import Loader from '../../components/Loader/Loader';
-
-// const UserSchema = Yup.object().shape({
-//   gender: Yup.string().required('Please select your gender'),
-//   name: Yup.string()
-//     .min(2, 'Minimum 2 characters')
-//     .max(32, 'Maximum 32 characters'),
-//   email: Yup.string().email('Invalid email'),
-//   password: Yup.string().min(8, 'Password must be at least 8 characters long'),
-//   newPassword: Yup.string()
-//     .min(8, 'New password must be at least 8 characters long')
-//     .when('password', {
-//       is: val => Boolean(val),
-//       then: Yup.string().required(
-//         'New password is required if old password is provided'
-//       ),
-//     }),
-//   repeatNewPassword: Yup.string()
-//     .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-//     .when('password', {
-//       is: val => Boolean(val),
-//       then: Yup.string().required(
-//         'Repeat new password is required if old password is provided'
-//       ),
-//     }),
-// });
-
-// export default function SettingModal({ closeModal }) {
-//   const dispatch = useDispatch();
-//   const user = useSelector(selectUserInfo);
-//   const isLoading = useSelector(state => state.users.isLoading);
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [selectedPhoto, setSelectedPhoto] = useState(null);
-//   const [previewPhotoUrl, setPreviewPhotoUrl] = useState(
-//     user?.photo || userImage
-//   );
-
-//   useEffect(() => {
-//     setPreviewPhotoUrl(user.photo || userImage);
-//   }, [user.photo]);
-
-//   useEffect(() => {
-//     const handleKeyDown = e => {
-//       if (e.key === 'Escape') {
-//         closeModal();
-//       }
-//     };
-//     document.addEventListener('keydown', handleKeyDown);
-//     return () => {
-//       document.removeEventListener('keydown', handleKeyDown);
-//     };
-//   }, [closeModal]);
-
-//   const handleImageUpload = e => {
-//     const file = e.target.files[0];
-//     if (file) {
-//       setSelectedPhoto(file);
-//       setPreviewPhotoUrl(URL.createObjectURL(file));
-//     }
-//   };
-
-//   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-//     try {
-//       const userData = { ...values, token: user?.token };
-
-//       if (selectedPhoto) {
-//         await dispatch(
-//           uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
-//         ).unwrap();
-//       }
-//       if (
-//         values.name !== user?.name ||
-//         values.email !== user?.email ||
-//         values.gender !== user?.gender ||
-//         values.password
-//       ) {
-//         await dispatch(updateUserInfo({ ...userData, id: user?._id })).unwrap();
-//       }
-//       toast.success('Settings updated successfully');
-//       closeModal();
-//     } catch (error) {
-//       toast.error('Failed to update settings');
-//       setErrors({ submit: error.message });
-//     } finally {
-//       setSubmitting(false);
-//     }
-//   };
-
-//   const togglePasswordVisibility = () => {
-//     setShowPassword(prev => !prev);
-//   };
-
-//   return (
-//     <div
-//       className={css.backdrop}
-//       onClick={e => e.target === e.currentTarget && closeModal()}
-//     >
-//       <div className={css.modal}>
-//         {isLoading && (
-//           <div className={css.loaderContainer}>
-//             <Loader />
-//           </div>
-//         )}
-//         <div className={css.wrap}>
-//           <p className={css.modalHeading}>Settings</p>
-//           <button type="button" className={css.uploadBtn} onClick={closeModal}>
-//             <svg className={css.closeIcon} width="24" height="24">
-//               <use href="/icons.svg#icon-x-mark"></use>
-//             </svg>
-//           </button>
-//         </div>
-
-//         <p className={css.subheaderYourPhoto}>Your photo</p>
-//         <div className={css.wrapImageUpload}>
-//           <img
-//             className={css.userImg}
-//             src={previewPhotoUrl}
-//             alt={user.name || 'User photo'}
-//           />
-//           <button
-//             type="button"
-//             className={css.uploadBtn}
-//             onClick={() => document.getElementById('fileInput').click()}
-//           >
-//             <svg className={css.arrowUpTrayIcon} width="16" height="16">
-//               <use href="/icons.svg#icon-arrow-up-tray"></use>
-//             </svg>
-//             <span className={css.uploadText}>Upload a photo</span>
-//           </button>
-//           <input
-//             id="fileInput"
-//             type="file"
-//             accept="image/*"
-//             onChange={handleImageUpload}
-//             style={{ display: 'none' }}
-//           />
-//         </div>
-
-//         <Formik
-//           initialValues={{
-//             gender: user?.gender || 'woman',
-//             name: user?.name || '',
-//             email: user?.email || '',
-//             password: '',
-//             newPassword: '',
-//             repeatNewPassword: '',
-//           }}
-//           validationSchema={UserSchema}
-//           onSubmit={handleSubmit}
-//         >
-//           {({ isSubmitting, errors }) => (
-//             <Form className={css.form}>
-//               <div className={css.formInner}>
-//                 <div className={css.leftColumn}>
-//                   <p className={css.subheaderGender}>Your gender identity</p>
-//                   <div className={css.formGroup}>
-//                     <div className={css.radioGroup}>
-//                       <label>
-//                         <Field type="radio" name="gender" value="woman" />
-//                         Woman
-//                       </label>
-//                       <label>
-//                         <Field type="radio" name="gender" value="man" />
-//                         Man
-//                       </label>
-//                     </div>
-//                     <ErrorMessage
-//                       name="gender"
-//                       component="div"
-//                       className={css.error}
-//                     />
-//                   </div>
-
-//                   <p className={css.subheaderYourName}>Your name</p>
-//                   <div className={css.formGroup}>
-//                     <Field
-//                       className={css.inputName}
-//                       type="text"
-//                       name="name"
-//                       placeholder="Name"
-//                     />
-//                     <ErrorMessage
-//                       name="name"
-//                       component="div"
-//                       className={css.error}
-//                     />
-//                   </div>
-
-//                   <p className={css.subheaderEmail}>E-mail</p>
-//                   <div className={css.formGroup}>
-//                     <Field
-//                       className={css.inputEmail}
-//                       type="email"
-//                       name="email"
-//                       placeholder="E-mail"
-//                     />
-//                     <ErrorMessage
-//                       name="email"
-//                       component="div"
-//                       className={css.error}
-//                     />
-//                   </div>
-//                 </div>
-
-//                 <div className={css.rightColumn}>
-//                   <p className={css.subheaderPassword}>Password</p>
-//                   <div className={css.passwordFormGroup}>
-//                     <label htmlFor="password">Outdated password:</label>
-//                     <div className={css.modalInputWrap}>
-//                       <Field
-//                         className={css.inputOutdated}
-//                         type={showPassword ? 'text' : 'password'}
-//                         name="password"
-//                         placeholder="Password"
-//                       />
-//                       <svg
-//                         className={css.eyeIcon}
-//                         width="16"
-//                         height="16"
-//                         onClick={togglePasswordVisibility}
-//                       >
-//                         <use
-//                           href={`/icons.svg#icon-eye-${
-//                             showPassword ? '' : 'slash'
-//                           }`}
-//                         ></use>
-//                       </svg>
-//                     </div>
-//                     <ErrorMessage
-//                       name="password"
-//                       component="div"
-//                       className={css.error}
-//                     />
-//                   </div>
-
-//                   <div className={css.passwordFormGroup}>
-//                     <label htmlFor="newPassword">New Password:</label>
-//                     <div className={css.modalInputWrap}>
-//                       <Field
-//                         className={css.inputNewPassword}
-//                         type={showPassword ? 'text' : 'password'}
-//                         name="newPassword"
-//                         placeholder="New password"
-//                       />
-//                       <svg
-//                         className={css.eyeIcon}
-//                         width="16"
-//                         height="16"
-//                         onClick={togglePasswordVisibility}
-//                       >
-//                         <use
-//                           href={`/icons.svg#icon-eye-${
-//                             showPassword ? '' : 'slash'
-//                           }`}
-//                         ></use>
-//                       </svg>
-//                     </div>
-//                     <ErrorMessage
-//                       name="newPassword"
-//                       component="div"
-//                       className={css.error}
-//                     />
-//                   </div>
-
-//                   <div className={css.passwordRepeat}>
-//                     <label htmlFor="repeatNewPassword">
-//                       Repeat New Password:
-//                     </label>
-//                     <div className={css.modalInputWrap}>
-//                       <Field
-//                         className={css.inputRepeatNewPassword}
-//                         type={showPassword ? 'text' : 'password'}
-//                         name="repeatNewPassword"
-//                         placeholder="Repeat password"
-//                       />
-//                       <svg
-//                         className={css.eyeIcon}
-//                         width="16"
-//                         height="16"
-//                         onClick={togglePasswordVisibility}
-//                       >
-//                         <use
-//                           href={`/icons.svg#icon-eye-${
-//                             showPassword ? '' : 'slash'
-//                           }`}
-//                         ></use>
-//                       </svg>
-//                     </div>
-//                     <ErrorMessage
-//                       name="repeatNewPassword"
-//                       component="div"
-//                       className={css.error}
-//                     />
-//                   </div>
-
-//                   {errors.submit && (
-//                     <div className={css.error}>{errors.submit}</div>
-//                   )}
-//                 </div>
-//               </div>
-//               <div className={css.submitBtnWrapper}>
-//                 <button
-//                   type="submit"
-//                   className={css.submitBtn}
-//                   disabled={isSubmitting}
-//                 >
-//                   {isSubmitting ? 'Saving...' : 'Save'}
-//                 </button>
-//               </div>
-//             </Form>
-//           )}
-//         </Formik>
-//       </div>
-//     </div>
-//   );
-// }
-
-// SettingModal.propTypes = {
-//   closeModal: PropTypes.func.isRequired,
-// };
