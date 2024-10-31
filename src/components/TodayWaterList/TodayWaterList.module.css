@@ -99,8 +99,9 @@
 }
 
 .scrollContainer {
+  display: block;
   max-height: 200px;
-  overflow-y: auto;
+  overflow-y: scroll;
   color: rgba(#d7e3ff, #9ebbff);
 }
 
@@ -119,22 +120,18 @@
 }
 
 @media screen and (min-width: 768px) {
+  .containerMain {
+    height: 260px;
+    width: 656px;
+  }
+
   .name {
     font-size: 26px;
     line-height: 1.23077;
   }
   .containerList {
-    width: 646px;
+    min-width: 646px;
     height: 36px;
-  }
-  .amountAndTime {
-    width: 206px;
-    gap: 16px;
-    margin-right: 390px;
-  }
-
-  .line {
-    width: 646px;
   }
   .containerBtn {
     width: 114px;
@@ -142,22 +139,34 @@
   }
   .btn {
     font-size: 18px;
+    line-height: 1.33;
   }
   .iconBtn {
     width: 14px;
     height: 14px;
     margin-right: 8px;
   }
+
+  .list {
+    width: 646px;
+    height: 36px;
+  }
+  .iconPencil {
+    width: 16px;
+    height: 16px;
+  }
+
+  .iconTrash {
+    width: 16px;
+    height: 16px;
+  }
+  .scrollContainer {
+    width: 544px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-  .containerList {
-    width: 534px;
-  }
-  .amountAndTime {
-    margin-right: 278px;
-  }
-  .line {
+  .containerL {
     width: 534px;
   }
 }
