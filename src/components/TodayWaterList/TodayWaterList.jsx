@@ -2,16 +2,25 @@ import onSaveClick from '../TodayListModal/TodayListModal.jsx';
 import onSaveClickAddModal from '../AddWaterModal/AddWaterModal.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import css from './TodayWaterList.module.css';
-import { openTodayModal, closeTodayModal } from '../../redux/water/slice.js';
-import { openAddModal, closeAddModal } from '../../redux/water/slice.js';
+import {
+  openTodayModal,
+  closeTodayModal,
+  openAddModal,
+  closeAddModal,
+  openDeleteModal,
+  closeDeleteModal,
+} from '../../redux/water/slice.js';
+
 import AddWaterModal from '../AddWaterModal/AddWaterModal.jsx';
 import { selectDailyPortions } from '../../redux/water/selectors.js';
 import TodayListModal from '../TodayListModal/TodayListModal.jsx';
+import DeleteEntryModal from '../DeleteEntryModal/DeleteEntryModal.jsx';
 
 export default function TodayWaterList() {
   const dispatch = useDispatch();
   const isEditModalOpen = useSelector(state => state.water.isTodayModalOpen);
   const isAddModalOpen = useSelector(state => state.water.isAddModalOpen);
+  const isDeleteModalOpen = useSelector(state => state.water.isDeleteModalOpen);
 
   const dailyPortions = useSelector(selectDailyPortions);
 
@@ -44,7 +53,15 @@ export default function TodayWaterList() {
                         )}
                         <use href="/public/icons.svg#icon-Vector"></use>
                       </svg>
-                      <svg className={css.iconTrash}>
+                      <svg
+                        className={css.iconTrash}
+                        onClick={() => dispatch(openDeleteModal())}
+                      >
+                        {isDeleteModalOpen && (
+                          <DeleteEntryModal
+                            onClose={() => dispatch(closeDeleteModal())}
+                          />
+                        )}
                         <use href="src/img/icons.svg#icon-Vector"></use>
                       </svg>
                     </div>
