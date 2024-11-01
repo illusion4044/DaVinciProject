@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  
-  selectSelectedTime,
-} from '../../redux/water/selectors.js';
+import { selectSelectedTime } from '../../redux/water/selectors.js';
 import { useEffect, useState } from 'react';
 
 import {
@@ -13,11 +10,8 @@ import {
 import css from './AddWaterModal.module.css';
 import dayjs from 'dayjs';
 import { setSelectedTime } from '../../redux/water/slice.js';
-import sprite from "../../img/icons.svg"
-console.log(sprite)
-
-
-
+import sprite from '../../img/icons.svg';
+console.log(sprite);
 
 const formatTimeMinutes = time => {
   const [h, m] = time.split(':');
@@ -38,7 +32,7 @@ export default function AddWaterModal({ onClose }) {
   //   const selectedItem = useSelector(selectSelectedItem);
   const selectedTime = useSelector(selectSelectedTime);
   console.log(selectedTime);
-  const [count, setCount] = useState(50);
+  const [count, setCount] = useState(0);
   const [inputValue, setInputValue] = useState(count);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
@@ -48,7 +42,7 @@ export default function AddWaterModal({ onClose }) {
     if (count > 0) {
       const newCount = Math.max(0, count - 50);
       setCount(newCount);
-      //   setInputValue(newCount);
+      setInputValue(newCount);
       setIsSaveDisabled(newCount <= 0);
     }
   };
@@ -57,7 +51,7 @@ export default function AddWaterModal({ onClose }) {
     if (count < 1500) {
       const newCount = Math.min(1500, count + 50);
       setCount(newCount);
-      //   setInputValue(newCount);
+      setInputValue(newCount);
       setIsSaveDisabled(newCount > 1500);
     }
   };
@@ -65,8 +59,8 @@ export default function AddWaterModal({ onClose }) {
   const handleInputChange = event => {
     const value = event.target.value;
     const numericValue = Number(value);
-    // setInputValue(value);
-    // setCount(numericValue);
+    setInputValue(value);
+    setCount(numericValue);
 
     if (!isNaN(numericValue) && numericValue >= 0 && numericValue <= 1500) {
       setCount(numericValue);
