@@ -17,7 +17,6 @@ export default function AddWaterBtn({className}) {
         </svg>
         Add Water
       </button>
-      {isModalOpen && <AddWaterModal onClose={() => dispatch(closeTodayModal())}/>}  
       {isModalOpen && <AddWaterModal onClose={() => dispatch(closeAddModal())}/>}  
     </>
     )
