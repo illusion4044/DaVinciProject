@@ -1,6 +1,7 @@
 .containerMain {
   margin: 0 auto;
   height: 258px;
+  width: 264px;
 }
 
 .name {
@@ -11,15 +12,22 @@
   font-weight: bold;
   color: #2f2f2f;
   letter-spacing: 0.04em;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
-.container {
-  display: flex;
+.containerList {
   width: 254px;
-  /* height: 258px; */
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /* padding-bottom: 12px; */
 }
+
+.entries {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+} 
 
 .iconGlass {
   width: 17px;
@@ -38,41 +46,42 @@
   line-height: 2;
   color: #2f2f2f;
 }
+
 .icons {
   display: flex;
-  align-items: end;
-  width: 50px;
-  margin-left: 38px;
+  justify-content: center;
+  align-items: center;
+  /* align-items: end; */
+  /* width: 50px; */
+  /* margin-left: 38px; */
   gap: 18px;
-  margin-bottom: 12px;
-  margin-top: 0px;
+  /* margin-bottom: 12px; */
+  /* margin-top: 0px; */
 }
 .iconPencil {
   width: 14px;
   height: 12px;
+  fill: transparent;
+  stroke: #9EBBFF;
 }
 
 .iconTrash {
   width: 12px;
   height: 12px;
+  fill: transparent;
+  stroke: #EF5050;
 }
 
-.containerList {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 12px;
-  padding-top: 0px;
-}
 .list {
   display: flex;
   flex-direction: row;
-  gap: 16px;
-
+  justify-content: space-between;
+  gap: 38px;
   width: 254px;
-  height: 26px;
-  margin: 12px 0;
-
+  height: 38px;
+  /* margin: 12px 0; */
   border-bottom: 1px solid #d7e3ff;
+  padding: 4px;
 }
 
 .containerBtn {
@@ -81,7 +90,7 @@
   width: 97px;
   height: 20px;
   margin-top: 12px;
-  margin-bottom: 24px;
+  /* margin-bottom: 24px; */
 }
 
 .btn {
@@ -102,6 +111,7 @@
   display: block;
   max-height: 200px;
   overflow-y: scroll;
+  overflow-x: hidden;
   color: rgba(#d7e3ff, #9ebbff);
 }
 
@@ -130,8 +140,8 @@
     line-height: 1.23077;
   }
   .containerList {
-    min-width: 646px;
-    height: 36px;
+    width: 646px;
+    /* height: 36px; */
   }
   .containerBtn {
     width: 114px;
@@ -160,13 +170,19 @@
     width: 16px;
     height: 16px;
   }
-  .scrollContainer {
-    width: 544px;
-  }
+
 }
 
 @media screen and (min-width: 1440px) {
-  .containerL {
+  .containerMain {
+      width: 544px;
+    }
+
+  .containerList {
     width: 534px;
+  }
+
+  .list {
+    width: 524px;
   }
 }

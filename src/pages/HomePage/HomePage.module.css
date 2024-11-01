@@ -49,6 +49,10 @@ img {
   margin: 52px auto 0 auto;
 }
 
+.todayWaterList {
+  margin-bottom: 24px;
+}
+
 @media (min-resolution: 2dppx) {
   .container {
       background-image: url(../../img/homeScreenImg/BottleMob2x-min.png), url(../../img/homeScreenImg/BackgroundMob2x-min.png)
