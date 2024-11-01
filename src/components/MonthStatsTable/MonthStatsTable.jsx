@@ -4,7 +4,7 @@ import { fetchMonthlyPortionsThunk } from '../../redux/water/operations';
 import { selectDailyNorma } from '../../redux/water/selectors';
 import styles from './MonthStatsTable.module.css';
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
-import sprite from "../../img/icons.svg";
+import sprite from '../../img/icons.svg';
 
 const MonthStatsTable = () => {
   const currentDate = new Date();
@@ -13,16 +13,26 @@ const MonthStatsTable = () => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   const dispatch = useDispatch();
   const dailyNorm = useSelector(selectDailyNorma); // Отримуємо норму води
-  const monthlyPortions = useSelector((state) => state.water.monthlyPortions);
+  const monthlyPortions = useSelector(state => state.water.monthlyPortions);
 
   useEffect(() => {
     dispatch(fetchMonthlyPortionsThunk(new Date()));
-  }, [dispatch, dailyNorm]); 
+  }, [dispatch, dailyNorm]);
 
   useEffect(() => {
     dispatch(
@@ -36,14 +46,39 @@ const MonthStatsTable = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const getDaysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
+  const getDaysInMonth = (month, year) =>
+    new Date(year, month + 1, 0).getDate();
+
+  // const stats = useMemo(() => {
+  //   const daysInMonth = getDaysInMonth(selectedMonth, currentYear);
+  //   return Array.from({ length: daysInMonth }, (_, day) => {
+  //     const dayData = monthlyPortions?.find((portion) =>
+  //       new Date(portion._id).getDate() === day + 1) || {
+  //         totalVolume: 0, servings: 0, percent: 0,
+  //     };
+  //     return {
+  //       day: day + 1,
+  //       waterPercentage: dayData.percent,
+  //       dailyNorma: dayData.totalVolume,
+  //       servings: dayData.servings,
+  //     };
+  //   });
+  // }, [selectedMonth, currentYear, monthlyPortions]);
 
   const stats = useMemo(() => {
     const daysInMonth = getDaysInMonth(selectedMonth, currentYear);
     return Array.from({ length: daysInMonth }, (_, day) => {
-      const dayData = monthlyPortions?.find((portion) => 
-        new Date(portion._id).getDate() === day + 1) || {
-          totalVolume: 0, servings: 0, percent: 0,
+      const dayData = monthlyPortions?.find(portion => {
+        const portionDate = new Date(portion._id);
+        return (
+          portionDate.getFullYear() === currentYear &&
+          portionDate.getMonth() === selectedMonth &&
+          portionDate.getDate() === day + 1
+        );
+      }) || {
+        totalVolume: 0,
+        servings: 0,
+        percent: 0,
       };
       return {
         day: day + 1,
@@ -76,7 +111,9 @@ const MonthStatsTable = () => {
           >
             <use href={`${sprite}#icon-right`}></use>
           </svg>
-          <span>{months[selectedMonth]} {currentYear}</span>
+          <span>
+            {months[selectedMonth]} {currentYear}
+          </span>
           {selectedMonth < currentDate.getMonth() && (
             <button onClick={() => handleMonthChange('next')}>
               <svg className={styles.svg}>
@@ -87,16 +124,22 @@ const MonthStatsTable = () => {
         </div>
       </div>
       <div className={styles.daysList}>
-        {stats.map((dayStat) => (
-          <div 
-            className={styles.dayBlockContainer} 
-            key={dayStat.day} 
+        {stats.map(dayStat => (
+          <div
+            className={styles.dayBlockContainer}
+            key={dayStat.day}
             onClick={() => setSelectedDay(dayStat)}
           >
-            <div className={`${styles.dayBlock} ${dayStat.waterPercentage < 100 ? styles.incomplete : ''}`}>
+            <div
+              className={`${styles.dayBlock} ${
+                dayStat.waterPercentage < 100 ? styles.incomplete : ''
+              }`}
+            >
               <span className={styles.dayNumber}>{dayStat.day}</span>
             </div>
-            <span className={styles.dayPercentage}>{dayStat.waterPercentage}%</span>
+            <span className={styles.dayPercentage}>
+              {dayStat.waterPercentage}%
+            </span>
           </div>
         ))}
       </div>
