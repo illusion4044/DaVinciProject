@@ -1,0 +1,1 @@
+import{j as s}from"./index-DSCy0xLv.js";import{A as n}from"./AuthForm-BJXg7cHl.js";const i="_signinpage_rybto_6",t={signinpage:i},o=()=>s.jsx("div",{className:t.signinpage,children:s.jsx(n,{})});export{o as default};
