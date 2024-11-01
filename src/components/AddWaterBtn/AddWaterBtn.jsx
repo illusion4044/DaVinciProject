@@ -1,6 +1,6 @@
 // import TodayListModal from '../TodayListModal/TodayListModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { openTodayModal, closeTodayModal } from '../../redux/water/slice.js';
+import { openAddModal, closeAddModal } from '../../redux/water/slice.js';
 import icon from '../../img/icons.svg';
 import css from './AddWaterBtn.module.css'; 
 import AddWaterModal from '../AddWaterModal/AddWaterModal.jsx';
@@ -11,13 +11,13 @@ export default function AddWaterBtn({className}) {
 
   return (
     <>
-      <button className={`${className}`} type="button" onClick={() => dispatch(openTodayModal())}>
+      <button className={`${className}`} type="button" onClick={() => dispatch(openAddModal())}>
         <svg className={css.icon}>
           <use href={`${icon}#icon-plus-circle`} />
         </svg>
         Add Water
       </button>
-      {isModalOpen && <AddWaterModal onClose={() => dispatch(closeTodayModal())}/>}  
+      {isModalOpen && <AddWaterModal onClose={() => dispatch(closeAddModal())}/>}  
     </>
     )
 }

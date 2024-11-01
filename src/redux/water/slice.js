@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { logOut } from '../auth/operations.js';
 
 const initialState = {
-  dailyNorma: 0,
+  dailyNorma: 1500,
   monthlyPortions: [],
   dailyPortions: [],
   percentPerDay: null,
