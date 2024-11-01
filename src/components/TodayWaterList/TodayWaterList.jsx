@@ -101,7 +101,7 @@ import {
   openTodayModal,
   closeTodayModal,
   openAddModal,
-  closeAddModal
+  closeAddModal,
 } from '../../redux/water/slice.js';
 
 import AddWaterModal from '../AddWaterModal/AddWaterModal.jsx';
@@ -110,10 +110,9 @@ import TodayListModal from '../TodayListModal/TodayListModal.jsx';
 import DeleteEntryModal from '../DeleteEntryModal/DeleteEntryModal.jsx';
 import { fetchDailyPortionsThunk } from '../../redux/water/operations';
 import { useEffect, useState } from 'react';
-import sprite from "../../img/icons.svg"
+import sprite from '../../img/icons.svg';
 
 export default function TodayWaterList() {
-
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const openDeleteModal = () => setIsOpenDeleteModal(true);
   const closeDeleteModal = () => setIsOpenDeleteModal(false);
@@ -144,7 +143,6 @@ export default function TodayWaterList() {
                     <p className={css.amount}> {portion.volume} ml</p>
                     <p className={css.time}>{portion.date?.split('T')[1]}</p>
                   </div>
-                  
 
                   <div className={css.icons}>
                     <svg
@@ -169,7 +167,8 @@ export default function TodayWaterList() {
                     />
                   )}
                   {isOpenDeleteModal && (
-                    <DeleteEntryModal id={portion._id}
+                    <DeleteEntryModal
+                      id={portion._id}
                       onClose={closeDeleteModal}
                     />
                   )}
@@ -177,19 +176,19 @@ export default function TodayWaterList() {
               ))}
             </ul>
           </div>
-        </div>
 
-        {/* Add Water Button and Modal */}
-        <div className={css.containerBtn}>
-          <p className={css.btn} onClick={() => dispatch(openAddModal())}>
-            <svg className={css.iconBtn}>
-              <use href={`${sprite}#icon-outline`}></use>
-            </svg>
-            Add Water
-          </p>
-          {isAddModalOpen && (
-            <AddWaterModal onClose={() => dispatch(closeAddModal())} />
-          )}
+          {/* Add Water Button and Modal */}
+          <div className={css.containerBtn}>
+            <p className={css.btn} onClick={() => dispatch(openAddModal())}>
+              <svg className={css.iconBtn}>
+                <use href={`${sprite}#icon-outline`}></use>
+              </svg>
+              Add Water
+            </p>
+            {isAddModalOpen && (
+              <AddWaterModal onClose={() => dispatch(closeAddModal())} />
+            )}
+          </div>
         </div>
       </div>
     </>
