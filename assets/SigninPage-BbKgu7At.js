@@ -1,1 +1,0 @@
-import{j as s}from"./index-BPXWWOJ-.js";import{A as n}from"./AuthForm-CPsmnixk.js";const i="_signinpage_rybto_6",t={signinpage:i},o=()=>s.jsx("div",{className:t.signinpage,children:s.jsx(n,{})});export{o as default};
