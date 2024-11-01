@@ -840,11 +840,26 @@ export default function TodayWaterList() {
                       <use href={`${sprite}#icon-trash`}></use>
                     </svg>
                   </div>
+
+                  {/* Conditionally Render the TodayListModal and DeleteEntryModal at the root level */}
+                  {isEditModalOpen && (
+                    <TodayListModal
+                      onClose={() => dispatch(closeTodayModal())}
+                      portion={portion}
+                    />
+                  )}
+                  {isOpenDeleteModal && (
+                    <DeleteEntryModal
+                      id={portion._id}
+                      onClose={closeDeleteModal}
+                    />
+                  )}
+
                 </li>
               ))}
             </ul>
           </div>
-        </div>
+
 
         {/* Conditionally Render the Modals at the root level with selectedPortion */}
         {isEditModalOpen && selectedPortion && (
@@ -871,6 +886,7 @@ export default function TodayWaterList() {
           {isAddModalOpen && (
             <AddWaterModal onClose={() => dispatch(closeAddModal())} />
           )}
+
         </div>
       </div>
     </>
