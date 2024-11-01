@@ -6,7 +6,7 @@ img {
 .signinpage{
         padding-bottom: 240px;
             background-image: url("../../img/signInImg/backgroundSignPageMob1x.jpg");
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
             max-width: 312px;
             padding-left: 16px;
