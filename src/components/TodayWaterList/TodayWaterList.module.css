@@ -27,7 +27,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-} 
+}
 
 .iconGlass {
   width: 17px;
@@ -62,14 +62,14 @@
   width: 14px;
   height: 12px;
   fill: transparent;
-  stroke: #9EBBFF;
+  stroke: #9ebbff;
 }
 
 .iconTrash {
   width: 12px;
   height: 12px;
   fill: transparent;
-  stroke: #EF5050;
+  stroke: #ef5050;
 }
 
 .list {
@@ -110,8 +110,8 @@
 .scrollContainer {
   display: block;
   max-height: 200px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: auto;
+  /* overflow-x: hidden; */
   color: rgba(#d7e3ff, #9ebbff);
 }
 
@@ -170,13 +170,12 @@
     width: 16px;
     height: 16px;
   }
-
 }
 
 @media screen and (min-width: 1440px) {
   .containerMain {
-      width: 544px;
-    }
+    width: 544px;
+  }
 
   .containerList {
     width: 534px;
