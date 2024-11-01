@@ -780,7 +780,6 @@ export default function TodayWaterList() {
   const dispatch = useDispatch();
   const isEditModalOpen = useSelector(state => state.water.isTodayModalOpen);
   const isAddModalOpen = useSelector(state => state.water.isAddModalOpen);
-
   const dailyPortions = useSelector(selectDailyPortions);
 
   useEffect(() => {
@@ -841,52 +840,36 @@ export default function TodayWaterList() {
                     </svg>
                   </div>
 
-                  {/* Conditionally Render the TodayListModal and DeleteEntryModal at the root level */}
-                  {isEditModalOpen && (
+                  {/* Conditionally Render the TodayListModal and DeleteEntryModal */}
+                  {isEditModalOpen && selectedPortion && (
                     <TodayListModal
-                      onClose={() => dispatch(closeTodayModal())}
-                      portion={portion}
+                      onClose={closeEditModal}
+                      portion={selectedPortion} // Pass the selected portion for editing
                     />
                   )}
-                  {isOpenDeleteModal && (
+                  {isOpenDeleteModal && selectedPortion && (
                     <DeleteEntryModal
-                      id={portion._id}
+                      id={selectedPortion._id} // Pass the selected portion for deletion
                       onClose={closeDeleteModal}
                     />
                   )}
-
                 </li>
               ))}
             </ul>
           </div>
 
-
-        {/* Conditionally Render the Modals at the root level with selectedPortion */}
-        {isEditModalOpen && selectedPortion && (
-          <TodayListModal
-            onClose={closeEditModal}
-            portion={selectedPortion} // Pass the selected portion for editing
-          />
-        )}
-        {isOpenDeleteModal && selectedPortion && (
-          <DeleteEntryModal
-            id={selectedPortion._id} // Pass the selected portion for deletion
-            onClose={closeDeleteModal}
-          />
-        )}
-
-        {/* Add Water Button and Modal */}
-        <div className={css.containerBtn}>
-          <p className={css.btn} onClick={() => dispatch(openAddModal())}>
-            <svg className={css.iconBtn}>
-              <use href={`${sprite}#icon-outline`}></use>
-            </svg>
-            Add Water
-          </p>
-          {isAddModalOpen && (
-            <AddWaterModal onClose={() => dispatch(closeAddModal())} />
-          )}
-
+          {/* Add Water Button and Modal */}
+          <div className={css.containerBtn}>
+            <p className={css.btn} onClick={() => dispatch(openAddModal())}>
+              <svg className={css.iconBtn}>
+                <use href={`${sprite}#icon-outline`}></use>
+              </svg>
+              Add Water
+            </p>
+            {isAddModalOpen && (
+              <AddWaterModal onClose={() => dispatch(closeAddModal())} />
+            )}
+          </div>
         </div>
       </div>
     </>

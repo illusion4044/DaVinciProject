@@ -686,7 +686,7 @@ export default function TodayListModal({ onClose, portion }) {
           <span className={css.span}>{count} ml</span>
           <button className={css.plus} onClick={handleIncrement}>
             <svg className={css.svgPlus}>
-              <use href={`${sprite}#icon-minus-small`}></use>
+              <use href={`${sprite}#icon-plus-small`}></use>
             </svg>
           </button>
         </div>
