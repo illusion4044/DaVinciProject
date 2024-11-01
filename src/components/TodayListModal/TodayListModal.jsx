@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-
-  selectSelectedItem,
-} from '../../redux/water/selectors.js';
+import { selectSelectedItem } from '../../redux/water/selectors.js';
 import { useEffect, useMemo, useState } from 'react';
 
 import {
@@ -12,24 +9,22 @@ import {
 } from '../../redux/water/operations.js';
 import css from './TodayListModal.module.css';
 import dayjs from 'dayjs';
-import sprite from "../../img/icons.svg"
-console.log(sprite)
-
-
+import sprite from '../../img/icons.svg';
+console.log(sprite);
 
 export default function TodayListModal({ onClose, portion }) {
   const dispatch = useDispatch();
-  const initialPortion = useMemo (()=>{
-  return {
-    time: portion.date.split("T")[1],
-    volume:portion.volume
-  } 
-  // eslint-disable-next-line
-  },[])
+  const initialPortion = useMemo(() => {
+    return {
+      time: portion.date.split('T')[1],
+      volume: portion.volume,
+    };
+    // eslint-disable-next-line
+  }, []);
   const selectedItem = useSelector(selectSelectedItem);
   // const selectedTime = useSelector(selectSelectedTime);
   const [count, setCount] = useState(initialPortion.volume);
-  const[selectedTime, setSelectedTime] = useState(initialPortion.time)
+  const [selectedTime, setSelectedTime] = useState(initialPortion.time);
   const [inputValue, setInputValue] = useState(count);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const isFirstRecord = !selectedItem || Object.keys(selectedItem).length === 0;
@@ -76,7 +71,6 @@ export default function TodayListModal({ onClose, portion }) {
     }
   };
 
-
   const getCurrentDate = () => {
     return dayjs().format('YYYY-MM-DD');
   };
@@ -104,12 +98,13 @@ export default function TodayListModal({ onClose, portion }) {
     const payload = {
       date: dateTime,
       volume: count,
-      id: portion._id
+      id: portion._id,
     };
 
     dispatch(updatePortionThunk(payload)).then(() => {
       dispatch(fetchDailyPortionsThunk(currentDate));
       dispatch(fetchMonthlyPortionsThunk(currentDateMonth));
+      onClose(); //added
     });
   };
 
@@ -163,12 +158,8 @@ export default function TodayListModal({ onClose, portion }) {
             <use href={`${sprite}#icon-Group-4`}></use>
           </svg>
 
-          <p className={css.amount}>
-            { initialPortion.volume } ml
-          </p>
-          <p className={css.time}>
-            {initialPortion.time}
-          </p>
+          <p className={css.amount}>{initialPortion.volume} ml</p>
+          <p className={css.time}>{initialPortion.time}</p>
         </div>
 
         <div>
