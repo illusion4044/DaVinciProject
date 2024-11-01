@@ -69,30 +69,31 @@ export default function SettingModal({ closeModal }) {
   };
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-    try {
-      const userData = { ...values };
-      if (selectedPhoto) {
-        await dispatch(
-          uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
-        ).unwrap();
-      }
-      if (
-        values.name !== user?.name ||
-        values.email !== user?.email ||
-        values.gender !== user?.gender ||
-        values.newPassword
-      ) {
-        await dispatch(updateUserInfo({ ...userData })).unwrap();
-      }
-      toast.success('Settings updated successfully');
-      closeModal();
-    } catch (error) {
-      toast.error('Failed to update settings');
-      setErrors({ submit: error.message });
-    } finally {
-      setSubmitting(false);
+  try {
+    const userData = { ...values };
+    if (selectedPhoto) {
+      await dispatch(
+        uploadUserPhoto({ photo: selectedPhoto, token: user?.token })
+      ).unwrap();
     }
-  };
+    if (
+      values.name !== user?.name ||
+      values.email !== user?.email ||
+      values.gender !== user?.gender ||
+      values.newPassword
+    ) {
+      await dispatch(updateUserInfo({ ...userData })).unwrap();
+    }
+    toast.success('Settings updated successfully');
+    closeModal();
+  } catch (error) {
+    console.error('Error updating settings:', error);
+    toast.error('Failed to update settings');
+    setErrors({ submit: error.message });
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   return (
     <div
